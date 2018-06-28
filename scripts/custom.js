@@ -297,6 +297,8 @@ $(document).ready(function(){
 		//Owl Carousel Sliders
 		setTimeout(function(){
 			$('.single-slider').owlCarousel({center: true, items:1, loop:true, margin:10, stagePadding:20, lazyLoad:true});
+			$('.center-slider').owlCarousel({center: false, items:2, autoWidth:true, loop:false, margin:10, stagePadding:20, lazyLoad:true});
+			$('.genre-tags-slider').owlCarousel({items:10, autoWidth:true, loop:false, margin:10});
 			$('.menu-fixed-slider').owlCarousel({loop:false, margin:0, nav:false, items:5});	
 			$('.single-slider-no-timeout').owlCarousel({loop:true, margin:0, nav:false, dots:false, items:1, autoHeight:true});
 			$('.single-store-slider').owlCarousel({loop:false, margin:10, nav:false, autoHeight:true, lazyLoad:true, items:1, autoplay: true, autoplayTimeout:3500});	
@@ -345,8 +347,8 @@ $(document).ready(function(){
 		baguetteBox.run('.profile-gallery', {});		
 		
 		if($('.gallery-filter').length > 0){$('.gallery-filter').filterizr();}		
-		$('.gallery-filter-controls li').on('click',function(){
-			$('.gallery-filter-controls li').removeClass('gallery-filter-active color-highlight');	
+		$('.gallery-filter-controls a').on('click',function(){
+			$('.gallery-filter-controls a').removeClass('gallery-filter-active color-highlight');	
 			$(this).addClass('gallery-filter-active color-highlight');	
 		})
 

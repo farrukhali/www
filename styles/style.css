@@ -289,37 +289,44 @@ font-size: 12px;
 .page-list-items li a.flag.flag-jp{
     background-image: url(../images/flag-jp.png);
 }
-.latest-comics-all{
+.latest-comics-all, .gallery-filter-results{
     margin-left: -7px;
     margin-right: -7px;
 }
-.latest-comics-all .comic-book-item{
+.latest-comics-all .comic-book-item,
+.gallery-filter-results .comic-book-item{
     width: 33.33333%;
     float: left;
     padding: 6px;
     margin-bottom: 23px;
 }
-.latest-comics-all.details-page-episodes .comic-book-item{
+.latest-comics-all.details-page-episodes .comic-book-item, 
+.gallery-filter-results.details-page-episodes .comic-book-item{
 
 }
-.latest-comics-all.details-page-episodes .comic-book-item a{
+.latest-comics-all.details-page-episodes .comic-book-item a, 
+.gallery-filter-results.details-page-episodes .comic-book-item a{
 }
-.latest-comics-all.details-page-episodes .comic-book-item a .episode-thumb-wrapper{
+.latest-comics-all.details-page-episodes .comic-book-item a .episode-thumb-wrapper, 
+.gallery-filter-results.details-page-episodes .comic-book-item a .episode-thumb-wrapper{
     overflow: hidden;
     position: relative;
     margin-bottom: 13px;
 }
-.latest-comics-all .comic-book-item img{
+.latest-comics-all .comic-book-item img,
+.gallery-filter-results .comic-book-item img{
     margin-bottom: 13px;
     height: 230px;
     object-fit: cover;
     border-radius: 5px;
 }
-.latest-comics-all.details-page-episodes .comic-book-item img{
+.latest-comics-all.details-page-episodes .comic-book-item img,
+.gallery-filter-results.details-page-episodes .comic-book-item img{
     margin-bottom: 0;
 }
 
-.latest-comics-all .comic-book-item .comic-book-item-title{
+.latest-comics-all .comic-book-item .comic-book-item-title,
+.gallery-filter-results .comic-book-item .comic-book-item-title{
     font-family: Roboto;
     margin-bottom: 0;
     font-weight: 500;
@@ -330,10 +337,12 @@ font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .comic-book-item-title{
+.latest-comics-all.details-page-episodes .comic-book-item .comic-book-item-title,
+.gallery-filter-results.details-page-episodes .comic-book-item .comic-book-item-title{
     text-align: center;
 }
-.latest-comics-all .comic-book-item .comic-book-item-auther{
+.latest-comics-all .comic-book-item .comic-book-item-auther,
+.gallery-filter-results .comic-book-item .comic-book-item-auther{
     line-height: 10px;
     font-family: Roboto;
     font-weight: 500;
@@ -344,10 +353,12 @@ font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .comic-book-item-auther{
+.latest-comics-all.details-page-episodes .comic-book-item .comic-book-item-auther,
+.gallery-filter-results.details-page-episodes .comic-book-item .comic-book-item-auther{
     text-align: center;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views{
+.latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views,
+.gallery-filter-results.details-page-episodes .comic-book-item .thumb-episode-views{
     position: absolute;
     top: 4px;
     right: 7px;
@@ -356,7 +367,8 @@ font-size: 12px;
     z-index: 2;99 */
     font-size:;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views:before{
+.latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views:before,
+.gallery-filter-results.details-page-episodes .comic-book-item .thumb-episode-views:before{
     content:'';
     background:#F71D4B;
     width: 42px;
@@ -369,7 +381,8 @@ font-size: 12px;
     border-radius: 50px;
 }
 
-.latest-comics-all.details-page-episodes .comic-book-item .thumb-price{
+.latest-comics-all.details-page-episodes .comic-book-item .thumb-price,
+.gallery-filter-results.details-page-episodes .comic-book-item .thumb-price{
     position: absolute;
     background: #1A7227;
     z-index: 999;
@@ -381,10 +394,12 @@ font-size: 12px;
     border-radius: 20px;
     color: #fff;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .thumb-price.price-free{
+.latest-comics-all.details-page-episodes .comic-book-item .thumb-price.price-free,
+.gallery-filter-results.details-page-episodes .comic-book-item .thumb-price.price-free{
     background: #1A7227;
 }
-.latest-comics-all.details-page-episodes .comic-book-item .thumb-price.price-paid{
+.latest-comics-all.details-page-episodes .comic-book-item .thumb-price.price-paid,
+.gallery-filter-results.details-page-episodes .comic-book-item .thumb-price.price-paid{
     background: #E44130;
 }
  
@@ -542,22 +557,26 @@ color: #E44130;
 }
 
 @media screen and (max-width: 650px){
-    .latest-comics-all .comic-book-item img{
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
         height: 200px;
     }
 }
 @media screen and (max-width: 500px){
-    .latest-comics-all .comic-book-item img{
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
         height: 150px;
     }
 }
 @media screen and (max-width: 400px){
-    .latest-comics-all .comic-book-item img{
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
         height: 110px;
     }
 }
 @media screen and (max-width: 350px){
-    .latest-comics-all .comic-book-item img{
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
         height: 100px;
     }
 }
@@ -1156,4 +1175,77 @@ a.upload-file-block .size-guide{
     font-size: 15px;
     line-height: 17px;
     vertical-align: middle;
+}
+.center-slider.featured-slider{
+
+}
+.owl-carousel.featured-slider.owl-drag .owl-item{
+    box-shadow: none;
+    border-radius: 0;
+}
+.center-slider.featured-slider .owl-item > div{
+    width: 140px;
+}
+.center-slider.featured-slider .owl-item > div img{
+    height: 140px;
+    object-fit: cover;
+    /* box-shadow: 0px 10px 15px hsla(219, 33%, 18%, 0.15); */
+    margin-bottom: 13px;
+    border-radius: 11px;
+}
+.center-slider.featured-slider .owl-item > div h3{
+
+width: 100%;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+font-family: Roboto;
+
+margin-bottom: 0;
+
+line-height: normal;
+}
+.center-slider.featured-slider .owl-item > div span{
+
+font-size: 9px;
+
+color: #8E8E93;
+
+line-height: normal;
+}
+.genre-tags-slider.genre-slider.owl-drag{
+    border: 0;
+}
+.genre-tags-slider.genre-slider.owl-drag .owl-item{
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+.genre-tags-slider.genre-slider.owl-drag > div{}
+.genre-tags-slider.genre-slider.owl-drag > div a{
+    font-size: 11px;
+    color: #1F2B3F;
+    text-transform: capitalize;
+    line-height: 28px;
+    box-sizing: border-box;
+    border: 1px solid #E1E1E1;
+    border-radius: 40px;
+    font-weight: 400;
+}
+.genre-tags-slider.genre-slider.owl-drag > div a span{
+
+}
+.genre-tags-slider.genre-slider.owl-drag > div a.gallery-filter-active{
+background: rgba(228, 65, 48, 0.15);   
+color: #E44130;
+}
+.gallery-filter-results.gallery-filter{
+    margin: 0 15px;
+}
+.gallery-filter-results.gallery-filter a{
+    width: 100%;
 }
