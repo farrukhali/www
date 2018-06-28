@@ -798,6 +798,9 @@ ul.info-tags li a{}
     position: relative;
     border-radius: 5px;
 }
+.content.search-results-section .search-results-list> ul> li > a{
+    width: 100%;
+}
 .content.search-results-section .search-results-list> ul> li.show-overlay-btns .long-press-overlay{
     display:block
 }
@@ -846,7 +849,7 @@ ul.info-tags li a{}
     float: left;
     display: block;
     position: relative;
-    padding-right: 50px;
+    padding-right: 40px;
     padding-left: 10px;
     vertical-align: middle;
     width: 100%;
@@ -954,6 +957,8 @@ ul.info-tags li a{}
     font-family: Roboto;
     font-weight: 400;
     margin-bottom: 20px;
+    width: 100%;
+    margin-top: 10px;
 }
 a.upload-file-block{
     width: 170px;
