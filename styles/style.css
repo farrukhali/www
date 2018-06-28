@@ -366,18 +366,32 @@ font-size: 12px;
     font-family: Roboto;
     z-index: 2;99 */
     font-size:;
+    font-size: 11px;
+}
+.latest-comics-all.details-page-episodes .comic-book-item .ranking-number{
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+    background: red;
+    width: 30px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 26px;
+    text-align: center;
 }
 .latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views:before,
 .gallery-filter-results.details-page-episodes .comic-book-item .thumb-episode-views:before{
     content:'';
     background:#F71D4B;
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
     display: block;
     position: absolute;
     z-index: -1;
-    top: -10px;
-    left: -10px;
+    top: -17px;
+    left: -13px;
     border-radius: 50px;
 }
 
@@ -556,30 +570,7 @@ color: #E44130;
     margin-top: 6px;
 }
 
-@media screen and (max-width: 650px){
-    .latest-comics-all .comic-book-item img,
-    .gallery-filter-results .comic-book-item img{
-        height: 200px;
-    }
-}
-@media screen and (max-width: 500px){
-    .latest-comics-all .comic-book-item img,
-    .gallery-filter-results .comic-book-item img{
-        height: 150px;
-    }
-}
-@media screen and (max-width: 400px){
-    .latest-comics-all .comic-book-item img,
-    .gallery-filter-results .comic-book-item img{
-        height: 110px;
-    }
-}
-@media screen and (max-width: 350px){
-    .latest-comics-all .comic-book-item img,
-    .gallery-filter-results .comic-book-item img{
-        height: 100px;
-    }
-}
+
 
 .story-info{}
 .story-info .story-info-left{
@@ -1253,4 +1244,150 @@ color: #E44130;
 }
 .gallery-filter-results.gallery-filter a{
     width: 100%;
+}
+
+
+
+.below-header-links{
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    background: #F5F5F5;
+}
+.below-header-links li{
+    display: inline-block;
+    margin: 0;
+}
+.below-header-links li a{
+    display: block;
+    padding: 9px 9px 9px 9px;
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #8E8E93;
+    margin: 0 15px;
+    letter-spacing: 1px;
+    position: relative;
+    font-weight:500;
+}
+.below-header-links li a:after{
+    content:'';
+    height:3px;
+    width:100%;
+    background-color:transparent;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+.below-header-links li.active a:after, .below-header-links li a:hover::after, .below-header-links li a:active::after{
+    background-color:#E44130;
+}
+
+.below-header-links li.active a, .below-header-links li a:hover, .below-header-links li a:focus{
+    color:#1F2B3F;
+}
+@media screen and (max-width: 650px){
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
+        height: 200px;
+    }
+}
+@media screen and (max-width: 500px){
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
+        height: 150px;
+    }
+}
+@media screen and (max-width: 400px){
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
+        height: 110px;
+    }
+    .below-header-links li a{
+    margin: 0 5px;
+}
+}
+@media screen and (max-width: 350px){
+    .latest-comics-all .comic-book-item img,
+    .gallery-filter-results .comic-book-item img{
+        height: 80px;
+    }
+    .below-header-links li a{}
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item{
+    width: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.latest-comics-all.top-ranked-row-2.top-ranked-row-3 .comic-book-item{
+    width: 33.333%;
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a{
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper{
+    position: relative;
+    border-radius: 10px;
+}
+.latest-comics-all.top-ranked-row-2.top-ranked-row-3 .comic-book-item a .comic-book-item-title, 
+.latest-comics-all.top-ranked-row-2.top-ranked-row-3 .comic-book-item a .comic-book-item-auther{
+    text-align:left
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper .overlay-content-ranked{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 50px 10px 14px 40px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61,000000+100&0+0,0.51+61,0.85+100 */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.51) 61%, rgba(0,0,0,0.85) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.51) 61%,rgba(0,0,0,0.85) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.51) 61%,rgba(0,0,0,0.85) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#d9000000',GradientType=0 ); /* IE6-9 */
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper .overlay-content-ranked .comic-book-item-title{
+    text-align: left;
+    color: #fff;
+    line-height: 14px;
+    font-weight: 300;
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper .overlay-content-ranked .ranking-number{
+    display: block;
+    float: left;
+    ft; */
+    width: 30px;
+    height: 24px;
+    width: 30px;
+    background: #ed474a;
+    text-align: center;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 25px;
+}
+.latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper .overlay-content-ranked .comic-book-item-auther{
+    text-align: left;
+    color: #fff;
+    float: left;
+    font-weight: 300;
+}
+.add-tags-input-wrapper{
+    position: relative;
+}
+.add-tags-input-wrapper .search-etc-tag-input{}
+.add-tags-input-wrapper > a{
+position: absolute;
+right: 0;
+top: 0;
+width: 40px;
+text-align: center;
+display: block;
+}
+.add-tags-input-wrapper > a > .la{
+    font-size: 18px;
+    line-height: 30px;
+    display: block;
+    color: #ed5464;
+    font-weight: bold;
 }

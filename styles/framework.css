@@ -4953,7 +4953,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	z-index:99;
 }
 
-.header-clear{padding-top:65px;}
+.header-clear{padding-top:55px;}
 .header-clear-large{padding-top:75px;}
 .header-clear-larger{padding-top:90px;}
 .footer-clear{padding-bottom: 90px;}
