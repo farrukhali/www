@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>Comics - Blmani </title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+</head>
+
+<body>
+    <div id="preloader" class="preloader-light">
+        <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
+        <div id="preload-spinner"></div>
+    </div>
+    <div id="page-transitions" class="page-build highlight-red">
+        <div class="header header-light header-logo-center">
+            <div class="header-title">Blmani</div>
+            <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
+            <a data-menu="menu-1" href="#" class="header-icon header-icon-4"><i class="la la-bars2"></i></a>
+        </div>
+        <div id="menu-1" class="menu-sidebar menu-light menu-sidebar-right menu-sidebar-over">
+            <div class="menu-scroll">
+                <div class="sidebar-icons">
+                    <a href="#" class="close-menu"><span class="la la-times font-20"></span></a>
+                </div>
+                <!-- not logined -->
+                <div class="menu-title-section user-not-logined">
+                    <h1 class="uppercase menu-title bolder color-black top-15">User <span class="color-highlight">Login</span></h1>
+                    <p>Sign in to start posting your stories</p>
+                </div>
+                <div class="menu-items menu-icons user-not-logined">
+                    <a href="login.html"><i class="la la-user"></i>Sign in</a>
+                    <a href="signup.html"><i class="la la-user-plus"></i>Sign up</a>
+                    <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
+                </div>
+                <!-- menu logined  -->
+                <div class="menu-profile-sec bottom-50 user-logined">
+                    <img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png">
+                    <h3 class="profile-title center-text">Alexandra Bernies</h3>
+                    <p class="user-city center-text">Pyongyang City</p>
+                </div>
+                <div class="menu-items menu-icons user-logined">
+                    <a href="#"><i class="far fa-bell"></i>Inbox<span>2 new</span></a>
+                    <a href="#"><i class="far fa-folder-open"></i>My Library</a>
+                    <a href="#"><i class="far fa-user"></i>Profile</a>
+                    <a href="#"><i class="far fa-sun"></i>Settings</a>
+                    <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
+                    <a href="#" class="profile-links--signout"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
+                </div>
+                <div class="copy-right-section">
+                    <p class="sidebar-copyright bottom-30 center-text"><img src="images/copyright-logo.png" alt="Blmani">
+                        <br>Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved Blmani.</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-content header-clear footer-clear">
+            <div class="content bottom-0 bottom-shadow position-relative">
+                <div class="tabs">
+                    <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
+                        <a href="#" id="1"  class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">1st Creation</a>
+                        <a href="#" id="2" data-tab-pill="tab-pill-2">2nd Reproduction</a>
+                    </div>
+                </div>
+                <div class="search-filters first-creation">
+                    <ul>
+                        <li>
+                        	<select name="select_genre" id="select_genre">
+                        		<option value="" selected="" disabled="">Genre</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+	                    </li>
+                        <li>
+                        	<select name="select_atype" id="select_atype">
+                        		<option value="" selected="" disabled="">A-Type</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                        </li>
+                        <li>
+                        	<select name="select_dtype" id="select_dtype">
+                        		<option value="" selected="" disabled="">D-Type</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                        </li>
+                    </ul>
+                </div>
+				<div class="search-filters second-reproduction hideit">
+                    <ul>
+                        <li>
+                        	<select name="select_content" id="select_content">
+                        		<option value="" selected="" disabled="">Content</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+	                    </li>
+                        <li>
+                        	<select name="select_title" id="select_title">
+                        		<option value="" selected="" disabled="">Title</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                        </li>
+                        <li>
+                        	<select name="select_character" id="select_character">
+                        		<option value="" selected="" disabled="">Character</option>
+                        	</select>
+	                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="clear"></div>
+                <div class="search-etc-tag">
+                    <form action="">
+                        <input type="text" class="search-etc-tag-input" placeholder="Search tag">
+                    </form>
+                </div>
+                <div class="decoration"></div>
+                <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
+                <ul class="info-tags collapseable">
+                </ul>
+                <div class="clear"></div>
+                <div style="text-align:center">
+                    <a href="#" class="button button-round button-dark btn-search uppercase font-12 button-xxs bottom-0 search-comics">Search</a>
+                </div>
+            </div>
+            <div class="content search-results-section">
+			    
+                <h3 class="srl-section-heading hideit">Search Results</h3>
+				<div class="nrf hideit"><div class="empty-results">
+                        <img src="images/empty-search.svg" alt="">
+                        <h3>We are Sorry!</h3>
+                        <p>We are unable to find any matching results.</p>
+                    </div></div>
+				
+                <div class="search-results-list">
+                    <ul class="searching-results">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-fixed">
+            <ul>
+                <li class="active"><a href="comic.html"><span class="la la-Rounded-Rectangle"></span><span class="ft-menu-text">Comics</span></a></li>
+                <li class="center-active"><a href="#"><span class="la la-search"></span><span class="ft-menu-text">Search</span></a></li>
+                <li><a href="dummy-page-posting.html"><span class="la la-edit"></span><span class="ft-menu-text">Post Story</span></a></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <a href="#" class="back-to-top-badge back-to-top-small bg-highlight"><i class="fa fa-angle-up"></i>Back to Top</a>
+    </div>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/session.js"></script>
+	<script type="text/javascript" src="scripts/search.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+    
+</body>

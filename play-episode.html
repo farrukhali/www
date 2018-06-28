@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<title>Blmani</title>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+<link rel="stylesheet" type="text/css" href="styles/framework.css">
+<link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+</head>
+
+<body>
+<div id="preloader" class="preloader-light">
+        <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
+        <div id="preload-spinner"></div>
+    </div>
+<div id="page-transitions" class="page-build highlight-red">
+	<div class="page-content page-content-full">	
+
+		<a href="#" class="map-but-1 cover-back-button back-button" style="background: rgba(255, 255, 255, 0.7); border-radius: 40px; left: 10px; top: 10px;"><i class="la la-times font-12 color-black" style="    line-height: 53px; font-size: 19px !important; text-shadow: 0px 0px 5px #fff;"></i></a>
+		<div class="map-full cover-item">
+		    <script>
+              var episodeid = document.URL.substr(document.URL.indexOf('#')+1);
+	          document.write('<iframe class="cover-item" src="http://blmani.com/com/index.php?id='+episodeid+'"></iframe>');
+			  $.ajax({
+				  url: "http://blmani.com/wp-json/aniparti/vupdate",
+				  type: "post",
+				  data: {id:episodeid},
+				  dataType: 'json',
+				  success: function (response) {
+					  console.log("service called "+response);
+					 }
+	          });
+            </script>
+			<!--<iframe class="cover-item" src="http://blmani.com/com/index.php?id="></iframe>-->
+			<!--
+			<a href="#" class="hide-map back-button button button-round button-red button-center-medium" style="opacity:1">Close Episode</a>-->
+		</div>
+
+	</div>
+</div>
+
+<script>
+$(window).on('load',function(){
+    
+	$('#page-build').remove();
+	setTimeout(function(){$("#preloader").addClass('hide-preloader');},450);// will fade out the white DIV that covers the website.
+	window.localStorage.setItem("story",1);
+	
+ });
+
+</script>
+</body>
