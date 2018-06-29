@@ -17,7 +17,7 @@
         <div class="header header-light header-logo-center">
             <div class="header-title">Post a Story</div>
             <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-            <a data-menu="menu-1" href="#" class="header-icon header-icon-4"><i class="la la-bars2"></i></a>
+            <a href="#" class="header-icon header-icon-4 back-button" style="line-height: 60px;"><i class="la la-times" style="font-size: 20px;color: #e44330;"></i></a>
         </div>
         <div id="menu-1" class="menu-sidebar menu-light menu-sidebar-right menu-sidebar-over">
             <div class="menu-scroll">
@@ -34,20 +34,6 @@
                     <a href="signup.html"><i class="la la-user-plus"></i>Sign up</a>
                     <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
                 </div>
-                <!-- menu logined  
-                <div class="menu-profile-sec bottom-50 user-logined">
-                    <img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png">
-                    <h3 class="profile-title center-text">Alexandra Bernies</h3>
-                    <p class="user-city center-text">Pyongyang City</p>
-                </div>
-                <div class="menu-items menu-icons user-logined">
-                    <a href="#"><i class="far fa-bell"></i>Inbox<span>2 new</span></a>
-                    <a href="#"><i class="far fa-folder-open"></i>My Library</a>
-                    <a href="#"><i class="far fa-user"></i>Profile</a>
-                    <a href="#"><i class="far fa-sun"></i>Settings</a>
-                    <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
-                    <a href="#" class="profile-links--signout"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
-                </div> -->
                 <div class="copy-right-section">
                     <p class="sidebar-copyright bottom-30 center-text"><img src="images/copyright-logo.png" alt="Blmani">
                         <br>Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved Blmani.</p>
@@ -209,12 +195,101 @@
                     </ul>
                     <div class="clear"></div>
                 </div>
-                <div class="recommended-last-btns top-20">
-                    <a href="#" class="btn btn-cancle float-left">Cancel</a>
-                    <a href="#" class="button button-round button-red float-right">Post</a>
-                    <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="footer-fixed bounds-footer">
+            <h3>Privacy Bounds</h3>
+            <div class="bounds-options">
+                <a href="#" class="active">Public</a>
+                <a href="#" data-menu="my-pick-modal">My Pick</a>
+                <a href="#">Private</a>
+                <a href="#" data-menu="passcode-modal">Locked</a>
+            </div>
+            <a data-menu="publish-modal" href="#" class="bounds-publish-btn button button-round float-right">Publish</a>
+        </div>
+    </div>
+    <div id="my-pick-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Add Friends</h3>
+            <div class="search-etc-tag">
+                <form action="">
+                    <input type="text" class="search-etc-tag-input" placeholder="Search friend">
+                    <span><img src="images/loadersvg-dark.svg" alt=""></span>
+                    <div class="search-friends-results">
+                        <ul>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                            <li>Farrukh</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <ul class="info-tags collapseable">
+                <li><span>Farrukh</span></li>
+                <li><span>Ali</span></li>
+                <li><span>Manzar</span></li>
+                <li><span>Ameen</span></li>
+                <li><span>Umer</span></li>
+                <li><span>Zain</span></li>
+                <li><span>Jahn</span></li>
+            </ul>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+                <a href="#" class="btn button-round button-red">Done</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="passcode-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Enter Passcode</h3>
+            <div class="search-etc-tag">
+                <form action="">
+                    <input type="password" class="search-etc-tag-input" placeholder="Enter Passcode">
+                    <span style="top: 0"><i class="la la-eye"></i></span>
+                </form>
+            </div>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+                <a href="#" class="btn button-round button-red">Done</a>
+            </div>
+        </div>
+    </div>
+    <div id="publish-modal" class="menu-flyin menu-share1 success-modal">
+        <div class="menu-flyin-content center-text">
+            <img src="images/success-image.png" alt="Success" style="margin: 0 auto">
+            <h2>Posting Completed</h2>
+            <p style="font-size: 9px;">Your posting ctompleted. Share your posting to your SNS.</p>
+            <div class="decoration"></div>
+            <div class="social-share-btns">
+                <a href="#" class="button button-round facebook-bg"><i class="la la-facebook"></i> Share</a>
+                <a href="#" class="button button-round twitter-bg"><i class="la la-twitter"></i> Share</a>
+            </div>
+            <div class="copy-url-sec">
+                <div class="copy-url-part">
+                    <div class="search-etc-tag">
+                        <input type="text" class="search-etc-tag-input" value="https://dummyurl.com/abc" placeholder="Copy URL">
+                    </div>
+                </div>
+                <div class="copy-url-btn">
+                    <a href="#"><i class="la la-copy"></i></a>
                 </div>
             </div>
+            <p style="font-size: 9px;">Check Publishing Results</p>
+                <div class="social-share-btns">
+                    <a href="#" class="button button-round button-black">Cancel</a>
+                    <a href="#" class="button button-round button-red">View Post</a>
+                </div>
         </div>
     </div>
     <!--<script type="text/javascript" src="cordova.js"></script>-->
@@ -222,4 +297,12 @@
     <script type="text/javascript" src="scripts/plugins.js"></script>
     <script type="text/javascript" src="scripts/session.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script>
+        $(function(){
+            $('.footer-fixed.bounds-footer .bounds-options>a').click(function(){
+                $('.footer-fixed.bounds-footer .bounds-options>a.active').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
 </body>
