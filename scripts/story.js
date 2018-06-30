@@ -38,7 +38,7 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (response) {
 		 // Blmani.Comic.getInstance().set(response);
-		 // console.log(response);
+		  console.log(response);
 		  //console.log(response.episodes);
 		  var counter =0;
 		  $.each(response.custom.genre,function(key,value){

@@ -1,11 +1,12 @@
 
 
-$(document).ready(function(){      
+$(document).ready(function(){ 
+     
     'use strict'	
 	window.items = [];		
 	function init_template(){	
 						
-		//Demo Purposes.
+		
 		$('a').on('click', function(){var attrs = $(this).attr('href');	if(attrs === '#'){return false;}});
 		
 		/*$('.demo-light').on('click', function(){
@@ -145,7 +146,7 @@ $(document).ready(function(){
 			if($('.header').hasClass('hide-header-card')){$('.header').css('transform','translateY(-60px)');}
 			return false;
 		});
-	
+	    
 		$('#menu-hider, .close-menu').on('click', function(){
 			$('.menu-flyin').removeClass('active-flyin');
 			$('.menu-sidebar').removeClass('active-touch menu-sidebar-shadow menu-sidebar-shadow-3d');
@@ -294,8 +295,9 @@ $(document).ready(function(){
 			}
         });
 		
-		//Owl Carousel Sliders
+		/*Owl Carousel Sliders
 		setTimeout(function(){
+			console.log("owl sliders");
 			$('.single-slider').owlCarousel({center: true, items:1, loop:true, margin:10, stagePadding:20, lazyLoad:true});
 			$('.center-slider').owlCarousel({center: false, items:2, autoWidth:true, loop:false, margin:10, stagePadding:20, lazyLoad:true});
 			$('.genre-tags-slider').owlCarousel({items:10, autoWidth:true, loop:false, margin:10});
@@ -310,7 +312,7 @@ $(document).ready(function(){
 			$('.timeline-slider').owlCarousel({loop:true, lazyLoad:true, nav:false, items:1, autoplay: true, autoplayTimeout:3500});
 			$('.next-slide, .next-slide-arrow, .next-slide-text, .next-slide-custom').on('click',function(){$(this).parent().find('.owl-carousel').trigger('next.owl.carousel');});		
 			$('.prev-slide, .prev-slide-arrow, .prev-slide-text, .prev-slide-custom').on('click',function(){$(this).parent().find('.owl-carousel').trigger('prev.owl.carousel');});		
-		},100);
+		},100);*/
 		
 		//Coverpage
 		setTimeout(function(){resize_coverpage();},250);
@@ -414,12 +416,59 @@ $(document).ready(function(){
         jQuery(document).ready(function(e) {
             function t(t, n) {
                 loginFormSubmitted = "true";
-                var r = e("#" + t).serialize();
-                e.post(e("#" + t).attr("action"), r, function(n) {
-                    console.log(n);
+				$(".loading-gif").removeClass("hideit");
+				var params = {};
+				params["username"] = $("#usernameField").val();
+				params["password"] = $("#passwordField").val();
+				console.log(params);
+				$.ajax({
+					  url: "http://blmani.com/wp-json/jwt-auth/v1/token",
+					  type: "post",
+				      data: params,
+					  dataType: 'json',
+					  success: function (response) {
+						   loginFormSubmitted = "true";
+						   console.log(response);
+						   Blmani.Session.getInstance().set(response);
+						   $(".loading-gif").addClass("hideit");
+						   $('.toast').addClass('show-toast');
+						   setTimeout(function(){window.location = "comic.html";},1500);
+			               //setTimeout(function(){$('.toast').removeClass('show-toast');},3000);
+						   //window.location = "comic.html";
+						   /* if(response.status == "Success"){
+								signupFormSubmitted = "true";
+								e("#" + t).hide();
+                                e("#formSuccessMessageWrap").fadeIn(500);
+								
+							} else {
+								//(response.status=="Error"){
+							   signupFormSubmitted = "false";
+                               console.log(response.msg);
+                               $("#formError3").html('<p class="center-text uppercase small-text color-white">'+response.msg+'</p>');
+							   $("#usernameField").focus();
+							   $("#usernameField").addClass("fieldHasError");
+							   $("#formError3").fadeIn(300);
+                               return false;							   
+							}
+						  */ 
+						},
+					    error: function (jqXHR, textStatus, errorThrown) {
+                               console.log(textStatus, errorThrown);
+							   loginFormSubmitted = "false";
+							   $(".loading-gif").addClass("hideit");
+						       $("#formError3").html('<p class="center-text uppercase small-text color-white">Invalid Username Or Password!</p>');
+							   $("#usernameField").focus();
+							   $("#usernameField").addClass("fieldHasError");
+							   $("#formError3").fadeIn(300);
+                               return false;
+                        }
+					 });
+                //var r = e("#" + t).serialize();
+                //e.post(e("#" + t).attr("action"), r, function(n) {
+                    //console.log(n);
 					//e("#" + t).hide();
                     //e("#formSuccessMessageWrap").fadeIn(500)
-                })
+                //})
             }
 
             function n(n, r) {
@@ -532,26 +581,41 @@ $(document).ready(function(){
                 signupFormSubmitted = "true";
                 //var r = e("#" + t).serialize();
 				//console.log(r);
+				//$(".loading-gif").removeClass("hideit");
 				var params = {};
 				params["username"] = $("#usernameField").val();
 				params["email"] = $("#emailField").val();
 				params["password"] = $("#passwordField").val();
 				console.log(params);
+				$(".loading-gif").removeClass("hideit");
 				$.ajax({
 					  url: "http://blmani.com/wp-json/aniparti/register",
 					  type: "post",
 				      data: params,
 					  dataType: 'json',
 					  success: function (response) {
-						 // Blmani.Comic.getInstance().set(response);
-						    if(response.status ="Error"){
-							   signupFormSubmitted = "false";
+						    var res = response;
+							console.log(response);
+						    Blmani.Session.getInstance().set(response);
+						    if(response.status == "Error"){
+								 signupFormSubmitted = "false";
                                console.log(response.msg);
                                $("#formError3").html('<p class="center-text uppercase small-text color-white">'+response.msg+'</p>');
 							   $("#usernameField").focus();
 							   $("#usernameField").addClass("fieldHasError");
 							   $("#formError3").fadeIn(300);
-                               return false;							   
+							   $(".loading-gif").addClass("hideit");
+                               return false;
+								
+								
+							} else {
+								signupFormSubmitted = "true";
+								$(".loading-gif").addClass("hideit");
+						        $('.toast').addClass('show-toast');
+						        setTimeout(function(){window.location = "comic.html";},1500);
+								//e("#" + t).hide();
+                                //e("#formSuccessMessageWrap").fadeIn(500);
+							  							   
 							}
 						  
 						}
