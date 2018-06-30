@@ -219,7 +219,7 @@
             <ul>
                 <li class="active "><a href="# "><span class="la la-Rounded-Rectangle "></span><span class="ft-menu-text ">Comics</span></a></li>
                 <li class="center-active "><a href="search.html "><span class="la la-search "></span><span class="ft-menu-text ">Search</span></a></li>
-                <li><a href="dummy-page-posting.html "><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
+                <li><a href="javascript:;" data-menu="post-a-story-options"><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
                 <div class="clear "></div>
             </ul>
         </div>
@@ -232,6 +232,30 @@
             </div>
         </div>
     </div>
+    <div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="fac fac-radio-full fac-default"><span></span>
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" value="1">
+                    <label for="box1-fac-radio-full">New Creation</label>
+                </div>
+                <div class="fac fac-radio-full fac-blue"><span></span>
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="1">
+                    <label for="box2-fac-radio-full">Recommended</label>
+                </div>
+                <div class="fac fac-radio-full fac-green"><span></span>
+                    <input id="box3-fac-radio-full" type="radio" name="rad1" value="1">
+                    <label for="box3-fac-radio-full">My Library</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-btn">Done</a>
+        </div>
+    </div>
     <!--<script type="text/javascript " src="cordova.js "></script>-->
     <script type="text/javascript " src="scripts/jquery.js "></script>
     <script type="text/javascript " src="scripts/plugins.js "></script>
@@ -242,7 +266,7 @@
         $('#page-build').remove();
         setTimeout(function() { $("#preloader").addClass('hide-preloader'); }, 100); // will fade out the white DIV that covers the website.
     });
-    $('.content.search-results-section .search-results-list>ul>li>a').click(function(){
+    $('.content.search-results-section .search-results-list>ul>li>a').click(function() {
         if ($(this).hasClass("item-selected")) {
             $(this).removeClass('item-selected');
             $('.footer-fixed.regular-footer').removeClass('move-out');

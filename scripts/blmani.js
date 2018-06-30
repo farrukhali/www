@@ -330,6 +330,7 @@ $(document).ready(function(){
 		   $(".search-friends-input").val("");
 		   $(".search-friends-results").addClass("hideit");
 		   $(".search-friends-ul").html("");
+		   $(".search-friends-span-close").addClass("hideit");
 		   
 	  })
        $(".search-friends-span-close").on("click",function(){
@@ -337,7 +338,7 @@ $(document).ready(function(){
 		   $(".search-friends-input").val("");
 		   $(".search-friends-results").addClass("hideit");
 		   $(".search-friends-ul").html("");
-		   
+		   $(".search-friends-input").removeClass('active-input-friends');
 	  })
 	  $("a.pb1").on("click",function(){
 		  $("a.active-bounds").each(function(){
@@ -402,6 +403,7 @@ $(document).ready(function(){
 					 console.log(searchp);
 					 $(".search-friends-span").removeClass("hideit");
 					 $(".search-friends-span-close").addClass("hideit");
+					 $(".search-friends-input").addClass('active-input-friends');
                       $.ajax({
 						  url: "http://blmani.com/wp-json/aniparti/getusers",
 						  type: "post",
@@ -467,16 +469,3 @@ var copyToClipboard = function (element) {
  //console.log(s);
  $temp.remove();
 }
-
-
-
-
-
-
-
-
-  
-
-
-
-

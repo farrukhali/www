@@ -380,11 +380,11 @@ sup{top: -15px;} sub{bottom: 0px;}
 .color-orange-dark{color: #E9573F!important;}
 
 .bg-red-light{background-color: #e74c3c!important; color:#FFFFFF;}
-.bg-red-dark{background-color: #c0392b!important; color:#FFFFFF;}
+.bg-red-dark{background-color: #E44130!important; color:#FFFFFF;}
 .border-red-light{border:solid 1px #e74c3c!important;}
-.border-red-dark{ border:solid 1px #c0392b!important;}
+.border-red-dark{ border:solid 1px #E44130!important;}
 .bg-hover-red-light:hover{background-color: #e74c3c!important; color:#FFFFFF!important; transition:all 200ms ease;}
-.bg-hover-red-dark:hover{background-color: #c0392b!important; color:#FFFFFF!important; transition:all 200ms ease;}
+.bg-hover-red-dark:hover{background-color: #E44130!important; color:#FFFFFF!important; transition:all 200ms ease;}
 .color-red-light{color: #e74c3c!important;}
 .color-red-dark{color: #E44130!important;}
 
@@ -759,7 +759,7 @@ ol ol ol{list-style-type:disc;}
 .decoration-boxed{margin:0px 20px 0px 20px;}
 .decoration-lines div{height:5px; width:10%; float:left;}
 .decoration-lines-thin div{height:3px; width:10%; float:left;}
-.deco-0{background-color:#c0392b;}
+.deco-0{background-color:#E44130;}
 .deco-1{background-color:#2ecc71;}
 .deco-2{background-color:#3498db;}
 .deco-3{background-color:#bdc3c7;}
@@ -2391,7 +2391,7 @@ input[type="range"]::-webkit-slider-thumb:after{
     height:40px;
     line-height:40px;
     margin-bottom:20px;
-	background-color:#c0392b;
+	background-color:#E44130;
 	text-align:center;
 	color:#FFFFFF;
 	text-transform: uppercase;
@@ -2787,6 +2787,7 @@ input[type="range"]::-webkit-slider-thumb:after{
 	margin-bottom:0px;
 	opacity:0;
 	transition:all 350ms ease;
+	z-index: 999999;
 }
 
 .toast-top{top:80px;}
@@ -5367,7 +5368,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	transform:translateY(101.1%) scale(0,0);
 	box-shadow: 0px 0 71px rgba(30, 41, 62, 0.21);
 }
-
+.menu-flyin.non-scroll-modal{
+    overflow: initial;
+    max-height: 100%;
+}
 .menu-flyin .menu-items{
 	width:320px;
 	overflow: hidden;
@@ -5375,6 +5379,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 .menu-flyin-content{
 	margin: 0;
+}
+.modal-content{
+    padding: 20px;
 }
 .active-flyin{bottom: 50%; transform:translateY(49.99999%) scale(1,1);  opacity:1;}
 .flyin-hider{background-color: rgba(255, 255, 255, 0.8)!important;}
@@ -5615,4 +5622,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     background-size: cover;
     background-repeat: no-repeat;
     padding: 50px 20px;
+}
+.f-roboto{
+	font-family: Roboto !important;
 }
