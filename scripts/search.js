@@ -160,11 +160,18 @@ $(document).ready(function () {
 				$(".srl-section-heading").removeClass('hideit');
 				$(".nrf").addClass('hideit'); 
 				$.each(response, function (key, value) {
-				$(".searching-results").append('<li><a href="story.html#'+value.ID+'" style="display:table"><div class="srl-image-wrapper"><img src="'+value.thumburl+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+value.custom.prodes+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+value.custom.views+'</span></div></div></div></a></li>');	
+				$(".searching-results").append('<li class="searched-li" id="'+value.ID+'"><a hewf="#" style="display:table"><div class="srl-image-wrapper"><img src="'+value.thumburl+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+value.custom.prodes+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+value.custom.views+'</span></div></div></div></a></li>');	
 				});
-			 
-				
 			 }
+			 $(".searched-li").click(function(){
+			 	    if(!$(this).hasClass('show-overlay-btns')){
+				 	    $(this).addClass('show-overlay-btns');
+				 	    $(this).append('<div class="long-press-overlay"><ul><li class="lpo-red"><a href="#">Play Story</a></li><li><a href="story.html">Add to Favorites</a></li></ul></div>');
+			 		}else{
+			 			$(this).removeClass('show-overlay-btns');
+			 		}
+	            });
+
 			 $('.search-comics').removeClass('searching-anc');
 	         $('.search-comics').html('Search');
 			
