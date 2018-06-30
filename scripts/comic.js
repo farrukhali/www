@@ -8,8 +8,229 @@ $(window).on('load',function(){
 	//setTimeout(function(){$("#preloader").addClass('hide-preloader');},450);// will fade out the white DIV that covers the website.
 });
 
+var getCompleteComics =function(){
+ var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+	
+}
 
-var getRecordsForHome = function(){
+var getPopularComics = function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+
+}
+
+
+var getAdultComics = function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+
+}
+
+var getRankedComics =function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+}
+var getSerialComics=function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+}
+
+var getFeaturedComics = function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+}
+
+
+var getLatestComics = function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	if(!session){
+	 params['uid'] ="nli";
+	} else {
+	params['uid'] =session.uid;	
+	}
+	console.log(params);
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/getAll",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb = value.thumburl;
+		 if(!thumb){thumb="images/placeholder.jpg";}
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".preload-image").lazyload({threshold : 500});
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+
+}
+
+var getComicsForHome = function(){
 	var session = Blmani.Session.getInstance().get();
 	params = {};
 	if(!session){
