@@ -41,6 +41,7 @@ function onDeviceReady() {
 
 function onPhotoURISuccess(imageURI) {
     $("#preview-thumb").attr("src",imageURI);
+	$('#preview-thumb').addClass("thumb-fullwidth");
 	$("#thumbFieldError").fadeOut(300);
 }
 
