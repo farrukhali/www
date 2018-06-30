@@ -12,7 +12,7 @@ $(document).ready(function(){
 		/*$('.demo-light').on('click', function(){
 			$('.demo-dark').removeClass('menu-item-active');
 			$(this).addClass('menu-item-active');	
-			$('.menu-sidebar').removeClass('menu-dark');
+			$('.menu-sidebar').removeClass('menu-dark');gallery-filter
 			$('.menu-sidebar').addClass('menu-light');
 		});		
 		$('.demo-dark').on('click', function(){
@@ -345,14 +345,9 @@ $(document).ready(function(){
 		}
 		
 		//Galleries
-		baguetteBox.run('.gallery', {});		
-		baguetteBox.run('.profile-gallery', {});		
+			
 		
-		if($('.gallery-filter').length > 0){$('.gallery-filter').filterizr();}		
-		$('.gallery-filter-controls a').on('click',function(){
-			$('.gallery-filter-controls a').removeClass('gallery-filter-active color-highlight');	
-			$(this).addClass('gallery-filter-active color-highlight');	
-		})
+		
 
 		//Contact Form
         var formSubmitted = "false";

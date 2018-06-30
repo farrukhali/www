@@ -330,6 +330,7 @@ $(document).ready(function(){
 		   $(".search-friends-input").val("");
 		   $(".search-friends-results").addClass("hideit");
 		   $(".search-friends-ul").html("");
+		   $(".search-friends-span-close").addClass("hideit");
 		   
 	  })
        $(".search-friends-span-close").on("click",function(){
@@ -337,6 +338,7 @@ $(document).ready(function(){
 		   $(".search-friends-input").val("");
 		   $(".search-friends-results").addClass("hideit");
 		   $(".search-friends-ul").html("");
+		   $('.search-friends-input').removeClass('active-input-friends');
 		   
 	  })
 	  $("a.pb1").on("click",function(){
@@ -400,6 +402,7 @@ $(document).ready(function(){
 					 searchp['str'] = $(this).val();
 					 searchp['uid'] = session.uid;
 					 console.log(searchp);
+					 $(this).addClass('active-input-friends');
 					 $(".search-friends-span").removeClass("hideit");
 					 $(".search-friends-span-close").addClass("hideit");
                       $.ajax({
