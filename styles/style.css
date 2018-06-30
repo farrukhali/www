@@ -345,6 +345,30 @@
     object-fit: cover;
     border-radius: 5px;
 }
+.latest-comics-all .comic-book-item .item-image-wrapper{
+    
+position: relative;
+}
+.latest-comics-all .comic-book-item .item-image-wrapper .item-image-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:  0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    border-radius: 5px;
+}
+.latest-comics-all .comic-book-item.item-selected .item-image-wrapper .item-image-overlay{
+    display: block;
+}
+.latest-comics-all .comic-book-item .item-image-wrapper .item-image-overlay i.la{
+    color: #fff;
+    font-size: 24px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
 
 .latest-comics-all.details-page-episodes .comic-book-item img,
 .gallery-filter-results.details-page-episodes .comic-book-item img {
@@ -486,7 +510,22 @@ body .active-touch .hideit {
     right: 0px;
     z-index: 99;
 }
-
+.footer-fixed.action-footer{
+    transform: translateY(110%);
+    transition: all 0.3s;
+    background: #1f2b3f !important;
+    text-align: center;
+}
+.footer-fixed.action-footer.come-in{
+    transform: translateY(0);
+}
+.footer-fixed.regular-footer{
+    transition: all 0.3s;
+}
+.footer-fixed.regular-footer.move-out{
+    transform: translateY(110%);
+    transition: all 0.3s;
+}
 .footer-fixed ul {
     padding: 0px 6%;
     margin: 0;
@@ -1686,6 +1725,12 @@ a.upload-file-block .size-guide {
     margin-right: 5px;
     border-radius: 30px;
 }
+.footer-fixed.bounds-footer.action-footer .bounds-options>a{
+    padding: 5px 10px;
+    color: #fff;
+    float: none;
+    display: inline-block;
+}
 .footer-fixed.bounds-footer .bounds-options>a:last-child{
     margin-right:0
 }
@@ -1727,7 +1772,6 @@ margin-right: 4px;
 }
 
 .search-friends-results{
-    display: none;
     position: absolute;
     background: #eee;
     width: 100%;
@@ -1767,3 +1811,7 @@ margin-right: 4px;
     color: #fff;
 }
 .copy-url-sec .copy-url-btn a i{}
+.footer-fixed.bounds-footer .bounds-options .btn-action-unpublish{
+    color: #E44130 !important;
+    border-color: #E44130;
+}

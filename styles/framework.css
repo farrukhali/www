@@ -386,7 +386,7 @@ sup{top: -15px;} sub{bottom: 0px;}
 .bg-hover-red-light:hover{background-color: #e74c3c!important; color:#FFFFFF!important; transition:all 200ms ease;}
 .bg-hover-red-dark:hover{background-color: #c0392b!important; color:#FFFFFF!important; transition:all 200ms ease;}
 .color-red-light{color: #e74c3c!important;}
-.color-red-dark{color: #c0392b!important;}
+.color-red-dark{color: #E44130!important;}
 
 .bg-pink-light{background-color: #fa6a8e !important; color:#FFFFFF;}
 .bg-pink-dark{background-color: #FB3365 !important; color:#FFFFFF;}
