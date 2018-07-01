@@ -80,6 +80,21 @@ var isValidUrl = function(str){
 
 }
 
+var canViewIt = function(pid,did){
+	if(pid==1){
+	  window.location = "story.html#"+did;
+	} 
+	if(pid==4){
+		//locked
+		$(".password-protected-link").click();
+	}
+	if(pid==2){
+		//my pick
+		$(".loading-gif-centered").removeClass("hideit");
+	    console.log("let medecide what to do");	
+	}
+}
+
 
 
 var setFields = function(){
@@ -154,13 +169,14 @@ var  uploadThumb = function(fileid) {
 
 
 var recSuccessFunc = function(success) {
-	
+	console.log(JSON.stringify(success));
     console.log("Code = " + success.responseCode);
     console.log("Response = " + success.response);
     /*alert("Response =" + success.response);*/
     console.log("Sent = " + success.bytesSent);
 	//return success;
-	url =success.response;
+	url ="http://blmani.com/"+success.url;
+	console.log('url')
 	recommendedPost(url);
 }
 
@@ -243,17 +259,18 @@ var recommendedPost =function(url){
       type: "post",
       data: JSON.stringify(param),
 	  contentType: 'application/json',
-	  contentType: 'application/json',
-		  beforeSend: function (xhr) {
+	   beforeSend: function (xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
 		},
 
       dataType: 'json',
 		 success: function (response) {
-			 console.log(response);
+             $("a#show-success-popup").click();
+			 console.log(JSON.stringify(response));
 			 $(".loading-gif").addClass("hideit");
-			 $("#view-post-btn").attr("href","story.html#"+response);
-			 setTimeout(function(){$("a#show-success-popup").click();},500);
+			 $("#copy-to-clipboard").val(response.url);
+			 $("#view-post-btn").attr("href","story.html#"+response.pid);
+
 			},
 		 error:function(response){
 		     console.log(JSON.stringify(response));
@@ -299,7 +316,30 @@ var delSelection = function(sel){
 
 
 $(document).ready(function(){
+	  console.log("document.ready");
 	  var session = Blmani.Session.getInstance().get();
+	  $(".post-story-icon").on("click",function(){
+		  if(!session){
+			$('#toast-login').addClass('show-toast');
+			setTimeout(function(){$('#toast-login').removeClass('show-toast');},3000);	
+            window.location ="login.html";			
+		  } else {
+			 // window.location = "recommended.html";
+			 $("a.post-story-option-link").click(); 
+		  }
+	  });
+	  
+	  $(".posting-method-selection-done").on("click",function(){
+		  var val = $('input[name=rad1]:checked').val();
+		  console.log("posting method"+val);
+		  if(val==1){
+			  window.location = "dummy-page-posting.html";
+		  } else if(val==2){
+			  window.location = "recommended.html";
+		  } else {
+			  window.location= "mylib.html";
+		  }
+	  });
       $("select#select_genre").on('change', function(){
 		  $("#sgenre").remove();
 		  $(".fc-info-tags").append('<li id="sgenre"><span onClick="delSelection(1)">'+$(this).children(':selected').text()+'</span></li>');
@@ -327,6 +367,7 @@ $(document).ready(function(){
 	  });
 	 
 	  $(".close-menu").on("click",function(){
+		    
 		   $(".search-friends-input").val("");
 		   $(".search-friends-results").addClass("hideit");
 		   $(".search-friends-ul").html("");
@@ -431,16 +472,7 @@ $(document).ready(function(){
 				}
 	  });
 
-      $(".post-story-icon").on("click",function(){
-		  var session = Blmani.Session.getInstance().get();
-		  if(!session){
-			  window.location = "login.html";
-		  } else {
-			  // show pop-p for now redirect to recommended;
-			  window.location = "recommended.html";
-		  }
-		  
-	  });  
+      
 	  
 	  $(".add-hash-tags").on("click",function(){
 		 console.log("clcikced");
@@ -450,26 +482,14 @@ $(document).ready(function(){
 			 $(".additional-info-tags").append('<li onClick="delHash(this)"><span>'+tag+'</span></li>');
 		 }
 	  })
-	  $("#copy-to-clipboard-btn").on("click", function(){
-		   console.log("f called");
-	       copyToClipboard("#copy-to-clipboard");
-		  
-	  });
+
 	  
 
 
 });
 
 
-var copyToClipboard = function (element) {
- var $temp = $("<input>");
- $("body").append($temp);
- $temp.val($(element).val());
- //console.log($temp.value);
- var s = document.execCommand("copy");
- //console.log(s);
- $temp.remove();
-}
+
 
 
 

@@ -92,16 +92,63 @@
             <ul>
                 <li class="active"><a href="comic.html"><span class="la la-Rounded-Rectangle"></span><span class="ft-menu-text">Comics</span></a></li>
                 <li class="center-active"><a href="search.html"><span class="la la-search"></span><span class="ft-menu-text">Search</span></a></li>
-                <li><a href="dummy-page-posting.html"><span class="la la-edit"></span><span class="ft-menu-text">Post Story</span></a></li>
+                <li><a href="#" data-menu="post-a-story-options"><span class="la la-edit"></span><span class="ft-menu-text">Post Story</span></a></li>
                 <div class="clear"></div>
             </ul>
+        </div>
+    </div>
+    <a href="#" class="password-protected-link hideit" data-menu="post-a-story-options">...</a>
+    <div id="passcode-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Enter Passcode</h3>
+            <div class="search-etc-tag">
+               
+                    <input type="password" class="search-etc-tag-input privacy-passcode" placeholder="Enter Passcode">
+                    <span style="top: 0" class="privacy-passcode-eye"><i class="la la-eye"></i></span>
+            </div>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+                <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red privacy-passcode-done">Done</a>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
+    <div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="fac fac-radio-full fac-default"><span></span>
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" checked value="1">
+                    <label for="box1-fac-radio-full">New Creation</label>
+                </div>
+                <div class="fac fac-radio-full fac-blue"><span></span>
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="2">
+                    <label for="box2-fac-radio-full">Recommended</label>
+                </div>
+                <div class="fac fac-radio-full fac-green"><span></span>
+                    <input id="box3-fac-radio-full" type="radio" name="rad1" value="3">
+                    <label for="box3-fac-radio-full">My Library</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+           <a href="#" class="modal-btn posting-method-selection-done">Done</a>
         </div>
     </div>
 	<script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
-	<script type="text/javascript" src="scripts/jslib.js"></script>
-	<script type="text/javascript" src="scripts/story.js"></script>
+    <script type="text/javascript" src="scripts/blmani.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="scripts/session.js"></script>
+    <script type="text/javascript" src="scripts/comic.js"></script>
+    <script>
+    $(window).on("load",function () {
+     getComicsForHome();
+    });
+    </script>
 	
 </body>

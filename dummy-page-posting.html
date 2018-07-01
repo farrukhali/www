@@ -10,7 +10,8 @@
     <script type="text/javascript" src="ani_canvas/plugins.js"></script>
     <script type="text/javascript" src="cordova.js"></script>    
     <script type="text/javascript" src="ani_canvas/inject.js"></script>
-    <script>
+    <script type="text/javascript" src="scripts/session.js"></script>
+	<script>
         window.loadUrl("http://blmani.com/posting.html?" + Date.now()).onload = function () {
             var r = window.parseCodeBlocks(this.response);          
             var e = document.createElement('div');

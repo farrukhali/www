@@ -72,12 +72,14 @@ $(".upload-file-block").on("click", function(e){
 		
             function t(t, n) {
 				var imageURI = $('#preview-thumb').attr("src");
-				/*if (!imageURI || imageURI == "images/image-icon.png") {
-					$("#thumbFieldError").fadeIn(300);
-					$("#upload-file-block").focus();
-					//alert('Please select an image first.');
+				if (!imageURI || imageURI == "images/image-icon.png") {
+					//$("#thumbFieldError").fadeIn(300);
+					//$("#upload-file-block").focus();
+					$('#toast-3').addClass('show-toast');
+			        setTimeout(function(){$('#toast-3').removeClass('show-toast');},3000);
 					return false;
-				}*/
+				}
+				console.log("submit");
                 recommendedFormSubmitted = "true";
 				$(".loading-gif").removeClass("hideit");
 				uploadThumb('preview-thumb');
@@ -93,6 +95,9 @@ $(".upload-file-block").on("click", function(e){
                         e(this).focus();
                         e(this).addClass("fieldHasError");
                         e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-title').addClass('show-toast');
+			            setTimeout(function(){$('#toast-title').removeClass('show-toast');},3000);
+						
                         return false
                     }
                     if (e(this).hasClass("requiredEmailField")) {
