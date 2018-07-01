@@ -69,37 +69,67 @@
 				Change Profile Picture <a href="#"><img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png"></a>
 			</li>
 			<li>
-				Nick name <a href="#" class="color-red">John.deo93</a>
+				Nick name <strong>(John.deo93)</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>
 			</li>
 			<li>
-				Gender <strong>Male</strong> <a href="#" data-menu="edit-gender-modal">Edit</a>
+				Gender <strong>(Male)</strong> <a href="#" data-menu="edit-gender-modal">Edit</a>
 			</li>
 			<li>
-				Birthday - <strong>12-09-1988</strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
+				Birthday - <strong>(12-09-1988)</strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
 			</li>
 		</ul>
 	</div>
 
-	<div id="edit-gender-modal" class="menu-flyin">
-		<div class="menu-flyin-content top-20 bottom-10">
-			<div class="page-login bottom-0">
-				<h3 class="uppercase ultrabold bottom-0">Select Gender</h3>
-				<div class="select-box select-box-1">
-					<select>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
+	<div id="edit-gender-modal" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Select Gender</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="fac fac-radio-full fac-default"><span></span>
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" value="1">
+                    <label for="box1-fac-radio-full">Male</label>
+                </div>
+                <div class="fac fac-radio-full fac-blue"><span></span>
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="1">
+                    <label for="box2-fac-radio-full">Female</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-btn">Done</a>
+        </div>
+    </div>
+	<div id="edit-bday-modal" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Enter Birthday</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="input-simple-1 has-icon input-green bottom-30">
+					<input type="text" placeholder="Enter Birthday">
 				</div>
-			</div>	
-		</div>
-	</div>
-	<div id="edit-bday-modal" class="menu-flyin">
-		<div class="menu-flyin-content top-20 bottom-10">
-			<h3 class="uppercase ultrabold bottom-0">Enter Birthday</h3>
-			<div class="input-simple-1 has-icon input-green bottom-30">
-				<input type="text" placeholder="Enter Birthday"></div>
-		</div>
-	</div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-btn">Done</a>
+        </div>
+    </div>
+    <div id="edit-nickname-modal" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Edit Nickname</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="input-simple-1 has-icon input-green bottom-30">
+					<input type="text" placeholder="Enter Nickname">
+				</div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-btn">Done</a>
+        </div>
+    </div>
 	
 	<div id="menu-share" class="menu-flyin menu-share">
 		<div class="menu-flyin-content">

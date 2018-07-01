@@ -1659,6 +1659,13 @@ margin-top: 6px;
     .page-login.top-60{
         margin-top: 20px !important;
     }
+    .center-slider.featured-slider .owl-item div img{
+        width: 110px;
+        height: 110px;
+    }
+    .below-header-links{
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (max-width: 350px) {
