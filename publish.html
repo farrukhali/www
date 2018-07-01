@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>Comics - Blmani </title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+</head>
+
+<body>
+    <div id="preloader" class="preloader-light">
+        <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
+        <div id="preload-spinner"></div>
+    </div>
+    <div id="page-transitions" class="page-build highlight-red">
+        <div class="header header-light header-logo-center">
+            <div class="header-title">Post a Story</div>
+            <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
+			<a href="#" class="header-icon header-icon-4 back-button" style="line-height: 60px;"><i class="la la-times" style="font-size: 20px;color: #e44330;"></i></a>
+        
+        </div>
+		
+		<div class="loading-gif hideit"><img src="images/loadersvg.svg"></div>
+		<p id="toast-1" class="toast toast-top toast-large bg-red-dark">You have not added any user!</p>
+		<p id="toast-2" class="toast toast-top toast-large bg-red-dark">Passcode lenght of 4, without space required!</p>
+		<p id="toast-3" class="toast toast-top toast-large bg-red-dark">Attach thumbnail!</p>
+		<p id="toast-title" class="toast toast-top toast-large bg-red-dark">Story Title Required!</p>
+		<p id="toast-url" class="toast toast-top toast-large bg-red-dark">Url required!</p>
+		<p id="toast-invalidurl" class="toast toast-top toast-large bg-red-dark">Invalid Url!</p>
+		<form action="" method="post" class="recommendedForm" id="recommendedForm">
+        <div class="page-content header-clear footer-clear">
+            <h2 class="red-block-heading">Set Publishing Information</h2>
+            <div class="content">
+			<div class="tabs">
+                    <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
+                        <a href="#" id="1" class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">1st Creation</a>
+                        <a href="#" id="2" data-tab-pill="tab-pill-2">2nd Reproduction</a>
+                    </div>
+                    <div class="tab-pill-content">
+                        <div class="tab-item active-tab" id="tab-pill-1">
+                            <div class="search-filters">
+                                <ul>
+                                    <li>
+                                        <select name="select_genre" id="select_genre">
+                                            <option value="" selected="" disabled="">Genre</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                    <li>
+                                        <select name="select_atype" id="select_atype">
+                                            <option value="" selected="" disabled="">A-Type</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                    <li>
+                                        <select name="select_dtype" id="select_dtype">
+                                            <option value="" selected="" disabled="">D-Type</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="search-etc-tag">
+                                <input type="text" class="search-etc-tag-input fc-search-input" placeholder="Search tag">
+                            </div>
+                            <div class="decoration"></div>
+                            <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
+                            <ul class="info-tags collapseable fc-info-tags">
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="tab-item" id="tab-pill-2">
+                            <div class="search-filters">
+                                <ul>
+                                    <li>
+                                        <select name="select_content" id="select_content">
+                                            <option value="" selected="" disabled="">Content</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                    <li>
+                                        <select name="select_title" id="select_title">
+                                            <option value="" selected="" disabled="">Title</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                    <li>
+                                        <select name="select_character" id="select_character">
+                                            <option value="" selected="" disabled="">Character</option>
+                                        </select>
+                                        <span class="zmdi zmdi-caret-down select-caret"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="search-etc-tag">
+                                <input type="text" class="search-etc-tag-input sc-search-input" placeholder="Search tag">
+                            </div>
+                            <div class="decoration"></div>
+                            <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
+                            <ul class="info-tags collapseable sc-info-tags">
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="decoration"></div>
+			    <div class="formValidationError bg-red-dark top-20" id="titleFieldError">
+						<p class="center-text uppercase small-text color-white">Story Title is required!</p>
+					</div>
+					<div class="formValidationError bg-red-dark top-20" id="thumbFieldError">
+						<p class="center-text uppercase small-text color-white">Thumb Image is Required!</p>
+					</div>
+					<!--<div class="formValidationError bg-red-dark top-20" id="urlflinkFieldError2">
+						<p class="center-text uppercase small-text color-white"></p>
+					</div>-->
+					<div class="formValidationError bg-red-dark top-20" id="formError3">
+								
+				</div>
+                <h6 class="story-title-label">Story Title</h6>
+                
+                    <div class="input-simple-1 blmani-design input-green bottom-20">
+                        <input type="text" placeholder="Enter story title" name="title" value="" class="titleField requiredField" id="titleField"  style="text-align: center;font-size: 20px;">
+                    </div>
+               
+                <a href="#" class="upload-file-block">
+                    <img src="images/image-icon.png" data-src="" alt="image icon" id="preview-thumb">
+                    <div class="upload-file-block-red-text">Tap Here</div>
+                    <p>to upload thumbnail</p>
+                    <div class="size-guide">500x500 pixels</div>
+                </a>
+                <h6 class="story-title-label">Upload image File Name</h6>
+                <div class="decoration"></div>
+                <div class="formValidationError bg-red-dark top-20" id="urlflinkFieldError">
+						<p class="center-text uppercase small-text color-white">URL for Link is required!</p>
+					</div>
+					<div class="formValidationError bg-red-dark top-20" id="urlflinkFieldError2">
+						<p class="center-text uppercase small-text color-white">Invalid Url! </p>
+					</div>
+                    <div class="input-simple-1 blmani-design input-green bottom-20">
+                        <em>URL for Link</em>
+                        <input type="text" placeholder="Copy & paste URL "  name="urlflink"  class="urlflinkField requiredField requireUrlField" id="urlflinkField">
+                    </div>
+                    <div class="input-simple-1 blmani-design input-green bottom-20">
+                        <em>Description</em>
+                        <textarea rows="7" class="textarea-simple-1" id="descField" placeholder="Write your description for this recommendation. Shortintroduction for the posting content"></textarea>
+                    </div>
+               
+                <div class="decoration"></div>
+                <h3 class="additional-title-label">Add Additional Hash Keywords</h3>
+                <div class="hash-tags-wrapper">
+                    <div class="search-etc-tag">
+                            <div class="add-tags-input-wrapper">
+                                <input type="text" class="search-etc-tag-input  additional-hash-keywords" placeholder="Type Additional Tags">
+                                <a  class="add-hash-tags"><i class="la la-plus"></i></a>
+                            </div>
+                            
+                    </div>
+                    <ul class="info-tags collapseable additional-info-tags">
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!--
+                <div class="recommended-last-btns top-20">
+                    <a href="#" class="btn btn-cancle float-left btn-back" >Cancel</a>
+                    <a href="#" class="button button-round button-red float-right" id="recommendedSubmitButton" data-formId="recommendedForm">Post</a>
+                    <div class="clear"></div>
+                </div>
+				-->
+            </div>
+        </div>
+		 <div class="footer-fixed bounds-footer" >
+            <h3>Privacy Bounds</h3>
+            <div class="bounds-options">
+                <a href="#" id="1" class="active privacy-bound pb1 active-bounds">Public</a>
+                <a href="#" id="2" class="privacy-bound pb2" data-menu="my-pick-modal">My Pick</a>
+                <a href="#" id="3" class="privacy-bound pb3">Private</a>
+                <a href="#" id="4" class="privacy-bound pb4" data-menu="passcode-modal">Locked</a>
+            </div>
+            <a  href="#" id="recommendedSubmitButton" data-formId="recommendedForm" class="bounds-publish-btn button button-round float-right">Publish</a>
+        </div>
+		</form>
+    </div>
+	<div id="my-pick-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Add Friends</h3>
+            <div class="search-etc-tag">
+                
+                    <input type="text" class="search-etc-tag-input search-friends-input" placeholder="Search friend">
+                    <span class="search-friends-span hideit"><img src="images/loadersvg-dark.svg" alt=""></span>
+					<span class="search-friends-span-close hideit"><i class="la la-times" style="font-size: 15px;color: #151516;"></i></span>
+                    <div class="search-friends-results hideit">
+                        <ul class="search-friends-ul">
+                        </ul>
+                    </div>
+                
+            </div>
+            <ul class="info-tags collapseable added-friends" style="padding-top: 135px;">
+            </ul>
+            <div class="clear"></div>
+            <div style="padding-top: 5px; text-align: center;">
+			    <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red add-friends-done">Done</a>
+            </div>
+            
+        </div>
+    </div>
+	<div id="passcode-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Enter Passcode</h3>
+            <div class="search-etc-tag">
+               
+                    <input type="password" class="search-etc-tag-input privacy-passcode" placeholder="Enter Passcode">
+                    <span style="top: 0" class="privacy-passcode-eye"><i class="la la-eye"></i></span>
+            </div>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+			    <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red privacy-passcode-done">Done</a>
+            </div>
+        </div>
+    </div>
+	<div id="publish-modal" class="menu-flyin menu-share1 success-modal">
+        <div class="menu-flyin-content center-text">
+            <img src="images/success-image.png" alt="Success" style="margin: 0 auto">
+            <h2>Posting Completed</h2>
+            <p style="font-size: 9px;">Your posting ctompleted. Share your posting to your SNS.</p>
+            <div class="decoration"></div>
+            <div class="social-share-btns">
+                <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null /* img */, null /* url */, 'Paste it dude!', function() {console.log('share ok')}, function(errormsg){console.log(errormsg)})"><i class="la la-facebook"></i> Share</a>
+                <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')"><i class="la la-twitter"></i> Share</a>
+            </div>
+            <div class="copy-url-sec">
+                <div class="copy-url-part">
+                    <div class="search-etc-tag">
+                        <input type="text" class="search-etc-tag-input" id="copy-to-clipboard" value="" placeholder="Copy URL">
+                    </div>
+                </div>
+                <div class="copy-url-btn">
+                    <a href="#" id="copy-to-clipboard-btn"><i class="la la-copy"></i></a>
+                </div>
+            </div>
+            <p style="font-size: 9px;">Check Publishing Results</p>
+                <div class="social-share-btns">
+                    <a href="mylib.html" class="button button-round button-black">Cancel</a>
+                    <a href="#" id="view-post-btn" class="button button-round button-red">View Post</a>
+                </div>
+        </div> 
+    </div>
+	<a href="#"  id="show-success-popup" data-menu="publish-modal" class="hideit">...</a>
+	<div id="fb-root"></div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+	<script type="text/javascript" src="scripts/blmani.js"></script>
+    <script type="text/javascript" src="scripts/session.js"></script>
+	<script type="text/javascript" src="scripts/posting.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+	
+	<script>
+$(window).on('load',function(){
+    
+	$('#page-build').remove();
+    setTimeout(function(){$("#preloader").addClass('hide-preloader');},100);// will fade out the white DIV that covers the website.
+	
+});
+
+
+
+
+            
+</script>
+</body>
