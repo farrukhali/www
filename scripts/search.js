@@ -184,9 +184,27 @@ $(document).ready(function () {
 				 } else {
 					 pviews = value.custom.views;
 				 }
-				$(".searching-results").append('<li><a href="#" style="display:table"  class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a></li>');	
+				$(".searching-results").append('<li class="searched-item"><a href="javascript:;" style="display:table" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><ul class="search-result-tags"><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li></ul><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
 				});
+                $(".searched-item").on('click',function() {
+				 if($(this).hasClass("item-selected")){
+				 $(this).removeClass("item-selected");
+				 $("input#my_work_id").val("0");
+				 console.log("ff called");
+				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
+				 $('.footer-fixed.regular-footer').removeClass('move-out');
+				} else{
+				 $(".searched-item").each(function(){
+					 $(this).removeClass("item-selected");
+				 });
+				 $(this).addClass("item-selected");
+				 //$("input#my_work_id").val($(this).attr("data-id"));
+				 //console.log("called");
+				 $('.footer-fixed.regular-footer').addClass('move-out');
+                 $('.footer-fixed.action-footer').addClass('come-in');
+			   }
 				
+			});
 		   $("#preloader").addClass('hide-preloader');
 		   $(".can-view-it").on("click",function(){
 		   var privacy = $(this).attr("data-privacy");
