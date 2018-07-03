@@ -8,6 +8,177 @@ $(window).on('load',function(){
 	//setTimeout(function(){$("#preloader").addClass('hide-preloader');},450);// will fade out the white DIV that covers the website.
 });
 
+var  loadMyFavourites = function(){
+	setTimeout(function(){$("#preloader").addClass('hide-preloader');},500);
+}
+
+var loadMyPostings = function(){
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	params['id'] =session.uid;	
+	
+		
+    $.ajax({
+      url: "http://blmani.com/wp-json/aniparti/get_userposts",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 if(response=="nrf"){
+			 
+		 } else {
+			 
+	       $.each(response,function(key,value){
+		   var thumb = value.thumburl;
+           if(!thumb){	
+		     thumb="images/placeholder.jpg";
+		   }
+		   
+		   if(!value.custom){
+			   division=1;
+		   } else if(!value.custom.division){
+			   division=1;
+		   } else{
+			  division = value.custom.division;
+		   }
+		   
+		   if(!value.custom){
+			   privacy=1;
+		   } else if(!value.custom.privacy){
+			   privacy=1;
+		   } else{
+			  privacy = value.custom.privacy;
+		   }
+		   var divclass ="";
+		   if(division==1){
+			   if(privacy==1){divclass ="mycomics-fcreation-public";}
+			   if(privacy==2){divclass ="mycomics-fcreation-mypick";}
+			   if(privacy==3){divclass ="mycomics-fcreation-private";}
+			   if(privacy==4){divclass ="mycomics-fcreation-locked";}
+		   }
+		   if(division==2){
+			   if(privacy==1){divclass ="mycomics-sreproduction-public";}
+			   if(privacy==2){divclass ="mycomics-sreproduction-mypick";}
+			   if(privacy==3){divclass ="mycomics-sreproduction-private";}
+			   if(privacy==4){divclass ="mycomics-sreproduction-locked";}
+		   }
+		   
+		   $('.'+divclass).append('<div class="comic-book-item" data-id="'+value.ID+'"><a href="#" ><div class="item-image-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><div class="item-image-overlay"><i class="la la-check-circle"></i></div></div><h3 class="comic-book-item-title">'+value.post_title+'</h3></a></div>');
+		    if(privacy==1){divclass ="mycomics-fcreation-public";}
+			   if(privacy==2){divclass ="mycomics-fcreation-mypick";}
+			   if(privacy==3){divclass ="mycomics-fcreation-private";}
+			   if(privacy==4){divclass ="mycomics-fcreation-locked";}
+		 
+		 });
+		 $('.mycomics-fcreation-public').append('<div class="clear"></div>');
+		  $('.mycomics-fcreation-mypick').append('<div class="clear"></div>');
+		   $('.mycomics-fcreation-private').append('<div class="clear"></div>');
+		    $('.mycomics-fcreation-locked').append('<div class="clear"></div>');
+			 $('.mycomics-sreproduction-public').append('<div class="clear"></div>');
+		  $('.mycomics-sreproduction-mypick').append('<div class="clear"></div>');
+		   $('.mycomics-sreproduction-private').append('<div class="clear"></div>');
+		    $('.mycomics-sreproduction-locked').append('<div class="clear"></div>');
+			$(".preload-image").lazyload({threshold : 500});
+			$('.latest-comics-all .comic-book-item').click(function(){
+        if ($(this).hasClass("item-selected")) {
+            $(this).removeClass('item-selected');
+			
+			$("input#my_post_id").val("0");
+            $('.footer-fixed.regular-footer').removeClass('move-out');
+            $('.footer-fixed.action-footer').removeClass('come-in');
+        } else {
+            $(".latest-comics-all").children().each(function() {
+                $(this).removeClass("item-selected");
+				
+                $('.footer-fixed.regular-footer').addClass('move-out');
+                $('.footer-fixed.action-footer').addClass('come-in');
+            });
+            $(this).addClass('item-selected');
+			$("input#my_post_id").val($(this).attr("data-id"));
+        }
+    });
+			 
+		 }
+		 $("#preloader").addClass('hide-preloader');
+		 /*$(".my-work-item").on('click',function() {
+			  
+		        if($(this).hasClass("item-selected")){
+				 $(this).removeClass("item-selected");
+				 $("input#my_work_id").val("0");
+				 console.log("ff called");
+				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
+				 $('.footer-fixed.regular-footer').removeClass('move-out');
+				} else{
+				 $(".my-work-item").each(function(){
+					 $(this).removeClass("item-selected");
+				 });
+				 $(this).addClass("item-selected");
+				 $("input#my_work_id").val($(this).attr("data-id"));
+				 console.log("called");
+				 $('.footer-fixed.regular-footer').addClass('move-out');
+                 $('.footer-fixed.action-footer').addClass('come-in');
+			   }
+        });*/
+		 
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+
+}
+var loadMyWork = function(){
+	
+	var session = Blmani.Session.getInstance().get();
+	params = {};
+	params['id'] =session.uid;	
+	
+		
+    $.ajax({
+      url: "http://blmani.com/wp-json/aniparti/get_repobyuser",
+      type: "post",
+      data: params,
+      dataType: 'json',
+      success: function (response) {
+		 console.log(response);
+		 $.each(response,function(key,value){
+		 var thumb="images/placeholder.jpg";
+		 $('.my-works-listing').append('<li ><a href="#" data-id="'+value.id+'" class="my-work-item"  style="display:table"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-text-wrapper"><h4 class="srl-item-title">﻿'+value.name+'</h4><p class="creation-date">Created Date: <span>'+value.created_date+'</span></p><p class="creation-date">Modified Date: <span>'+value.modified_date+'</span></p><div class="item-status-tag saved-tag">Saved</div></div><div class="srl-right-text-overlay"><i class="la la-check-circle"></i></div></div></a></li>')
+		 });
+		 $("#preloader").addClass('hide-preloader');
+		 $(".my-work-item").on('click',function() {
+			  
+		        if($(this).hasClass("item-selected")){
+				 $(this).removeClass("item-selected");
+				 $("input#my_work_id").val("0");
+				 console.log("ff called");
+				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
+				 $('.footer-fixed.regular-footer').removeClass('move-out');
+				} else{
+				 $(".my-work-item").each(function(){
+					 $(this).removeClass("item-selected");
+				 });
+				 $(this).addClass("item-selected");
+				 $("input#my_work_id").val($(this).attr("data-id"));
+				 console.log("called");
+				 $('.footer-fixed.regular-footer').addClass('move-out');
+                 $('.footer-fixed.action-footer').addClass('come-in');
+			   }
+        });
+		 
+		 },
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
+});
+
+        
+
+}
+
 var getCompleteComics =function(){
  var session = Blmani.Session.getInstance().get();
 	params = {};
@@ -83,7 +254,13 @@ var getPopularComics = function(){
 		 } else {
 			 privacy = value.custom.privacy
 		 }
-		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></a></div>')
+		 var author = "";
+		 if(!value.author_name){
+			 author ="";
+		 } else {
+			 author = value.author_name;
+		 }
+		 $('.latest-comics-page').append('<div class="comic-book-item"><a href="#" class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+author+'</div></a></div>')
 		 });
 		 $("#preloader").addClass('hide-preloader');
 		  $(".can-view-it").on("click",function(){
@@ -174,6 +351,9 @@ var getRankedComics =function(){
 		 } else {
 			views = value.custom.chviews; 
 		 }
+		 if(views>=1000){
+			 views = Math.round(views/1000)+"K";
+		 }
 		 if(!value.custom){
 			 privacy = 1;
 		 } else if(!value.custom.privacy){
@@ -183,14 +363,14 @@ var getRankedComics =function(){
 		 }
 		 var rank = counter;
 		 if(counter<3){
-		 $('.comic-ranked-2').append('<div class="comic-book-item" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="#" class="can-view-it"><div class="episode-thumb-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><span class="thumb-episode-views">'+views+'</span><div class="overlay-content-ranked"><span class="ranking-number">0'+rank+'</span><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></div></div></a></div>');
+		 $('.comic-ranked-2').append('<div class="comic-book-item" ><a href="#" class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="episode-thumb-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><span class="thumb-episode-views">'+views+'</span><div class="overlay-content-ranked"><span class="ranking-number">0'+rank+'</span><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></div></div></a></div>');
 		 }
 		 if(counter===2){
 			 $(".comic-ranked-2").append('<div class="clear"></div>');
 		 }
 		 
 		 if(counter>2 && counter <6){
-		 $('.comic-ranked-3').append('<div class="comic-book-item"><a href="#" data-id="'+value.ID+'" class="can-view-it"><div class="episode-thumb-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><span class="thumb-episode-views">'+views+'</span><div class="overlay-content-ranked"><span class="ranking-number">0'+rank+'</span><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></div></div></a></div>');
+		 $('.comic-ranked-3').append('<div class="comic-book-item"><a href="#" data-privacy="'+privacy+'" data-id="'+value.ID+'" class="can-view-it"><div class="episode-thumb-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><span class="thumb-episode-views">'+views+'</span><div class="overlay-content-ranked"><span class="ranking-number">0'+rank+'</span><h3 class="comic-book-item-title">'+value.post_title+'</h3><div class="comic-book-item-auther">'+value.author_name+'</div></div></div></a></div>');
 		 }
 		 if(counter===5){
 		  $(".comic-ranked-3").append('<div class="clear"></div>');
@@ -211,16 +391,16 @@ var getRankedComics =function(){
 		 } else {
 			 privacy = value.custom.privacy
 		 }
-		 $('.rank-top-of-week').append('<div style="width: 140px"><a href="#" data-id="'+value.ID+'" data-privacy="'+privacy+'"><img width="200" class="owl-lazy" src="images/empty.png" data-src="'+thumb+'"><h3 class="font-15 ">'+value.post_title+'</h3> <span>'+value.author_name+'</span></a></div>');
+		 $('.rank-top-of-week').append('<div style="width: 140px"><a href="#" class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><img width="200" class="owl-lazy" src="images/empty.png" data-src="'+thumb+'"><h3 class="font-15 ">'+value.post_title+'</h3> <span>'+value.author_name+'</span></a></div>');
          });
-		 
-		  $(".preload-image").lazyload({threshold : 500});
-		  $("#preloader").addClass('hide-preloader');
 		  $(".can-view-it").on("click",function(){
 		   var privacy = $(this).attr("data-privacy");
 		   var dataid = $(this).attr("data-id");
 		   canViewIt(privacy,dataid);
 	     });
+		  $(".preload-image").lazyload({threshold : 500});
+		  $("#preloader").addClass('hide-preloader');
+		  
 		  
 			setTimeout(function(){
 				$('.single-slider').owlCarousel({center: true, items:1, loop:true, margin:10, stagePadding:20, lazyLoad:true});
@@ -267,6 +447,10 @@ var getSerialComics=function(){
       type: "post",
       data: params,
       dataType: 'json',
+	  /*contentType: 'application/json',
+	   beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
+		},*/
       success: function (response) {
 		 console.log(response);
 		 $.each(response,function(key,value){
@@ -289,8 +473,9 @@ var getSerialComics=function(){
 		   canViewIt(privacy,dataid);
 	     });
 		 },
-	  error: function(){
-				 checkConnection();
+	  error: function(error){
+				 console.log(error);
+				 //checkConnection();
 				 $("#preloader").addClass('hide-preloader');
 	  }
 });
@@ -306,7 +491,7 @@ var getFeaturedComics = function(){
 	}
 	console.log(params);
 	$.ajax({
-      url: "http://blmani.com/wp-json/aniparti/getAll",
+      url: "http://blmani.com/wp-json/aniparti/forfeatured",
       type: "post",
       data: params,
       dataType: 'json',
@@ -377,7 +562,7 @@ var getLatestComics = function(){
 		 $(".preload-image").lazyload({threshold : 500});
 		 },
 	  error: function(){
-				 checkConnection();
+				 //checkConnection();
 				 $("#preloader").addClass('hide-preloader');
 	  }
 });
@@ -426,7 +611,7 @@ var getComicsForHome = function(){
 		  $.each(response.genre,function(key,value){
 			  console.log(key,value);
 			   ckey++;
-			   $(".home-genres-filter-controls").append('<div><a href="javascript:;" style="padding:0 10px" data-filter="'+ckey+'">'+key+'</a></div>');
+			    $(".home-genres-filter-controls").append('<div><a href="javascript:;" style="padding:0 10px" data-filter="'+ckey+'">'+key+'</a></div>');
 			   $.each(value,function(skey,svalue){
 				   console.log(skey,svalue);
 				   var sthumb = svalue.thumburl;
@@ -472,7 +657,7 @@ var getComicsForHome = function(){
 			    });
 				baguetteBox.run('.gallery', {});		
 		        baguetteBox.run('.profile-gallery', {});	
-			},1);
+			},100);
 			 $(".preload-image").lazyload({threshold : 500});
 			 
 		  },

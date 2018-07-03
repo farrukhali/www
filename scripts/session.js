@@ -53,19 +53,19 @@ var fbLogin = function () {
                     var appId = prompt("Enter FB Application ID", "");
                     facebookConnectPlugin.browserInit(appId);
                 }
-                console.log("fblogin function called");
-
+                
                 facebookConnectPlugin.login(["public_profile", "email"],
                     function (res){
                         console.log(JSON.stringify(res));
                         console.log(res.authResponse)
                         if (res.status == "connected") {
-                        facebookConnectPlugin.api("/" + res.authResponse.userID, ["public_profile", "email"],
+							fbRegisterLoginUser(res);
+                        /*facebookConnectPlugin.api("/" + res.authResponse.userID, ["public_profile", "email"],
                                              fbRegisterLoginUser,
                                              function (response) {
                                               alert("Error Occurred");
                                               console.log(JSON.stringify(response));
-                                              });
+                                              });*/
                         } else {
                          alert("Error Occurred");
                         }
@@ -101,8 +101,13 @@ var fbRegisterLoginUser = function(userData){
     params["username"] = userData.id;
     params["email"] = userData.id;
     }
+	if(userData.name){
+	params["user_display_name"] = userData.name;
+	} else{
+	params["user_display_name"] = userData.id;	
+	}
     params["password"] = userData.id;
-    params["user_display_name"] = userData.name;
+    
     console.log(JSON.stringify(params));
     $.ajax({
     			url: "http://blmani.com/wp-json/aniparti/fb_register",
@@ -155,7 +160,9 @@ console.log(JSON.stringify(response));
 		} else {
 			$('.user-not-logined').addClass("hideit");
 			$('.profile-title').html(session.user_nicename);
+			if(session.user_pic.indexOf("avatar") == -1){
 			$('.profile-image').attr("src",'"'+session.user_pic+'"');
+			}
 		}
 
 	}

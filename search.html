@@ -18,6 +18,7 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Your content is loading</p></div></div>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">Blmani</div>
@@ -39,17 +40,17 @@
                     <a href="signup.html"><i class="la la-user-plus"></i>Sign up</a>
                     <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
                 </div>
-                <!-- menu logined  -->
+                <!-- menu logined  --> 
                 <div class="menu-profile-sec bottom-50 user-logined">
                     <img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png">
-                    <h3 class="profile-title center-text">Alexandra Bernies</h3>
-                    <p class="user-city center-text">Pyongyang City</p>
+                    <h3 class="profile-title center-text"><!--Alexandra Bernies--></h3>
+                    <!--<p class="user-city center-text">Pyongyang City</p>-->
                 </div>
                 <div class="menu-items menu-icons user-logined">
-                    <a href="#"><i class="far fa-bell"></i>Inbox<span>2 new</span></a>
-                    <a href="#"><i class="far fa-folder-open"></i>My Library</a>
-                    <a href="#"><i class="far fa-user"></i>Profile</a>
-                    <a href="#"><i class="far fa-sun"></i>Settings</a>
+                    <a href="inbox.html"><i class="far fa-bell"></i>Inbox<!--<span>2 new</span>--></a>
+                    <a href="mylib.html"><i class="far fa-folder-open"></i>My Library</a>
+                    <a href="profile.html"><i class="far fa-user"></i>Profile</a>
+                    <a href="settings.html"><i class="far fa-sun"></i>Settings</a>
                     <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
                     <a href="#" class="profile-links--signout"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
                 </div>
@@ -58,9 +59,9 @@
                         <br>Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved Blmani.</p>
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="page-content header-clear footer-clear">
-            <div class="content bottom-0 bottom-shadow position-relative">
+            <div class="content bottom-0 top-20 bottom-shadow position-relative">
                 <div class="tabs">
                     <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
                         <a href="#" id="1"  class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">1st Creation</a>
@@ -145,18 +146,60 @@
         </div>
         <div class="footer-fixed">
             <ul>
-                <li class="active"><a href="comic.html"><span class="la la-Rounded-Rectangle"></span><span class="ft-menu-text">Comics</span></a></li>
+                <li><a href="comic.html"><span class="la la-Rounded-Rectangle"></span><span class="ft-menu-text">Comics</span></a></li>
                 <li class="center-active"><a href="#"><span class="la la-search"></span><span class="ft-menu-text">Search</span></a></li>
-                <li><a href="dummy-page-posting.html"><span class="la la-edit"></span><span class="ft-menu-text">Post Story</span></a></li>
+                <li><a href="#" class="post-story-icon"><span class="la la-edit"></span><span class="ft-menu-text">Post Story</span></a></li>
                 <div class="clear"></div>
             </ul>
         </div>
-        <a href="#" class="back-to-top-badge back-to-top-small bg-highlight"><i class="fa fa-angle-up"></i>Back to Top</a>
     </div>
-    <!--<script type="text/javascript" src="cordova.js"></script>-->
+	 <div id="fb-root"></div>
+	 <a href="#" class="password-protected-link hideit" data-menu="passcode-modal">...</a>
+	<div id="passcode-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Enter Passcode</h3>
+            <div class="search-etc-tag">
+               
+                    <input type="password" class="search-etc-tag-input privacy-passcode" placeholder="Enter Passcode">
+                    <span style="top: 0" class="privacy-passcode-eye"><i class="la la-eye"></i></span>
+            </div>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+			    <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red validate-passcode-done">Done</a>
+            </div>
+        </div>
+    </div>
+	 <a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
+	<div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
+        </div>
+        <div class="modal-content">
+            <form action="">
+                <div class="fac fac-radio-full fac-default"><span></span>
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" checked value="1">
+                    <label for="box1-fac-radio-full">New Creation</label>
+                </div>
+                <div class="fac fac-radio-full fac-blue"><span></span>
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="2">
+                    <label for="box2-fac-radio-full">Recommended</label>
+                </div>
+                <div class="fac fac-radio-full fac-green"><span></span>
+                    <input id="box3-fac-radio-full" type="radio" name="rad1" value="3">
+                    <label for="box3-fac-radio-full">My Library</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+		   <a href="#" class="modal-btn posting-method-selection-done">Done</a>
+        </div>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
+	<script type="text/javascript" src="scripts/blmani.js"></script>
     <script type="text/javascript" src="scripts/session.js"></script>
+	<script type="text/javascript" src="scripts/custom.js"></script>
 	<script type="text/javascript" src="scripts/search.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
+    
 </body>

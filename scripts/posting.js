@@ -62,7 +62,87 @@ $(".upload-file-block").on("click", function(e){
 	getPhoto();
 } );
 
+         // publishForm publishSubmitButton
+		 
+		 
+		 var publishFormSubmitted = "false";
+        jQuery(document).ready(function(e) {
+		
+            function t(t, n) {
+				var imageURI = $('#preview-thumb').attr("src");
+				if (!imageURI || imageURI == "images/image-icon.png") {
+					//$("#thumbFieldError").fadeIn(300);
+					//$("#upload-file-block").focus();
+					$('#toast-3').addClass('show-toast');
+			        setTimeout(function(){$('#toast-3').removeClass('show-toast');},3000);
+					return false;
+				}
+				console.log("submit");
+                publishFormSubmitted = "true";
+				$(".loading-gif").removeClass("hideit");
+				uploadPublishThumb('preview-thumb');
+				
+            }
 
+            function n(n, r) {
+                e(".formValidationError").hide();
+                e(".fieldHasError").removeClass("fieldHasError");
+                e("#" + n + " .requiredField").each(function(i) {
+                    if (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy")) {
+                        e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+                        e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-title').addClass('show-toast');
+			            setTimeout(function(){$('#toast-title').removeClass('show-toast');},3000);
+						
+                        return false
+                    }
+                    if (e(this).hasClass("requiredEmailField")) {
+                        var s = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        var o = "#" + e(this).attr("id");
+                        if (!s.test(e(o).val())) {
+                            e(o).focus();
+                            e(o).addClass("fieldHasError");
+                            e(o + "Error2").fadeIn(300);
+                            return false
+                        }
+                    }
+					if(e(this).hasClass("requireUrlField")){
+						var s = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+						var o = "#" + e(this).attr("id");
+						if (!s.test(e(o).val())) {
+							e(o).focus();
+                            e(o).addClass("fieldHasError");
+                            e(o + "Error2").fadeIn(300);
+                            return false
+							
+						}
+					}
+                    if (publishFormSubmitted == "false" && i == e("#" + n + " .requiredField").length - 1) {
+                        t(n, r)
+                    }
+                })
+            }
+            e(".formValidationError").fadeOut(0);
+            e('input[type="text"], input[type="password"]').focus(function() {
+                if (e(this).val() == e(this).attr("data-dummy")) {
+                    e(this).val("")
+                }
+            });
+            e("input").blur(function() {
+                if (e(this).val() == "") {
+                    e(this).val(e(this).attr("data-dummy"))
+                }
+            });
+            e("#publishSubmitButton").click(function() {
+                n(e(this).attr("data-formId"));
+                return false
+            })
+        })
+
+		 
+		 
 
 
         // recommendedfrom

@@ -517,11 +517,13 @@ $(document).ready(function(){
             function t(t, n) {
                 forgetFormSubmitted = "true";
                 var r = e("#" + t).serialize();
-                e.post(e("#" + t).attr("action"), r, function(n) {
-                    console.log(n);
+               // e.post(e("#" + t).attr("action"), r, function(n) {
+                 //   console.log(n);
 					//e("#" + t).hide();
                     //e("#formSuccessMessageWrap").fadeIn(500)
-                })
+               // })
+			   
+			   
             }
 
             function n(n, r) {

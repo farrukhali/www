@@ -33,7 +33,7 @@
 		<p id="toast-title" class="toast toast-top toast-large bg-red-dark">Story Title Required!</p>
 		<p id="toast-url" class="toast toast-top toast-large bg-red-dark">Url required!</p>
 		<p id="toast-invalidurl" class="toast toast-top toast-large bg-red-dark">Invalid Url!</p>
-		<form action="" method="post" class="recommendedForm" id="recommendedForm">
+		<form action="" method="post" class="publishForm" id="publishForm">
         <div class="page-content header-clear footer-clear">
             <h2 class="red-block-heading">Set Publishing Information</h2>
             <div class="content">
@@ -67,9 +67,9 @@
                                 </ul>
                             </div>
                             <div class="clear"></div>
-                            <div class="search-etc-tag">
+                            <!--<div class="search-etc-tag">
                                 <input type="text" class="search-etc-tag-input fc-search-input" placeholder="Search tag">
-                            </div>
+                            </div>-->
                             <div class="decoration"></div>
                             <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
                             <ul class="info-tags collapseable fc-info-tags">
@@ -138,16 +138,8 @@
                 </a>
                 <h6 class="story-title-label">Upload image File Name</h6>
                 <div class="decoration"></div>
-                <div class="formValidationError bg-red-dark top-20" id="urlflinkFieldError">
-						<p class="center-text uppercase small-text color-white">URL for Link is required!</p>
-					</div>
-					<div class="formValidationError bg-red-dark top-20" id="urlflinkFieldError2">
-						<p class="center-text uppercase small-text color-white">Invalid Url! </p>
-					</div>
-                    <div class="input-simple-1 blmani-design input-green bottom-20">
-                        <em>URL for Link</em>
-                        <input type="text" placeholder="Copy & paste URL "  name="urlflink"  class="urlflinkField requiredField requireUrlField" id="urlflinkField">
-                    </div>
+                
+					
                     <div class="input-simple-1 blmani-design input-green bottom-20">
                         <em>Description</em>
                         <textarea rows="7" class="textarea-simple-1" id="descField" placeholder="Write your description for this recommendation. Shortintroduction for the posting content"></textarea>
@@ -184,7 +176,7 @@
                 <a href="#" id="3" class="privacy-bound pb3">Private</a>
                 <a href="#" id="4" class="privacy-bound pb4" data-menu="passcode-modal">Locked</a>
             </div>
-            <a  href="#" id="recommendedSubmitButton" data-formId="recommendedForm" class="bounds-publish-btn button button-round float-right">Publish</a>
+            <a  href="#" id="publishSubmitButton" data-formId="publishForm" class="bounds-publish-btn button button-round float-right">Publish</a>
         </div>
 		</form>
     </div>
@@ -234,9 +226,9 @@
             <p style="font-size: 9px;">Your posting ctompleted. Share your posting to your SNS.</p>
             <div class="decoration"></div>
             <div class="social-share-btns">
-                <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null /* img */, null /* url */, 'Paste it dude!', function() {console.log('share ok')}, function(errormsg){console.log(errormsg)})"><i class="la la-facebook"></i> Share</a>
-                <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')"><i class="la la-twitter"></i> Share</a>
-            </div>
+              <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebook('Blamni', null ,'http://blmani.com', null)"><i class="la la-facebook"></i> Share</a>
+              <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter('Blamni', null , 'http://blmani.com')"><i class="la la-twitter"></i> Share</a>
+           </div>
             <div class="copy-url-sec">
                 <div class="copy-url-part">
                     <div class="search-etc-tag">
@@ -255,6 +247,12 @@
         </div> 
     </div>
 	<a href="#"  id="show-success-popup" data-menu="publish-modal" class="hideit">...</a>
+	
+	<script>
+              var siid = document.URL.substr(document.URL.indexOf('#')+1);
+	          document.write('<input type="text" value="'+siid+'" id="saveitemid">');
+			  
+            </script>
 	<div id="fb-root"></div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -274,7 +272,5 @@ $(window).on('load',function(){
 
 
 
-
-            
 </script>
 </body>

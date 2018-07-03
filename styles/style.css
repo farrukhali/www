@@ -633,7 +633,7 @@ body .active-touch .hideit {
     left: 50%;
     bottom: 5px;
     transform: translate(-50%, 0%);
-    /* color: #1f2b3f; */
+    color: #1f2b3f; 
 }
 
 .footer-fixed ul li a span.la {
@@ -1666,6 +1666,9 @@ margin-top: 6px;
     .below-header-links{
         margin-bottom: 10px;
     }
+    .center-slider.featured-slider .owl-item div{
+        width:110px !important;
+    }
 }
 
 @media screen and (max-width: 350px) {
@@ -1680,6 +1683,7 @@ margin-top: 6px;
     width: 50%;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 0;
 }
 
 .latest-comics-all.top-ranked-row-2.top-ranked-row-3 .comic-book-item {
@@ -1691,6 +1695,7 @@ margin-top: 6px;
 .latest-comics-all.top-ranked-row-2 .comic-book-item a .episode-thumb-wrapper {
     position: relative;
     border-radius: 10px;
+    margin-bottom: 0;
 }
 
 .latest-comics-all.top-ranked-row-2.top-ranked-row-3 .comic-book-item a .comic-book-item-title,
@@ -1936,4 +1941,9 @@ a.upload-file-block .thumb-fullwidth{
     color: #fff;
     margin: 0;
     vertical-align: middle;
+}
+
+.content .tab-content{
+    border: 0;
+    padding: 0;
 }

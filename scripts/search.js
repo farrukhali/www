@@ -141,7 +141,7 @@ $(document).ready(function () {
 		 tos['character'] = vcharacter;	 
 		 }
 		 if(vtag.trim() !=""){
-		 tos['search_keywords'] = vtag;	 
+		 tos['search_tags'] = vtag;	 
 		 }
 		 
 		 console.log(tos);
@@ -160,22 +160,52 @@ $(document).ready(function () {
 				$(".srl-section-heading").removeClass('hideit');
 				$(".nrf").addClass('hideit'); 
 				$.each(response, function (key, value) {
-				$(".searching-results").append('<li class="searched-li" id="'+value.ID+'"><a hewf="#" style="display:table"><div class="srl-image-wrapper"><img src="'+value.thumburl+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+value.custom.prodes+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+value.custom.views+'</span></div></div></div></a></li>');	
+				var thumb = value.thumburl;
+				 if(!thumb){thumb="images/placeholder.jpg";}
+				 if(!value.custom){
+					 privacy = 1;
+				 } else if(!value.custom.privacy){
+					 privacy =1;
+				 } else {
+					 privacy = value.custom.privacy
+				 }
+				 if(!value.custom){
+					 desc = "";
+				 } else if(!value.custom.prodes){
+					 desc ="";
+				 } else {
+					 desc = value.custom.prodes;
+				 }
+				 
+				 if(!value.custom){
+					 pviews = 0;
+				 } else if(!value.custom.views){
+					 pviews =0;
+				 } else {
+					 pviews = value.custom.views;
+				 }
+				$(".searching-results").append('<li><a href="#" style="display:table"  class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a></li>');	
 				});
+				
+		   $("#preloader").addClass('hide-preloader');
+		   $(".can-view-it").on("click",function(){
+		   var privacy = $(this).attr("data-privacy");
+		   var dataid = $(this).attr("data-id");
+		   canViewIt(privacy,dataid);
+	     });
+		 $(".preload-image").lazyload({threshold : 500});
+		 
+			 
+				
 			 }
-			 $(".searched-li").click(function(){
-			 	    if(!$(this).hasClass('show-overlay-btns')){
-				 	    $(this).addClass('show-overlay-btns');
-				 	    $(this).append('<div class="long-press-overlay"><ul><li class="lpo-red"><a href="#">Play Story</a></li><li><a href="story.html">Add to Favorites</a></li></ul></div>');
-			 		}else{
-			 			$(this).removeClass('show-overlay-btns');
-			 		}
-	            });
-
 			 $('.search-comics').removeClass('searching-anc');
 	         $('.search-comics').html('Search');
 			
-		 }
+		},
+	  error: function(){
+				 checkConnection();
+				 $("#preloader").addClass('hide-preloader');
+	  }
 		 });
 	  });
 	 

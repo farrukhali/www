@@ -57,6 +57,38 @@ Blmani.Fields = (function () {
 }());
 
 
+var unpublishPost =function(value){
+	      var session = Blmani.Session.getInstance().get();
+	      var params={};
+		  params['uid'] = session.uid;
+		  params['pid'] = value;
+          $.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/unpublish",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response);
+				   $('#toast-2').addClass('show-toast');
+				   $(".latest-comics-all").children().each(function() {
+                   if($(this).hasClass("item-selected")){
+					  $(this).remove();
+				   }
+				   });
+				   $('.footer-fixed.regular-footer').removeClass('move-out');
+                   $('.footer-fixed.action-footer').removeClass('come-in');
+        
+            
+                   setTimeout(function(){$('#toast-2').removeClass('show-toast');},2000);	
+				   
+			}
+	  });
+}
+	  
+	  
+	  
+
+
         
 var checkConnection = function(){
 	    var networkState = navigator.connection && navigator.connection.type;
@@ -80,18 +112,53 @@ var isValidUrl = function(str){
 
 }
 
-var canViewIt = function(pid,did){
-	if(pid==1){
-	  window.location = "story.html#"+did;
+var canViewIt = function(privacyid,postid){
+    if(privacyid==1 || privacyid==""){
+	  window.location = "story.html#"+postid;
 	} 
-	if(pid==4){
+	if(privacyid==4){
 		//locked
+		if(!session){
+		 alert("This Comic is Protected Login to view it.");
+		} else {
 		$(".password-protected-link").click();
+		window.localStorage.setItem("pcpc",postid);
+		}
 	}
-	if(pid==2){
+	if(privacyid==2){
 		//my pick
+		if(!session){
+		 alert("This Comic is Protected Login to view it.");
+		} else {
 		$(".loading-gif-centered").removeClass("hideit");
-	    console.log("let medecide what to do");	
+		var params ={};
+		params['postid'] = postid;
+		params['uid'] = session.uid;
+		
+		$.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/checkuser",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response);
+				   $(".loading-gif-centered").addClass("hideit");
+				   if(response=="yes"){
+					   window.location ="story.html#"+postid;
+					   
+				   } else {
+					  alert("This comic is for specific users, you cant view it"); 
+				   }
+				   
+			},
+		     error :function(error){
+				 console.log(error);
+			 }
+	  });
+		
+		
+	    
+		}		
 	}
 }
 
@@ -165,19 +232,13 @@ var  uploadThumb = function(fileid) {
     ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/upload_image"), recSuccessFunc, recFailFunc,options)
 	}
 
-
-
-
 var recSuccessFunc = function(success) {
 	console.log(JSON.stringify(success));
-    console.log("Code = " + success.responseCode);
-    console.log("Response = " + success.response);
-    /*alert("Response =" + success.response);*/
-    console.log("Sent = " + success.bytesSent);
-	//return success;
-	url ="http://blmani.com/"+success.url;
-	console.log('url')
-	recommendedPost(url);
+    var url = success.response.replace('"','');
+	var url = url.replace('"','');
+	purl =url;//"";//"blmani.com"+url;
+	console.log(purl);
+	recommendedPost(purl);
 }
 
 var recFailFunc =function(error) {
@@ -188,8 +249,45 @@ var recFailFunc =function(error) {
 	url = "";
 	recommendedPost(url);
 }
+	
+var  uploadPublishThumb = function(fileid) {
+	var imageURI = $('#'+fileid).attr("src");
+	console.log("imageURI"+imageURI);
+    var options = new FileUploadOptions();
+    options.fileKey = "image";
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+    options.mimeType = "image/png";
+    options.chunkedMode = false;
 
-var recommendedPost =function(url){
+    var ft = new FileTransfer();
+    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/upload_image"), pubSuccessFunc, pubFailFunc,options)
+	}
+
+
+
+
+
+var pubSuccessFunc = function(success) {
+	console.log(JSON.stringify(success));
+    var url = success.response.replace('"','');
+	var url = url.replace('"','');
+	purl =url;//"";//"blmani.com"+url;
+	console.log(purl);
+	publishPost(purl);
+}
+
+var pubFailFunc =function(error) {
+    //alert("An error has occurred: Code = " + error.code);
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
+	//return error;
+	url = "";
+	publishPost(url);
+}
+
+
+var publishPost = function(url){
+    console.log("abc12");
 	var param = {}
 	var tos = {};
 	var ekeys = [];
@@ -198,24 +296,118 @@ var recommendedPost =function(url){
 	tos['division'] = vdivision;
 	
 	if(vdivision==1){
-		   var vtag = $('.fc-search-input').val();
-		   console.log(vtag);
+		   //var vtag = $('.fc-search-input').val();
+		   //console.log(vtag);
 		   var vgenre = $("select#select_genre").val();
 		   var vatype = $("select#select_atype").val();
 		   var vdtype = $("select#select_dtype").val();
 		   if(vgenre !=null){ tos['genre'] = vgenre;}
            if(vatype !=null){tos['a_type'] = vatype;}
 		   if(vdtype !=null){tos['d_type'] = vdtype;}
-		   if(vtag.trim() !=""){tos['search_tags'] = vtag;}
+		   //if(vtag.trim() !=""){tos['search_tags'] = vtag;}
 	} else {
-		   var vtag = $(".sc-search-input").val();
+		   //var vtag = $(".sc-search-input").val();
 		   var vcontent = $("select#select_content").val();
 		   var vtitle = $("select#select_title").val();
 		   var vcharacter = $("select#select_character").val();	
            if(vcontent !=null){tos['content'] = vcontent;}
 		   if(vtitle !=null){tos['title'] = vtitle }
 		   if(vcharacter !=null){tos['character'] = vcharacter;	}
-		  if(vtag.trim() !=""){tos['search_tags'] = vtag;}
+		   //if(vtag.trim() !=""){tos['search_tags'] = vtag;}
+           		   
+   }
+    
+	
+	$("ul.additional-info-tags").children().each(function(i){
+		ekeys[i] = $(this).text();
+	});
+	var pbound = $(".active-bounds").attr("id");
+	if(pbound==4){
+	   pboundkey = $(".privacy-passcode").val();
+	   param['privacy'] = pbound;
+	   param['privacykey'] = pboundkey;
+	} else if(pbound==2){
+	   $("ul.added-friends").children().each(function(i){
+		pusers[i] = $(this).attr("id");
+	   });
+	   param['privacy'] = pbound;
+	   param['pickusers'] = pusers;
+	} else {
+	  param['privacy'] = pbound;
+	}
+	
+    
+	param['thurl'] = url;
+	param['title'] = $("#titleField").val();
+	param['desc'] = $("textarea#descField").val();
+	param['si'] = tos;
+	param['extrakeys'] = ekeys;
+    param['siid'] = $("input#saveitemid").val();
+	
+   
+	
+	$(".loading-gif").addClass("hideit");
+	//return false;
+	var session = Blmani.Session.getInstance().get();
+	param['id'] = session.uid;
+	console.log(JSON.stringify(param));
+	
+	$.ajax({
+      url: "http://blmani.com/wp-json/aniparti/post_comic",
+      type: "post",
+      data: param,
+	  /*contentType: 'application/json',
+	   beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
+		},*/
+
+      dataType: 'json',
+		 success: function (response) {
+             $("a#show-success-popup").click();
+			 console.log(JSON.stringify(response));
+			 $(".loading-gif").addClass("hideit");
+			 $("#copy-to-clipboard").val(response.url);
+			 $("#view-post-btn").attr("href","story.html#"+response.pid);
+
+			},
+		 error:function(response){
+		     console.log(JSON.stringify(response));
+             $(".loading-gif").addClass("hideit");
+			 publishFormSubmitted = "false";
+			 alert("Error Occurred!");
+		 }
+			
+	 });
+}
+
+var recommendedPost =function(url){
+   console.log("abc14");
+	var param = {}
+	var tos = {};
+	var ekeys = [];
+	var pusers =[];
+	var vdivision = $(".active-tab-pill-button").attr("id");
+	tos['division'] = vdivision;
+	
+	if(vdivision==1){
+		   //var vtag = $('.fc-search-input').val();
+		   //console.log(vtag);
+		   var vgenre = $("select#select_genre").val();
+		   var vatype = $("select#select_atype").val();
+		   var vdtype = $("select#select_dtype").val();
+		   if(vgenre !=null){ tos['genre'] = vgenre;}
+           if(vatype !=null){tos['a_type'] = vatype;}
+		   if(vdtype !=null){tos['d_type'] = vdtype;}
+		  // if(vtag.trim() !=""){tos['search_tags'] = vtag;}
+	} else {
+		  // var vtag = $(".sc-search-input").val();
+		   var vcontent = $("select#select_content").val();
+		   var vtitle = $("select#select_title").val();
+		   var vcharacter = $("select#select_character").val();	
+           if(vcontent !=null){tos['content'] = vcontent;}
+		   if(vtitle !=null){tos['title'] = vtitle }
+		   if(vcharacter !=null){tos['character'] = vcharacter;	}
+		  //if(vtag.trim() !=""){tos['search_tags'] = vtag;}
            		   
    }
     
@@ -251,17 +443,17 @@ var recommendedPost =function(url){
 	$(".loading-gif").addClass("hideit");
 	//return false;
 	var session = Blmani.Session.getInstance().get();
-	param['uid'] = session.uid;
+	param['id'] = session.uid;
 	console.log(JSON.stringify(param));
 	
 	$.ajax({
       url: "http://blmani.com/wp-json/aniparti/post_comic",
       type: "post",
-      data: JSON.stringify(param),
-	  contentType: 'application/json',
+      data: param,
+	  /*contentType: 'application/json',
 	   beforeSend: function (xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
-		},
+		},*/
 
       dataType: 'json',
 		 success: function (response) {
@@ -315,7 +507,49 @@ var delSelection = function(sel){
 }
 
 
+
+		
+
+
+
+var validatePassCode = function(){
+	      $(".loading-gif-centered").removeClass("hideit");
+	      console.log("ff called");
+		  var pid = window.localStorage.getItem("pcpc");
+		  var passcode = $(".privacy-passcode").val();
+		  params['uid'] = session.uid;
+		  params['postid'] = pid;//window.localStorage.getItem("pcpc");
+		  params['passcode'] = passcode;
+		  $.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/checkpass",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response);
+				   $(".loading-gif-centered").addClass("hideit");
+				   if(response=="yes"){
+					  window.location ="story.html#"+pid;
+				   } else {
+					  alert("invalid Passcode");
+				   }
+				   
+				   
+			},
+			error: function(error){
+				console.log(error);
+			}
+	  });
+	  
+	  
+}
+
+
 $(document).ready(function(){
+	
+	  $(".posting-method-selection-done").on("click",function(){
+		  
+	  });
 	  console.log("document.ready");
 	  var session = Blmani.Session.getInstance().get();
 	  $(".post-story-icon").on("click",function(){
@@ -328,6 +562,55 @@ $(document).ready(function(){
 			 $("a.post-story-option-link").click(); 
 		  }
 	  });
+	  
+	  $("#edit_work").on("click",function(){
+		  console.log("editwork called");
+		  var value = $("input#my_work_id").val();
+		  if(value==0){
+		   $('#toast-1').addClass('show-toast');
+           setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   
+		  } else {
+			window.location ="dummy-page-posting.html#"+value;
+		  }
+	  });
+	  
+	  //my_post_id
+	  
+	  $("#publish_work").on("click",function(){
+		  console.log("publish called");
+		  var value = $("input#my_work_id").val();
+		  if(value==0){
+		   $('#toast-1').addClass('show-toast');
+           setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   
+		  } else {
+			window.location ="publish.html#"+value;
+		  }
+	  });
+	  
+	  $("#post_view").on("click",function(){
+		  console.log("publish called");
+		  var value = $("input#my_post_id").val();
+		  if(value==0){
+		   $('#toast-1').addClass('show-toast');
+           setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   
+		  } else {
+			window.location ="story.html#"+value;
+		  }
+	  });
+	  
+	  $("#post_unpublish").on("click",function(){
+		  console.log("publish called");
+		  var value = $("input#my_post_id").val();
+		  if(value==0){
+		   $('#toast-1').addClass('show-toast');
+           setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   
+		  } else {
+			//window.location ="story.html#"+value;
+			unpublishPost(value);
+		  }
+	  });
+	  
+	  
 	  
 	  $(".posting-method-selection-done").on("click",function(){
 		  var val = $('input[name=rad1]:checked').val();
@@ -413,7 +696,11 @@ $(document).ready(function(){
 			setTimeout(function(){$('#toast-1').removeClass('show-toast');},3000);
 		  }
 		  
-	  })
+	  });
+	   $(".validate-passcode-done").on("click",function(){
+		   validatePassCode();
+	   });
+	   
        $(".privacy-passcode-done").on("click",function(){
 		   console.log($(".privacy-passcode").val().trim().length);
 		   if($(".privacy-passcode").val().trim().length<4){

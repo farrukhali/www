@@ -17,6 +17,8 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
+	<p id="toast-1" class="toast toast-top toast-large bg-red-dark">Please Select Item!</p>
+	<p id="toast-2" class="toast toast-top toast-large bg-red-dark">Item unpublished!</p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">My Library</div>
@@ -28,7 +30,7 @@
                 <div class="sidebar-icons">
                     <a href="#" class="close-menu"><span class="la la-times font-20"></span></a>
                 </div>
-                <!-- not logined -->
+                <!-- not logined 
                 <div class="menu-title-section user-not-logined">
                     <h1 class="uppercase menu-title bolder color-black top-15">User <span class="color-highlight">Login</span></h1>
                     <p>Sign in to start posting your stories</p>
@@ -38,15 +40,29 @@
                     <a href="signup.html"><i class="la la-user-plus"></i>Sign up</a>
                     <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
                 </div>
+                 menu logined  --> 
+                <div class="menu-profile-sec bottom-50 user-logined">
+                    <img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png">
+                    <h3 class="profile-title center-text"><!--Alexandra Bernies--></h3>
+                    <!--<p class="user-city center-text">Pyongyang City</p>-->
+                </div>
+                <div class="menu-items menu-icons user-logined">
+                    <a href="inbox.html"><i class="far fa-bell"></i>Inbox<!--<span>2 new</span>--></a>
+                    <a href="mylib.html"><i class="far fa-folder-open"></i>My Library</a>
+                    <a href="profile.html"><i class="far fa-user"></i>Profile</a>
+                    <a href="settings.html"><i class="far fa-sun"></i>Settings</a>
+                    <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
+                    <a href="#" class="profile-links--signout"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
+                </div>
                 <div class="copy-right-section">
                     <p class="sidebar-copyright bottom-30 center-text"><img src="images/copyright-logo.png" alt="Blmani">
                         <br>Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved Blmani.</p>
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="page-content header-clear footer-clear">
             <ul class="below-header-links">
-                <li><a href="library-my-works.html">My Works</a></li>
+                <li><a href="mylib.html">My Works</a></li>
                 <li class="active"><a href="library-my-postings.html">My Postings</a></li>
                 <li><a href="library-my-favorities.html">My Favorites</a></li>
             </ul>
@@ -56,182 +72,106 @@
                     <a href="#" id="1" class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">1st Creation</a>
                     <a href="#" id="2" data-tab-pill="tab-pill-2">2nd Reproduction</a>
                 </div>
-                <h2 class="bold font-15 color-black uppercase">Public</h2>
-                <div class="latest-comics-all">
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
+				<div class="tab-content">
+					<div class="tab-item active-tab" id="tab-pill-1">
+					<h2 class="bold font-15 color-black uppercase">Public</h2>
+                <div class="latest-comics-all  mycomics-fcreation-public">
+                    
                 </div>
                 <h2 class="bold font-15 color-black uppercase">Private</h2>
-                <div class="latest-comics-all ">
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
+                <div class="latest-comics-all mycomics-fcreation-private">
+                   
                 </div>
                 <h2 class="bold font-15 color-black uppercase">Locked</h2>
-                <div class="latest-comics-all ">
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14119-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
+                <div class="latest-comics-all mycomics-fcreation-locked">
+				
+				</div>
+				<h2 class="bold font-15 color-black uppercase">My Pick</h2>
+                <div class="latest-comics-all mycomics-fcreation-mypick">
+				
+				</div>
+				</div>
+				
+				<div class="tab-item" id="tab-pill-2">
+				<h2 class="bold font-15 color-black uppercase">Public</h2>
+                <div class="latest-comics-all  mycomics-sreproduction-public">
                 </div>
-            </div>
+                <h2 class="bold font-15 color-black uppercase">Private</h2>
+                <div class="latest-comics-all mycomics-sreproduction-private">
+                    
+                </div>
+                <h2 class="bold font-15 color-black uppercase">Locked</h2>
+                <div class="latest-comics-all mycomics-fcreation-locked">
+				
+				</div>
+				<h2 class="bold font-15 color-black uppercase">My Pick</h2>
+                <div class="latest-comics-all mycomics-sreproduction-mypick">
+				<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				</div>
+				</div>
+                
+                    
             <!-- MOST LIKED end -->
         </div>
         <div class="footer-fixed regular-footer">
             <ul>
-                <li class="active "><a href="# "><span class="la la-Rounded-Rectangle "></span><span class="ft-menu-text ">Comics</span></a></li>
+                <li ><a href="comic.html"><span class="la la-Rounded-Rectangle "></span><span class="ft-menu-text ">Comics</span></a></li>
                 <li class="center-active "><a href="search.html "><span class="la la-search "></span><span class="ft-menu-text ">Search</span></a></li>
-                <li><a href="dummy-page-posting.html "><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
+                <li class="active"><a href="#" data-menu="post-a-story-options"><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
                 <div class="clear "></div>
             </ul>
         </div>
         <div class="footer-fixed bounds-footer action-footer">
             <div class="bounds-options">
-                <a href="#"><i class="la la-eye"></i> View</a>
-                <a href="#"><i class="la la-pencil"></i> Edit Work</a>
-                <a href="#"><i class="la la-edit"></i> Edit Post</a>
-                <a href="#" class="btn-action-unpublish"><i class="la la-cloud-download"></i> Unpublish</a>
+                <a href="#" id="post_view"><i class="la la-eye"></i> View</a>
+                <a href="#" id="post_unpublish" class="btn-action-unpublish"><i class="la la-cloud-download"></i> Unpublish</a>
             </div>
         </div>
     </div>
-    <!--<script type="text/javascript " src="cordova.js "></script>-->
+	<div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+        <div class="menu-flyin-content bottom-0">
+            <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
+        </div>
+        <div class="modal-content">
+                <div class="fac fac-radio-full fac-default"><span></span>
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" checked value="1">
+                    <label for="box1-fac-radio-full">New Creation</label>
+                </div>
+                <div class="fac fac-radio-full fac-blue"><span></span>
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="2">
+                    <label for="box2-fac-radio-full">Recommended</label>
+                </div>
+                
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-btn posting-method-selection-done">Done</a>
+        </div>
+	
+    </div>
+	<input type="hidden" value="0" id="my_post_id">
+    <script type="text/javascript " src="cordova.js "></script>
     <script type="text/javascript " src="scripts/jquery.js "></script>
     <script type="text/javascript " src="scripts/plugins.js "></script>
-    <script type="text/javascript " src="scripts/session.js "></script>
-    <script type="text/javascript " src="scripts/custom.js "></script>
+    <script type="text/javascript" src="scripts/comic.js"></script>
+	<script type="text/javascript" src="scripts/blmani.js"></script>
+	<script type="text/javascript" src="scripts/posting.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+	<script type="text/javascript" src="scripts/session.js"></script>
     <script>
-    $(window).on('load', function() {
-        $('#page-build').remove();
-        setTimeout(function() { $("#preloader").addClass('hide-preloader'); }, 100); // will fade out the white DIV that covers the website.
-    });
-
-    $('.latest-comics-all .comic-book-item').click(function(){
-        if ($(this).hasClass("item-selected")) {
-            $(this).removeClass('item-selected');
-            $('.footer-fixed.regular-footer').removeClass('move-out');
-            $('.footer-fixed.action-footer').removeClass('come-in');
-        } else {
-            $(".latest-comics-all").children().each(function() {
-                $(this).removeClass("item-selected");
-                $('.footer-fixed.regular-footer').addClass('move-out');
-                $('.footer-fixed.action-footer').addClass('come-in');
-            });
-            $(this).addClass('item-selected');
-        }
+	
+	$(window).on("load",function () {
+	 loadMyPostings();
+	});
+	$(document).ready(function () {
+	sessionCheck();
+	
+	if(!checkConnection()){
+	  alert("Internet Connection not available!");
+	  return false;
+	}
+	
     });
     </script>
 </body>

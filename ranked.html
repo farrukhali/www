@@ -17,6 +17,7 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Your content is loading</p></div></div>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">Comics</div>
@@ -160,14 +161,14 @@
             <ul>
                 <li class="active "><a href="comic.html"><span class="la la-Rounded-Rectangle "></span><span class="ft-menu-text ">Comics</span></a></li>
                 <li class="center-active "><a href="search.html "><span class="la la-search "></span><span class="ft-menu-text ">Search</span></a></li>
-                <li><a href="#" class="post-story-icon"><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
+                <li><a class="post-story-icon"><span class="la la-edit "></span><span class="ft-menu-text ">Post Story</span></a></li>
                 <div class="clear "></div>
             </ul>
         </div>
     </div>
     <div id="fb-root"></div>
-    <a href="#" class="password-protected-link hideit" data-menu="post-a-story-options">...</a>
-    <div id="passcode-modal" class="menu-flyin menu-share1">
+	<a href="#" class="password-protected-link hideit" data-menu="passcode-modal">...</a>
+	<div id="passcode-modal" class="menu-flyin menu-share1">
         <div class="menu-flyin-content">
             <h3>Enter Passcode</h3>
             <div class="search-etc-tag">
@@ -177,13 +178,13 @@
             </div>
             <div class="clear"></div>
             <div style="padding-top: 20px; text-align: center;">
-                <a href="#" class="btn button-round button-black close-menu">Close</a>
-                <a href="#" class="btn button-round button-red privacy-passcode-done">Done</a>
+			    <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red validate-passcode-done">Done</a>
             </div>
         </div>
     </div>
-    <a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
-    <div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+	 <a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
+	<div id="post-a-story-options" class="menu-flyin non-scroll-modal">
         <div class="menu-flyin-content bottom-0">
             <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
         </div>
@@ -204,9 +205,9 @@
             </form>
         </div>
         <div class="modal-footer">
-           <a href="#" class="modal-btn posting-method-selection-done">Done</a>
+		   <a href="#" class="modal-btn posting-method-selection-done">Done</a>
         </div>
-    </div>
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>

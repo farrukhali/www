@@ -110,9 +110,9 @@
                                 </ul>
                             </div>
                             <div class="clear"></div>
-                            <div class="search-etc-tag">
+                            <!--<div class="search-etc-tag">
                                 <input type="text" class="search-etc-tag-input fc-search-input" placeholder="Search tag">
-                            </div>
+                            </div>-->
                             <div class="decoration"></div>
                             <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
                             <ul class="info-tags collapseable fc-info-tags">
@@ -235,8 +235,8 @@
             <p style="font-size: 9px;">Your posting ctompleted. Share your posting to your SNS.</p>
             <div class="decoration"></div>
             <div class="social-share-btns">
-                <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null /* img */, null /* url */, 'Paste it dude!', function() {console.log('share ok')}, function(errormsg){console.log(errormsg)})"><i class="la la-facebook"></i> Share</a>
-                <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')"><i class="la la-twitter"></i> Share</a>
+              <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebook('Blamni', null ,'http://blmani.com', null)"><i class="la la-facebook"></i> Share</a>
+              <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter('Blamni', null , 'http://blmani.com')"><i class="la la-twitter"></i> Share</a>
             </div>
             <div class="copy-url-sec">
                 <div class="copy-url-part">
@@ -250,12 +250,12 @@
             </div>
             <p style="font-size: 9px;">Check Publishing Results</p>
                 <div class="social-share-btns">
-                    <a href="#" class="button button-round button-black back-button">Cancel</a>
+                    <a href="mylib.html" class="button button-round button-black">Cancel</a>
                     <a href="#" id="view-post-btn" class="button button-round button-red">View Post</a>
                 </div>
         </div> 
     </div>
-	<a href="#"  id="show-success-popup" data-menu="publish-modal">test</a>
+	<a href="#"  id="show-success-popup" data-menu="publish-modal" class="hideit">...</a>
 	<div id="fb-root"></div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
