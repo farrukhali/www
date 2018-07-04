@@ -32,7 +32,7 @@ $(document).ready(function () {
 			$('.user-not-logined').addClass("hideit");
 		}
 	}
-	 $.ajax({
+	/* $.ajax({
       url: "http://blmani.com/wp-json/aniparti/get_field",
       type: "post",
       //data: {id:16842},
@@ -73,7 +73,9 @@ $(document).ready(function () {
 		 // Blmani.Comic.getInstance().set(response);
 		  console.log(response);
 	    }
-	 });
+	 });*/
+	 
+	  setFields();
 	  $("#preloader").addClass('hide-preloader');
 	  
 	  $("select#select_genre").on('change', function(){
@@ -109,6 +111,23 @@ $(document).ready(function () {
 		 $(this).addClass('searching-anc');
 		 $(this).html('Searching...<img src="images/loadersvg.svg">');
 		 var vdivision = $(".active-tab-pill-button").attr("id");
+		 
+		 var session = Blmani.Session.getInstance().get();
+	     var langid  = Blmani.Language.getInstance().get();
+		 var fields = Blmani.Fields.getInstance().get();
+	
+			params = {};
+			if(!langid){
+			 params['lang'] =1;
+			} else {
+			params['lang'] =langid;	
+			}
+			if(!session){
+			 params['uid'] ="nli";
+			} else {
+			params['uid'] =session.uid;	
+			}
+			
 		 if(vdivision==1){
 		   var vgenre = $("select#select_genre").val();
 		   var vatype = $("select#select_atype").val();
@@ -184,33 +203,97 @@ $(document).ready(function () {
 				 } else {
 					 pviews = value.custom.views;
 				 }
-				$(".searching-results").append('<li class="searched-item"><a href="javascript:;" style="display:table" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><ul class="search-result-tags"><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li><li>Girl</li></ul><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
+				 
+				    var  types = [];
+		            if(value.custom.character){
+					   types['character'] = value.custom.character[0];
+					}
+					if(value.custom.content){
+					   types['content'] = value.custom.content[0];
+					}
+					if(value.custom.title){
+					   types['title'] = value.custom.title[0];
+					}
+				 
+				 	if(value.custom.genre){
+					   types['genre'] = value.custom.genre[0];
+					}
+					if(value.custom.a_type){
+					   types['a_type'] = value.custom.a_type[0];
+					}
+					if(value.custom.d_type){
+					   types['d_type'] = value.custom.d_type[0];
+					}
+		  var taghtml ="";
+          console.log("count"+types);		  
+		  //if(types.length>0){
+		  var taghtml ='<ul class="search-result-tags">';
+		  $.each(fields,function(key,value){
+				 if(types[key]){
+					 console.log("key"+key);
+					 var item = value.find(item => item.ID === types[key]);
+					 taghtml +='<li>'+item.name+'</li>';
+				 }
+				 
+			 }); 
+			 taghtml +='</ul>';
+			 console.log(taghtml);
+		 // }
+				//$(".searching-results").append('<li><a href="#" style="display:table"  class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a></li>');	
+				$(".searching-results").append('<li class="searched-item" data-type="0" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
+				
 				});
-                $(".searched-item").on('click',function() {
-				 if($(this).hasClass("item-selected")){
-				 $(this).removeClass("item-selected");
-				 $("input#my_work_id").val("0");
-				 console.log("ff called");
-				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
-				 $('.footer-fixed.regular-footer').removeClass('move-out');
-				} else{
-				 $(".searched-item").each(function(){
+		  $("li.searched-item").bind( "taphold", function(){
+			  console.log("tapholde called");
+			  $(".searched-item").each(function(){
 					 $(this).removeClass("item-selected");
 				 });
 				 $(this).addClass("item-selected");
-				 //$("input#my_work_id").val($(this).attr("data-id"));
-				 //console.log("called");
+				  $("#spost_view").attr("data-id",$(this).attr("data-id"));
+				  $("#post_favourite").attr("data-id",$(this).attr("data-id"));
+				  $("#spost_view").attr("data-privacy",$(this).attr("data-privacy"));
+				  $("#post_favourite").attr("data-privacy",$(this).attr("data-privacy"));
+				  $("#spost_view").attr("data-privacy",$(this).attr("data-type"));
+				  $("#post_favourite").attr("data-privacy",$(this).attr("data-type"));
+				  console.log("called");
 				 $('.footer-fixed.regular-footer').addClass('move-out');
                  $('.footer-fixed.action-footer').addClass('come-in');
+		  });
+		  $(".searched-item").on('click',function() {
+				 if($(this).hasClass("item-selected")){
+				 $(this).removeClass("item-selected");
+				  $("#post_view").attr("data-it",0);
+				  $("#post_favourite").attr("data-it",0);
+				  $("#post_view").attr("data-privacy",0);
+				  $("#post_favourite").attr("data-privacy",0);
+				  $("#post_view").attr("data-privacy",0);
+				  $("#post_favourite").attr("data-privacy",0);
+				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
+				 $('.footer-fixed.regular-footer').removeClass('move-out');
+				} else{
+				 /*$(".searched-item").each(function(){
+					 $(this).removeClass("item-selected");
+				 });
+				 $(this).addClass("item-selected");
+				  $("#spost_view").attr("data-id",$(this).attr("data-id"));
+				  $("#post_favourite").attr("data-id",$(this).attr("data-id"));
+				  $("#spost_view").attr("data-privacy",$(this).attr("data-privacy"));
+				  $("#post_favourite").attr("data-privacy",$(this).attr("data-privacy"));
+				  $("#spost_view").attr("data-privacy",$(this).attr("data-type"));
+				  $("#post_favourite").attr("data-privacy",$(this).attr("data-type"));
+				  console.log("called");
+				 $('.footer-fixed.regular-footer').addClass('move-out');
+                 $('.footer-fixed.action-footer').addClass('come-in');*/
 			   }
 				
 			});
+				
 		   $("#preloader").addClass('hide-preloader');
-		   $(".can-view-it").on("click",function(){
+		   /*$(".can-view-it").on("click",function(){
 		   var privacy = $(this).attr("data-privacy");
 		   var dataid = $(this).attr("data-id");
 		   canViewIt(privacy,dataid);
-	     });
+	       });*/
 		 $(".preload-image").lazyload({threshold : 500});
 		 
 			 

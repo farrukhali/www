@@ -854,7 +854,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
           md.addClass('ani-modal ani-modal-transition');
         }
         else {
-          md = $('<div class="ani-modal ani-modal-transition"><div class="menu-flyin-content top-20 bottom-20"><h3 class="center-text uppercase bolder bottom-15 ani-modal-title"></h3><div class="ani-modal-body"></div><div class="ani-modal-buttons"></div></div></div>');
+          md = $('<div class="ani-modal ani-modal-transition"><div class="ani-modal-body"></div><div class="ani-modal-buttons"></div></div>');
         }
 
 
@@ -881,10 +881,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
           md.find(".popover-header").draggableMargin(md[0]);
         }
 
-        md.css("opacity", 0).css("min-width1", "330px").css("max-width", "730px");
+        md.css("opacity", 0);
         md[0].isModal = true;
         md.buttonsArea = md.find('.ani-modal-buttons');
         md.body = md.find('.ani-modal-body');
+     
 
         md.find(".ani-modal-title").css("width", "100%");
 
@@ -987,8 +988,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         md[0].centerlize = function () {
           var wd = md.width();
           var ht = md.height();
-          md.css("margin-left", (-wd / 2) + "px").css("margin-top", (-ht / 2) + "px");
-          console.log(wd + "," + ht);
+          console.log(wd + "x" + ht);
+          md.css("margin-left", (-wd * 0.5) + "px").css("margin-top", (-ht * 0.5) + "px");
+          md.css("left", "50%").css("top", "50%");
+         
         };
 
         $(document.body).append(md[0].overlay).append(md);
@@ -1012,8 +1015,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         setTimeout(function () {
           if (md[0].ready) md[0].ready();
           if (md[0].onShown) md[0].onShown();
-           md[0].centerlize();
-        
+          setTimeout(function (md) {  }, 100, md);
+          md[0].centerlize();
           md.css("opacity", 1);
 
 
