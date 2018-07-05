@@ -28,18 +28,21 @@
 		    <script>
 			
               var sid = document.URL.substr(document.URL.indexOf('#')+1);
-			  if(isNaN(sid)){
+			  console.log(sid);
+			  /*if(isNaN(sid)){
 			      var  episodeid = document.URL.substr(document.URL.indexOf('#')+2);
 				  document.write('<iframe class="cover-item" src="'+sid+'"></iframe>');
 			  } else {
 			      var  episodeid=sid;
 			      document.write('<iframe class="cover-item" src="http://blmani.com/com/index.php?id='+sid+'"></iframe>');
-			  }
-	          console.log("episodeid"+episodeid);
+				  
+			  }*/
+			  document.write('<iframe class="cover-item" src="http://blmani.com/com/index.php?id='+sid+'"></iframe>');
+	          console.log("episodeid"+sid);
 			  $.ajax({
 				  url: "http://blmani.com/wp-json/aniparti/vupdate",
 				  type: "post",
-				  data: {id:episodeid},
+				  data: {id:sid},
 				  dataType: 'json',
 				  success: function (response) {
 					  console.log("service called "+response);

@@ -1,5 +1,5 @@
 var Blmani = Blmani || {};
-Blmani.Comic = (function () {
+/*Blmani.Comic = (function () {
     var instance;
     function init() {
         var sessionIdKey = "blmani-comic";
@@ -25,7 +25,7 @@ Blmani.Comic = (function () {
             return instance;
         }
     };
-}());
+}());*/
 
 
 var Blmani = Blmani || {};
@@ -96,15 +96,22 @@ Blmani.Fields = (function () {
         return {
             // Public methods and variables.
             set: function (sessionData) {
+				console.log("new fields set");
                 window.localStorage.setItem(sessionIdKey, JSON.stringify(sessionData));
             },
             get: function () {
                 var result = null;
                 try {
+					console.log("getting fields form localStorage");
                     result = JSON.parse(window.localStorage.getItem(sessionIdKey));
                 } catch(e){}
                 return result;
-            }
+            },
+            destroy: function(){
+				window.localStorage.removeItem(sessionIdKey);
+				
+				
+			},
         };
     };
     return {
@@ -227,13 +234,22 @@ var canViewIt = function(privacyid,postid){
 
 var setFields = function(){
 	var fields = Blmani.Fields.getInstance().get();
+	var langid  = Blmani.Language.getInstance().get();
+	var params ={};
+	if(!langid){
+	 params['lang'] = 1;
+	} else {
+	 params['lang'] = langid;	
+	}
+	console.log(params)
 	if(!fields){
 		$.ajax({
 			  url: "http://blmani.com/wp-json/aniparti/get_field",
 			  type: "post",
-			  //data: {id:16842},
+			  data: params,
 			  dataType: 'json',
 			  success: function (response) {
+				  console.log(response);
 				  Blmani.Fields.getInstance().set(response);
 				  populateFieldDD();
 				}
@@ -246,35 +262,71 @@ var setFields = function(){
 
 var populateFieldDD = function(){
 	var fields = Blmani.Fields.getInstance().get();
+	var langid  = Blmani.Language.getInstance().get();
+	
+	$("select#select_genre").html('<option value="" selected="" disabled="">Genre</option>');
+	$("select#select_atype").html('<option value="" selected="" disabled="">A-Type</option>');
+	$("select#select_dtype").html('<option value="" selected="" disabled="">D-Type</option>');
+	$("select#select_content").html('<option value="" selected="" disabled="">Content</option>');
+	$("select#select_title").html('<option value="" selected="" disabled="">Title</option>');
+	$("select#select_character").html('<option value="" selected="" disabled="">Character</option>');
 	$.each(fields,function(key,value){
-				 if(key=="genre"){
-					  $.each(value,function(id,genre){
-					  $("select#select_genre").append('<option value="'+genre.ID+'" >'+genre.name+'</option>');
+				 if(key=="genre"){ 
+					 
+					 $.each(value,function(id,genre){
+					 if(langid==2 && genre.lang=="ko"){
+						$("select#select_genre").append('<option value="'+genre.ID+'" >'+genre.name+'</option>');
+					 } else if(genre.lang=="en" && langid==1){
+					   $("select#select_genre").append('<option value="'+genre.ID+'" >'+genre.name+'</option>'); 
+					 }
+						 
+					 
 					 });
 		         }
 				 if(key=="a_type"){
 					  $.each(value,function(id,atype){
+					 if(langid==2 && atype.lang=="ko"){
 					  $("select#select_atype").append('<option value="'+atype.ID+'" >'+atype.name+'</option>');
+					 } else if(atype.lang=="en" && langid==1){
+					   $("select#select_atype").append('<option value="'+atype.ID+'" >'+atype.name+'</option>'); 
+					  }
 					 });
 				  }
 				  if(key=="d_type"){
 					  $.each(value,function(id,dtype){
-					  $("select#select_dtype").append('<option value="'+dtype.ID+'" >'+dtype.name+'</option>');
+					  if(langid==2 && dtype.lang=="ko"){
+					     $("select#select_dtype").append('<option value="'+dtype.ID+'" >'+dtype.name+'</option>');
+					   } else if(dtype.lang=="en" && langid==1){
+						  $("select#select_dtype").append('<option value="'+dtype.ID+'" >'+dtype.name+'</option>');  
+					   }
 					 });
 				  }
 				  if(key=="content"){
 					  $.each(value,function(id,content){
+					  if(langid==2 && content.lang=="ko"){
 					  $("select#select_content").append('<option value="'+content.ID+'" >'+content.name+'</option>');
+					  } else if(content.lang=="en" && langid==1){
+					  $("select#select_content").append('<option value="'+content.ID+'" >'+content.name+'</option>');  	  
+					  }
 					 });
 				  }
 				  if(key=="title"){
 					  $.each(value,function(id,title){
-					  $("select#select_title").append('<option value="'+title.ID+'" >'+title.name+'</option>');
+					   if(langid==2 && title.lang=="ko"){
+					   $("select#select_title").append('<option value="'+title.ID+'" >'+title.name+'</option>');
+					   } else if(title.lang=="en" && langid==1){
+					   $("select#select_title").append('<option value="'+title.ID+'" >'+title.name+'</option>');	  
+					  }
 					 });
 				  }
 				  if(key=="character"){
 					  $.each(value,function(id,character){
+					  if(langid==2 && character.lang=="ko"){
 					  $("select#select_character").append('<option value="'+character.ID+'" >'+character.name+'</option>');
+					  } else if(character.lang=="en" && langid==1){
+					  $("select#select_character").append('<option value="'+character.ID+'" >'+character.name+'</option>');	  
+					  }
+					  
 					 });
 				  }
 			 });	 
@@ -576,11 +628,17 @@ var delSelection = function(sel){
 var validatePassCode = function(){
 	      $(".loading-gif-centered").removeClass("hideit");
 	      console.log("ff called");
-		  var pid = window.localStorage.getItem("pcpc");
+		  var postObject = JSON.parse(window.localStorage.getItem("pcpc"));
+		  console.log(postObject);
+		   // myObjct["did"] = dtype;
+		   //	myObjct["pid"] = postid;
+		  //	myObjct["purl"] = durl;
+		  
 		  var passcode = $(".privacy-passcode").val();
 		  params['uid'] = session.uid;
-		  params['postid'] = pid;//window.localStorage.getItem("pcpc");
+		  params['postid'] = postObject.pid;//window.localStorage.getItem("pcpc");
 		  params['passcode'] = passcode;
+		  console.log(params);
 		  $.ajax({
 			  url: "http://blmani.com/wp-json/aniparti/checkpass",
 			  type: "post",
@@ -590,7 +648,8 @@ var validatePassCode = function(){
 				   console.log(response);
 				   $(".loading-gif-centered").addClass("hideit");
 				   if(response=="yes"){
-					  window.location ="story.html#"+pid;
+					  //window.location ="story.html#"+pid;
+					  showComic(postObject.did,postObject.pid,postObject.purl);
 				   } else {
 					  alert("invalid Passcode");
 				   }
@@ -603,6 +662,25 @@ var validatePassCode = function(){
 	  });
 	  
 	  
+}
+
+var showComic = function(dtype,postid,durl){
+	console.log(dtype);
+	if(dtype==3){
+		  // normal post
+	      window.location = "play-episode.html#"+postid;
+	  } else if(dtype==2){
+		  // recommended post
+	    if (!window.cordova) {
+		   window.open(durl,"_blank");
+           //window.location = "play-episode.html#"+durl+"#"+postid;         
+        } else {
+	       navigator.app.loadUrl(durl, { openExternal:true });
+		}
+	  
+	  } else {
+	   window.location = "story.html#"+postid;
+	  } 
 }
 
 
@@ -652,33 +730,47 @@ $(document).ready(function(){
 	  
 	  $("#spost_view").on("click",function(){
 		  
-       var posttype =0;
+       var dtype =$(this).attr("data-type");
 	   var privacyid =$(this).attr("data-privacy");
-	   var postid = $(this).attr("data-privacy");
+	   var postid = $(this).attr("data-id");
+	   var durl = $(this).attr("data-url");
 	
 	
     if(privacyid==1 || privacyid==""){
-	  window.location = "story.html#"+postid;
+	  showComic(dtype,postid,durl);
+	 
+	  
 	} 
+	
 	if(privacyid==4){
 		//locked
 		if(!session){
-		 alert("This Comic is Protected Login to view it.");
+		  $("#toast-x").html("This Comic is Protected Login to view it.");
+		  $("#toast-x").addClass("show-toast");
+		  setTimeout($("#toast-x").removeClass("show-toast"),2000);
+		 //alert("This Comic is Protected Login to view it.");
 		} else {
-		$(".password-protected-link").click();
-		window.localStorage.setItem("pcpc",postid);
+		    $(".password-protected-link").click();
+			var myObjct = {};
+			myObjct["did"] = dtype;
+			myObjct["pid"] = postid;
+			myObjct["purl"] = durl;
+			window.localStorage.setItem('pcpc', JSON.stringify(myObjct));
+		    
 		}
 	}
 	if(privacyid==2){
 		//my pick
 		if(!session){
-		 alert("This Comic is Protected Login to view it.");
+		  $("#toast-x").html("This Comic is Protected Login to view it.");
+		  $("#toast-x").addClass("show-toast");
+		  setTimeout($("#toast-x").removeClass("show-toast"),2000);
 		} else {
 		$(".loading-gif-centered").removeClass("hideit");
 		var params ={};
 		params['postid'] = postid;
 		params['uid'] = session.uid;
-		
+		console.log(params);
 		$.ajax({
 			  url: "http://blmani.com/wp-json/aniparti/checkuser",
 			  type: "post",
@@ -688,15 +780,20 @@ $(document).ready(function(){
 				   console.log(response);
 				   $(".loading-gif-centered").addClass("hideit");
 				   if(response=="yes"){
-					   window.location ="story.html#"+postid;
+					   //window.location ="story.html#"+postid;
+					   showComic(dtype,postid,durl);
+					   
 					   
 				   } else {
-					  alert("This comic is for specific users, you cant view it"); 
+					  alert("you are not added in viewers list");
+					  $("#toast-x").html("you are not added in viewers list");
+		              $("#toast-x").addClass("show-toast");
+		              setTimeout($("#toast-x").removeClass("show-toast"),2000); 
 				   }
 				   
 			},
 		     error :function(error){
-				 console.log(error);
+				 console.log("error"+error);
 			 }
 	  });
 		
@@ -709,14 +806,18 @@ $(document).ready(function(){
 	  });
 	  
 	  $("#post_view").on("click",function(){
-		  console.log("publish called");
+		  var dtype = $(this).attr("data-type");
+		  var pid = $(this).attr("data-id");
+		  var purl = $(this).attr("data-url");
+		  showComic(dtype,pid,purl);
+		  /*console.log("publish called");
 		  var value = $("input#my_post_id").val();
 		  if(value==0){
 		   $('#toast-1').addClass('show-toast');
            setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   
 		  } else {
-			window.location ="story.html#"+value;
-		  }
+		   window.location ="story.html#"+value;
+		  }*/
 	  });
 	  
 	  $("#post_unpublish").on("click",function(){

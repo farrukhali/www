@@ -71,7 +71,16 @@ var loadMyPostings = function(){
 			   if(privacy==4){divclass ="mycomics-sreproduction-locked";}
 		   }
 		   
-		   $('.'+divclass).append('<div class="comic-book-item" data-id="'+value.ID+'"><a href="#" ><div class="item-image-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><div class="item-image-overlay"><i class="la la-check-circle"></i></div></div><h3 class="comic-book-item-title">'+value.post_title+'</h3></a></div>');
+		     dtype = 1;
+			 if(value.custom.post_type){
+			   dtype = value.custom.post_type;
+			 }
+			 durl = "";
+			 if(value.post_content){
+			  durl = value.post_content;
+			 }
+		   
+		   $('.'+divclass).append('<div class="comic-book-item" data-id="'+value.ID+'" data-type="'+dtype+'" data-url="'+durl+'" ><a href="#" ><div class="item-image-wrapper"><img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><div class="item-image-overlay"><i class="la la-check-circle"></i></div></div><h3 class="comic-book-item-title">'+value.post_title+'</h3></a></div>');
 		    if(privacy==1){divclass ="mycomics-fcreation-public";}
 			   if(privacy==2){divclass ="mycomics-fcreation-mypick";}
 			   if(privacy==3){divclass ="mycomics-fcreation-private";}
@@ -92,6 +101,10 @@ var loadMyPostings = function(){
             $(this).removeClass('item-selected');
 			
 			$("input#my_post_id").val("0");
+			     $("#post_view").attr("data-id",0);
+				 $("#post_view").attr("data-id",0);
+				 $("#post_view").attr("data-id",0);
+				 $("#post_unpublish").attr("data-id",0);
             $('.footer-fixed.regular-footer').removeClass('move-out');
             $('.footer-fixed.action-footer').removeClass('come-in');
         } else {
@@ -103,6 +116,10 @@ var loadMyPostings = function(){
             });
             $(this).addClass('item-selected');
 			$("input#my_post_id").val($(this).attr("data-id"));
+			     $("#post_view").attr("data-id",$(this).attr("data-id"));
+				 $("#post_view").attr("data-type",$(this).attr("data-type"));
+				 $("#post_view").attr("data-url",$(this).attr("data-url"));
+				 $("#post_unpublish").attr("data-id",$(this).attr("data-id"));
         }
     });
 			 
@@ -159,6 +176,7 @@ var loadMyWork = function(){
 		 console.log(response);
 		 $.each(response,function(key,value){
 		 var thumb="images/placeholder.jpg";
+		    
 		 $('.my-works-listing').append('<li ><a href="#" data-id="'+value.id+'" class="my-work-item"  style="display:table"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-text-wrapper"><h4 class="srl-item-title">﻿'+value.name+'</h4><p class="creation-date">Created Date: <span>'+value.created_date+'</span></p><p class="creation-date">Modified Date: <span>'+value.modified_date+'</span></p><div class="item-status-tag saved-tag">Saved</div></div><div class="srl-right-text-overlay"><i class="la la-check-circle"></i></div></div></a></li>')
 		 });
 		 $("#preloader").addClass('hide-preloader');
@@ -167,6 +185,11 @@ var loadMyWork = function(){
 		        if($(this).hasClass("item-selected")){
 				 $(this).removeClass("item-selected");
 				 $("input#my_work_id").val("0");
+				 
+				 
+				 
+				 
+				 
 				 console.log("ff called");
 				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
 				 $('.footer-fixed.regular-footer').removeClass('move-out');
@@ -176,6 +199,7 @@ var loadMyWork = function(){
 				 });
 				 $(this).addClass("item-selected");
 				 $("input#my_work_id").val($(this).attr("data-id"));
+				 
 				 console.log("called");
 				 $('.footer-fixed.regular-footer').addClass('move-out');
                  $('.footer-fixed.action-footer').addClass('come-in');

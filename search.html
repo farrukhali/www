@@ -11,8 +11,6 @@
     <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.css">
     <link rel="stylesheet" type="text/css" href="styles/framework.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-    
-  
 </head>
 
 <body>
@@ -21,6 +19,7 @@
         <div id="preload-spinner"></div>
     </div>
 	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Your content is loading</p></div></div>
+	<p id="toast-x" class="toast toast-top toast-large bg-red-dark"></p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">Blmani</div>
@@ -146,7 +145,9 @@
                 </div>
             </div>
         </div>
-        <div class="footer-fixed regular-footer">
+        
+		
+		<div class="footer-fixed regular-footer">
             <ul>
                 <li><a href="comic.html"><span class="la la-Rounded-Rectangle"></span><span class="ft-menu-text">Comics</span></a></li>
                 <li class="center-active"><a href="#"><span class="la la-search"></span><span class="ft-menu-text">Search</span></a></li>
@@ -156,7 +157,7 @@
         </div>
 		<div class="footer-fixed bounds-footer action-footer">
             <div class="bounds-options">
-                <a href="#" id="spost_view" data-id="0" data-privacy="0" data-type="0"><i class="la la-eye"></i> View</a>
+                <a href="#" id="spost_view" data-id="0" data-privacy="0" data-type="0" data-url="0"><i class="la la-eye"></i> View</a>
                 <a href="#" id="post_favourite" data-id="0" data-privacy="0" data-type="0" class="btn-action-unpublish"><i class="la la-heart"></i> Favorite</a>
             </div>
         </div>
@@ -204,12 +205,11 @@
         </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
-	<script ype="text/javascript"  src="scripts/jmobile.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
 	<script type="text/javascript" src="scripts/blmani.js"></script>
     <script type="text/javascript" src="scripts/session.js"></script>
-	<script type="text/javascript" src="scripts/custom.js"></script>
+	<script type="text/javascript" src="scripts/posting.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
 	<script type="text/javascript" src="scripts/search.js"></script>
-	
     
 </body>

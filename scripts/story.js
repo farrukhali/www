@@ -150,7 +150,9 @@ $(document).ready(function () {
 				 if(types[key]){
 					 console.log("key"+key);
 					 var item = value.find(item => item.ID === types[key]);
+					 if(item){
 					 $(".info-tags").append('<li><span>'+item.name+'</span></span>');
+					 }
 				 }
 				 
 			 }); 
