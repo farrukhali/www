@@ -1551,7 +1551,7 @@ a.upload-file-block .size-guide {
 }
 .footer-fixed.bounds-footer {
     background: #fff;
-    padding: 12px;
+    padding: 10px;
     box-shadow: 0px -10px 20px rgba(19, 59, 76, 0.08);
 }
 .footer-fixed.bounds-footer .bounds-options {}
@@ -1573,10 +1573,14 @@ a.upload-file-block .size-guide {
     border-radius: 30px;
 }
 .footer-fixed.bounds-footer.action-footer .bounds-options>a {
-    padding: 5px 10px;
+    padding: 7px 13px;
     color: #fff;
     float: none;
     display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 .footer-fixed.bounds-footer .bounds-options>a:last-child {
     margin-right: 0
@@ -1672,8 +1676,8 @@ a.upload-file-block .size-guide {
 }
 .copy-url-sec .copy-url-btn a i {}
 .footer-fixed.bounds-footer .bounds-options .btn-action-unpublish {
-    color: #E44130 !important;
-    border-color: #E44130;
+    color: #e44330 !important;
+    border-color: #e44330;
 }
 a.upload-file-block .thumb-fullwidth {
     position: absolute;
@@ -1835,4 +1839,8 @@ ul.search-result-tags li {
     .content{
         padding: 0px 15px 0px 15px;
     }
+    .footer-fixed.bounds-footer.action-footer .bounds-options>a{
+    padding: 5px 9px;
+    font-size: 10px;
+}
 }

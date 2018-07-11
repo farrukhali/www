@@ -276,6 +276,7 @@ var loadMyWork = function(){
 		 console.log(response.length);
 		 if(response.length==0){
 			$(".nrf").removeClass("hideit");
+			$("#preloader").addClass('hide-preloader');
 		 } else {
 		 $.each(response,function(key,value){
 		 var thumb="images/placeholder.jpg";
