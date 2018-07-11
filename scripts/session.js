@@ -62,7 +62,7 @@ function onPhotoURISuccess(imageURI) {
 
     var ft = new FileTransfer();
     ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/upload_asset"), userImageSuc, userImageFail,options)
-	}
+	
 
 }
 
@@ -314,6 +314,13 @@ console.log(JSON.stringify(response));
 		} else {
 			$('.user-not-logined').addClass("hideit");
 			$('.profile-title').html(session.user_nicename);
+			var langid = Blmani.Language.getInstance().get();
+			if(langid==1){
+			$('span.lang-flags').html('<img src="images/flag-en.png" alt="En-US">');
+			}
+			if(langid==2){
+			$('span.lang-flags').html('<img src="images/flag-ko.png" alt="En-US">');	
+			}
 			if(session.user_pic.indexOf("avatar") == -1){
 			$('.profile-image').attr("src",'"'+session.user_pic+'"');
 			$("#user_profile_pic").attr("src",'"'+session.user_pic+'"');

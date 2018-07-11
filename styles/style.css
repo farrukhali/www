@@ -582,6 +582,7 @@ body .active-touch .hideit {
 .story-info .story-info-right {
     float: left;
     padding-right: 40px;
+    width: calc(100% - 110px);
 }
 .story-info .story-info-right .story-title {
     margin-bottom: 20px;
@@ -623,9 +624,63 @@ body .active-touch .hideit {
 .story-info .story-info-right .right-fixed-action > a{
     color: #1F2B3F;
     line-height: 33px;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 25px;
+    margin-bottom: 7px;
+    border: 1px solid #1F2B3F;
+}
+.story-info .story-info-right .right-fixed-action > a.h-liked{
+    border-color: #e44330;
+}
+.story-info .story-info-right .right-fixed-action > a.h-liked .la-heart-o{
+
+display: none;
+}
+.story-info .story-info-right .right-fixed-action > a.h-liked .la-heart{
+    
+display: block;
+    
+color: #e44330;
+}
+.story-info .story-info-right .right-fixed-action > a .la-heart{
+
+display: none;
+}
+
+.story-info .story-info-right .right-fixed-action > a .la-heart-o{
+    
+display: block;
+}
+.header .header-icon.fav-star .la-star-o{
+    display: block;
+    line-height: 48px;
+}
+.header .header-icon.fav-star .la-star{
+    display: none;
+}
+.header .header-icon.fav-star.fav-star-clicked .la-star{
+    display: block;
+    line-height: 48px;
+    color: #fdf734;
+}
+.header .header-icon.fav-star.fav-star-clicked .la-star-o{
+    display: none;
+}
+
+
+
+.story-info .story-info-right .right-fixed-action > a:last-child{
+    
+margin-bottom: 0;
 }
 .story-info .story-info-right .right-fixed-action > a > i{
-    font-size: 16px;
+    font-size: 20px;
+    line-height: 36px;
+    color: #1F2B3F;
 }
 .story-info .story-info-right .story-views-sec .story-views-sec-tag {
     font-weight: normal;
