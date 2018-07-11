@@ -1821,4 +1821,18 @@ ul.search-result-tags li {
         left: -8px;
         border-radius: 50px;
     }
+    .story-info .story-info-right .author-details .author-details-text-wrapper{
+        padding: 0;
+    }
+    .story-info .story-info-right .author-details img{
+        width: 23px;
+        height: 23px;
+        margin-right: 5px;
+    }
+    .story-info .story-info-right .story-title h2{
+        margin-top:10px;
+    }
+    .content{
+        padding: 0px 15px 0px 15px;
+    }
 }
