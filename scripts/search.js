@@ -189,6 +189,7 @@ $(document).ready(function () {
 				 } else {
 					 privacy = value.custom.privacy
 				 }
+				 console.log("privacy"+privacy); 
 				 if(!value.custom){
 					 desc = "";
 				 } else if(!value.custom.prodes){
@@ -198,11 +199,11 @@ $(document).ready(function () {
 				 }
 				 
 				 if(!value.custom){
-					 pviews = 0;
+					 likes = 0;
 				 } else if(!value.custom.views){
-					 pviews =0;
+					 likes =0;
 				 } else {
-					 pviews = value.custom.views;
+					 likes = value.custom._aliked;
 				 }
 				 
 				 
@@ -257,35 +258,21 @@ $(document).ready(function () {
 			 }
 			 
 		 // }
-				//$(".searching-results").append('<li><a href="#" style="display:table"  class="can-view-it" data-id="'+value.ID+'" data-privacy="'+privacy+'"><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p><div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a></li>');	
-				$(".searching-results").append('<li class="searched-item" data-url="'+pcontent+'" data-type="'+ptype+'" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+pviews+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
+				$(".searching-results").append('<li class="searched-item" data-url="'+pcontent+'" data-type="'+ptype+'" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+likes+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
 				
 				});
-		 /* $("li.searched-item").bind( "taphold", function(){
-			  console.log("tapholde called");
-			  $(".searched-item").each(function(){
-					 $(this).removeClass("item-selected");
-				 });
-				 $(this).addClass("item-selected");
-				  $("#spost_view").attr("data-id",$(this).attr("data-id"));
-				  $("#post_favourite").attr("data-id",$(this).attr("data-id"));
-				  $("#spost_view").attr("data-privacy",$(this).attr("data-privacy"));
-				  $("#post_favourite").attr("data-privacy",$(this).attr("data-privacy"));
-				  $("#spost_view").attr("data-privacy",$(this).attr("data-type"));
-				  $("#post_favourite").attr("data-privacy",$(this).attr("data-type"));
-				  console.log("called");
-				 $('.footer-fixed.regular-footer').addClass('move-out');
-                 $('.footer-fixed.action-footer').addClass('come-in');
-		  });*/
+				
+		 
 		  $(".searched-item").on('click',function() {
 				 if($(this).hasClass("item-selected")){
 				 $(this).removeClass("item-selected");
 				  $("#spost_view").attr("data-url",0);
 				  $("#spost_view").attr("data-id",0);
-				  $("#post_favourite").attr("data-id",0);
 				  $("#spost_view").attr("data-privacy",0);
-				  $("#post_favourite").attr("data-privacy",0);
 				  $("#spost_view").attr("data-type",0);
+				  
+				  $("#post_favourite").attr("data-id",0);
+				  $("#post_favourite").attr("data-privacy",0);
 				  $("#post_favourite").attr("data-type",0);
 				 $('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
 				 $('.footer-fixed.regular-footer').removeClass('move-out');
@@ -296,10 +283,14 @@ $(document).ready(function () {
 				 $(this).addClass("item-selected");
 				  $("#spost_view").attr("data-url",$(this).attr("data-url"));
 				  $("#spost_view").attr("data-id",$(this).attr("data-id"));
-				  $("#post_favourite").attr("data-id",$(this).attr("data-id"));
 				  $("#spost_view").attr("data-type",$(this).attr("data-type"));
-				  $("#post_favourite").attr("data-type",$(this).attr("data-type"));
 				  $("#spost_view").attr("data-privacy",$(this).attr("data-privacy"));
+				  console.log($(this).attr("data-privacy"));
+				  //$("#spost_view").attr("data-privacy",$(this).attr("data-privacy"));
+				  
+				  
+				  $("#post_favourite").attr("data-type",$(this).attr("data-type"));
+				  $("#post_favourite").attr("data-id",$(this).attr("data-id"));
 				  $("#post_favourite").attr("data-privacy",$(this).attr("data-privacy"));
 				  $('.footer-fixed.regular-footer').addClass('move-out');
                   $('.footer-fixed.action-footer').addClass('come-in');

@@ -17,6 +17,10 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Processing Request...</p></div></div>
+	<p id="toast-fav" class="toast toast-top toast-large bg-red-dark">Item removed from favourite list!</p>
+	<p id="toast-x" class="toast toast-top toast-large bg-red-dark">You are not Added into viewers list!</p>
+	
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">My Library</div>
@@ -66,71 +70,15 @@
             </ul>
             <!-- MOST LIKED start -->
             <div class="content">
-                <div class="latest-comics-all">
-				    <div class="nrf">No Records Found!</div>
-                    <!--<div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
+			    <div class="nrf hideit">
+				   <div class="empty-results">
+                        <img src="images/empty-search.svg" alt="">
+                        <h3>No Favorite Comics Found!</h3>
+                        
                     </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="comic-book-item">
-                        <a href="javascript:;">
-                            <div class="item-image-wrapper">
-                                <img data-src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" src="http://blmani.com/wp-content/uploads/2018/04/14263-150x150.png" class="preload-image responsive-image" alt="img">
-                                <div class="item-image-overlay"><i class="la la-check-circle"></i></div>
-                            </div>
-                            <h3 class="comic-book-item-title">动物先森</h3>
-                            <div class="comic-book-item-auther">Admin</div>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
-                </div>-->
-            </div>
+				</div>
+			    <div class="latest-comics-all  comics-my-favourite">
+				</div>
             <!-- MOST LIKED end -->
         </div>
         <div class="footer-fixed regular-footer">
@@ -143,11 +91,29 @@
         </div>
         <div class="footer-fixed bounds-footer action-footer">
             <div class="bounds-options">
-                <a href="#"><i class="la la-eye"></i> View</a>
-                <a href="#" class="btn-action-unpublish"><i class="la la-heart-o"></i> unfavourite</a>
+                <a href="#" id="fav_unfav" data-id="0" class="btn-action-unpublish"><i class="la la-heart-o"></i> unfavourite</a>
+				<a href="#" id="spost_view" data-privacy="0" data-id="0" data-type="0" data-url="0"><i class="la la-eye"></i> View</a>
             </div>
         </div>
     </div>
+	
+	<a href="#" class="password-protected-link hideit" data-menu="passcode-modal">...</a>
+	<div id="passcode-modal" class="menu-flyin menu-share1">
+        <div class="menu-flyin-content">
+            <h3>Enter Passcode</h3>
+            <div class="search-etc-tag">
+               
+                    <input type="password" class="search-etc-tag-input privacy-passcode" placeholder="Enter Passcode">
+                    <span style="top: 0" class="privacy-passcode-eye"><i class="la la-eye"></i></span>
+            </div>
+            <div class="clear"></div>
+            <div style="padding-top: 20px; text-align: center;">
+			    <a href="#" class="btn button-round button-black close-menu">Close</a>
+                <a href="#" class="btn button-round button-red validate-passcode-done">Done</a>
+            </div>
+        </div>
+    </div>
+	
 	<div id="post-a-story-options" class="menu-flyin non-scroll-modal">
         <div class="menu-flyin-content bottom-0">
             <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
@@ -187,6 +153,7 @@
 	  return false;
 	}
 	
+		
 });
     </script>
 </body>

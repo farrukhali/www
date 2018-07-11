@@ -1497,384 +1497,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   ani.editPages = function (schema) {
 
-    var processItem = function (item, parent) {
-
-      var width = item.width || "100%";
-      var tag = item.tag || 'div';
-      
-      if (item.type == "button") tag = "a";
-
-      var item$ = $('<' + tag + '></' + tag + '>');
-
-      if (tag == "a") item$.attr("href", "#");
-
-      var float = item.float || "left";
-
-      if (item.attr) {
-        for (var a in item.attr)
-          item$.attr(a, item.attr[s]);
-      }
-
-      item$.css("float", float).css("width", width);
-      if (item.id) item$.attr("id", item.id);
-
-      parent.append(item$);
-      var container$ = item$;
-      if (item.type == "collapsable") {
-        item$.addClass('toggle toggle-active');
-        var title$ = $('<h5 class="toggle-title bold header-dark"></h5>');
-        if (item.cssClassTitle) title$.addClass(item.cssClassTitle);
-        if (item.styleTitle) title$.attr("style", item.styleTitle);
-        title$.html(item.title);
-        item$.append(title$);
-        if (item.collapsed) {
-          item$.append('<a href="#" class="toggle-classic toggle-trigger"><i class="fa fa-chevron-down"></i></a><div class="toggle-content"></div>');
-
-        }
-        else {
-          item$.append('<a href="#" class="toggle-classic toggle-trigger"><i class="fa fa-chevron-down"></i></a><div class="toggle-content" style="display: block;"></div>');
-
-        }
-          container$ = item$.find(".toggle-content");
-      }
-      
-
-
-      if (item.items) {
-        if (item.type == "pages") {
-          item$.addClass("tabs");
-          var titles$ = $('<div class="tab-titles"></div>');
-          var contents$ = $('<div class="tab-content"></div>');
-          var activeTab = false;
-          item.items.forEach(function (itm) {
-            if (itm.type == "page") {
-              itm.id = ani.guid();
-              var title$ = $('<a href="#" id="title_' + itm.id + '" data-tab="' + itm.id + '" class="bold"></a>');
-              if (!activeTab) activeTab = itm.id;
-              if (itm.active) activeTab = itm.id;
-              title$.html(itm.title);
-              titles$.append(title$);
-              if (itm.cssClassTitle) title$.addClass(itm.cssClassTitle);
-              if (itm.styleTitle) title$.attr("style", itm.styleTitle);
-              processItem(itm, contents$).addClass('tab-item');
-            }
-            else {
-              processItem(itm, contents$);
-            }
-
-            
-
-
-
-          });
-
-          if (activeTab) {
-            titles$.find("#title_" + activeTab).addClass('active-tab-button');
-            contents$.find("#" + activeTab).addClass('active-tab');
-          }
-          item$.append(titles$).append(contents$);
-
-        }
-      
-        else {
-          item.items.forEach(function (itm) {
-            processItem(itm, container$);
-          });
-        }
-
-      }
-      else {
-        var field = item.field || "";
-
-        var fieldType = "string";
-
-        if (field.indexOf("##") == 0) {
-          fieldType = "float";
-          field = field.replace("##", "");
-        }
-        else if (field.indexOf("#") == 0) {
-          fieldType = "int";
-          field = field.replace("#", "");
-        }
-        if (item.input)
-        {
-
-          var input$ = $('<div class="page-input input-simple-1 input-blue"><em class="inputTitle"></em></div>');
-          if (!item.title) input$.addClass("no-title");
-         
-          input$[0].onValueUpdate = function (v) {
-          };
-          input$[0].onInput = function (v) {
-          };
-
-          input$[0].setValue = function (v) {
-            this.underlineValue(v);
-            return (this);
-          };
-
-          input$.addClass(item.input);
-         
-
-          if (field != "") {
-            input$[0].fieldType = fieldType;
-            input$[0].fieldName = field;
-            input$.attr("field", field).attr("fieldType", fieldType);
-
-          }
-
-
-          if (fieldType == "string") {
-            input$[0].getDisplayValue = function (v) {
-              return (v);
-            };
-          }
-          else if (fieldType == "int") {
-            input$[0].getDisplayValue = function (v) {
-              return (parseInt(v));
-            };
-          }
-          else if (fieldType == "float") {
-            input$[0].getDisplayValue = function (v) {
-              return (parseFloat(v).toFixed("2"));
-            };
-          }
-        
-
-
-
-          if (item.input == "text") {
-            input$.append('<input type="text"  />');
-            input$[0].textBox = input$.find("input");
-            input$[0].textBox.change(function () {
-              this.parentNode.onValueUpdate(this.value);
-            });
-
-
-
-
-            input$[0].underlineValue = function (v) {
-              this.textBox.val(this.getDisplayValue(v));
-            };
-
-            if (item.touchControl) {
-              var txb = input$[0].textBox[0];
-              txb.dragable = true;
-              txb.touchControlStart = function () {
-                this.valueStart = parseInt(this.value);
-              };
-              txb.touchControlSpeed = item.touchControlSpeed || 2;
-              txb.touchControlMove = function (dx, dy, x, y) {
-               
-                if (Math.abs(dy) == 0) {
-                 
-                  var value = this.valueStart + (x / this.touchControlSpeed);
-                  this.parentNode.onValueUpdate(value);
-                  this.value = this.parentNode.getDisplayValue(value);
-                }
-             
-              };
-            }
-
-
-          }
-          else if (item.input == "dropdown") {
-            item.options = item.options || [];
-            input$.append('<div class="select-box select-box-2"><select></select><div class="sp-dd">▼</div></div>');
-
-            input$[0].dropdown = input$.find("select");
-            input$[0].dropdown.dropDownPlain(item.options).onUpdate = function (v) {
-              this[0].parentNode.parentNode.onValueUpdate(v);
-            };
-            
-            input$[0].underlineValue = function (v) {
-              this.dropdown.val(v);
-            };
-
-           
-          }
-          else if (item.input == "color") {
-            input$.append('<div class="colorPicker"></div>');
-            input$[0].colorPicker = input$.find(".colorPicker");
-            input$[0].colorPicker.createColorPickerEx().onUpdate = function (v) {
-              this[0].parentNode.onValueUpdate(v);
-            };
-
-            input$[0].underlineValue = function (v) {
-              this.colorPicker.smartEdit(v).onUpdate = function (v) {
-                this[0].parentNode.onValueUpdate(v);
-              };
-            };
-
-          }
-          else if (item.input == "checkbox") {
-
-            input$.find(".inputTitle").remove();
-            input$.append('<div class="fac fac-checkbox fac-default"><span></span><input id="'+field+'-fac-checkbox" type="checkbox" value="1" checked=""><label for="'+field+'-fac-checkbox" class="inputTitle">Simple</label></div>');
-            input$[0].checkbox = input$.find("input");
-
-            input$[0].checkbox[0].oninput = function () {
-              this.parentNode.parentNode.onValueUpdate(!this.checked);
-              this.parentNode.parentNode.onInput();
-
-            };
-            input$[0].underlineValue = function (v) {
-
-              this.checkbox[0].checked = !v;
-            };
-          
-
-
-          }
-          else if (item.input == "slider") {
-            input$.append('<div class="range-slider"><input type="text" value="0" /><input class="ios-slider" type="range" value="0"/></div>');
-
-            item.min = item.min || 0; item.max = item.max || 100; item.value = item.value || 0;
-            var range = input$.find("input:last");
-            var textBox = input$.find("input:first");
-
-            range[0].textBox = textBox;
-            if (item.hideTextbox) range[0].textBox.hide();
-            textBox[0].$ = textBox;
-            input$[0].parseValue = function (v) {
-              return (parseInt(v));
-            };
-
-            input$[0].displayValue = function (v) {
-              return (parseInt(v));
-            };
-           
-            textBox.updateValue = function () {
-              this[0].parentNode.parentNode.onValueUpdate(this.val());
-
-            };
-            if (item.valueControl) {
-              item.valueRange = item.valueRange || 5;
-              range[0].min = -item.valueRange; range[0].max = item.valueRange; range[0].value = 0;
-
-              range[0].oninput = function () {               
-                this.textBox.val(this.parentNode.parentNode.displayValue(this.startValue + this.parentNode.parentNode.parseValue(this.value)));
-                this.textBox.updateValue();
-
-              };
-              range[0].ontouchstart = function () {
-                this.startValue = this.parentNode.parentNode.parseValue(this.textBox.val());
-              };
-
-              range[0].ontouchend = function () {
-                this.value = 0;
-              };
-
-              input$[0].underlineValue = function (v) {
-                this.textBox.val(v);
-              };
-
-            }
-            else {
-              range[0].min = item.min; range[0].max = item.max; range[0].value = 0;
-              range[0].oninput = function () {
-                textBox.val(this.value);
-                this.textBox.updateValue();
-              };
-              textBox[0].oninput = function () {
-                range.val(this.value);
-                this.$.updateValue();
-              };
-
-              input$[0].underlineValue = function (v) {
-                this.range.val(v);
-                this.range[0].textBox.val(v);
-              };
-             
-            }
-            
-           
-            input$[0].range = range;
-
-
-
-          }
-          else if (item.input == "textarea") {
-            input$.append('<textarea></textarea>');
-            input$[0].textBox = input$.find("textarea");
-         
-            item.rows = item.rows || 3; 
-            input$[0].textBox.attr("rows", item.rows);
-            input$[0].textBox.change(function () {
-              this.parentNode.onValueUpdate(this.value);
-            });
-
-            input$[0].textBox[0].oninput = function () {
-              this.parentNode.onValueUpdate(this.value);
-            };
-
-            input$[0].underlineValue = function (v) {
-              this.textBox.val(this.getDisplayValue(v));
-            };
-
-
-          }
-          else if (item.input == "content") {
-            input$[0].underlineValue = function (v) {
-              this.$.html(v);
-            };
-          }
- 
-
-          
-          item$[0].inputTitle = input$.find(".inputTitle");
-
-          item$[0].inputTitle.html(item.title);
-
-          if (item.inputSettings) {
-            ani.extend(input$[0], item.inputSettings);
-          }
-          item$.append(input$);
-
-        }
-
-
-       
-        else if (item.type == "button") {
-          item$.html(item.title);
-          item$.addClass('button');
-          item$.css("margin", "0px");
-          item$[0].onclick = item.onClick;
-        }
-        else if (item.title && !item.type) {
-          item$.html(item.title);
-          if (field != "") {
-            item$.addClass("custom-page-input");
-            item$[0].fieldType = fieldType;
-            item$[0].fieldName = field;
-            item$.attr("field", field).attr("fieldType", fieldType);
-            if (item.inputSettings) {
-              ani.extend(item$[0], item.inputSettings);
-            }
-          }
-
-        }
-
-        
-       
-
-      }
-      if (item.cssClass) item$.addClass(item.cssClass);
-      if (item.style) {
-        var style = item$.attr("style") || "";
-        item$.attr("style", style + item.style);
-
-      }
-
-      if (item.html) item$.html(item.html);
-      item$[0].$ = item$;
-      if (item.onInit) item.onInit(item$);
-      return (item$);
-
-    };
-   
+    
     var div$ = $('<div class="editPages" style="width:100%"></div>');
     schema.items.forEach(function (item) {
-      processItem(item, div$);
+      ani.editPages.processItem(item, div$);
     });
 
    div$.find('a[data-tab]').on("click", function () {
@@ -1927,7 +1553,380 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     return (div$);
   };
+  ani.editPages.processItem = function (item, parent) {
 
+    var width = item.width || "100%";
+    var tag = item.tag || 'div';
+
+    if (item.type == "button") tag = "a";
+
+    var item$ = $('<' + tag + '></' + tag + '>');
+
+    if (tag == "a") item$.attr("href", "#");
+
+    var float = item.float || "left";
+
+    if (item.attr) {
+      for (var a in item.attr)
+        item$.attr(a, item.attr[s]);
+    }
+
+    item$.css("float", float).css("width", width);
+    if (item.id) item$.attr("id", item.id);
+
+    parent.append(item$);
+    var container$ = item$;
+    if (item.type == "collapsable") {
+      item$.addClass('toggle toggle-active');
+      var title$ = $('<h5 class="toggle-title bold header-dark"></h5>');
+      if (item.cssClassTitle) title$.addClass(item.cssClassTitle);
+      if (item.styleTitle) title$.attr("style", item.styleTitle);
+      title$.html(item.title);
+      item$.append(title$);
+      if (item.collapsed) {
+        item$.append('<a href="#" class="toggle-classic toggle-trigger"><i class="fa fa-chevron-down"></i></a><div class="toggle-content"></div>');
+
+      }
+      else {
+        item$.append('<a href="#" class="toggle-classic toggle-trigger"><i class="fa fa-chevron-down"></i></a><div class="toggle-content" style="display: block;"></div>');
+
+      }
+      container$ = item$.find(".toggle-content");
+    }
+
+
+
+    if (item.items) {
+      if (item.type == "pages") {
+        item$.addClass("tabs");
+        var titles$ = $('<div class="tab-titles"></div>');
+        var contents$ = $('<div class="tab-content"></div>');
+        var activeTab = false;
+        item.items.forEach(function (itm) {
+          if (itm.type == "page") {
+            itm.id = ani.guid();
+            var title$ = $('<a href="#" id="title_' + itm.id + '" data-tab="' + itm.id + '" class="bold"></a>');
+            if (!activeTab) activeTab = itm.id;
+            if (itm.active) activeTab = itm.id;
+            title$.html(itm.title);
+            titles$.append(title$);
+            if (itm.cssClassTitle) title$.addClass(itm.cssClassTitle);
+            if (itm.styleTitle) title$.attr("style", itm.styleTitle);
+            ani.editPages.processItem(itm, contents$).addClass('tab-item');
+          }
+          else {
+            ani.editPages.processItem(itm, contents$);
+          }
+
+
+
+
+
+        });
+
+        if (activeTab) {
+          titles$.find("#title_" + activeTab).addClass('active-tab-button');
+          contents$.find("#" + activeTab).addClass('active-tab');
+        }
+        item$.append(titles$).append(contents$);
+
+      }
+
+      else {
+        item.items.forEach(function (itm) {
+          ani.editPages.processItem(itm, container$);
+        });
+      }
+
+    }
+    else {
+      var field = item.field || "";
+
+      var fieldType = "string";
+
+      if (field.indexOf("##") == 0) {
+        fieldType = "float";
+        field = field.replace("##", "");
+      }
+      else if (field.indexOf("#") == 0) {
+        fieldType = "int";
+        field = field.replace("#", "");
+      }
+      if (item.input) {
+
+        var input$ = $('<div class="page-input input-simple-1 input-blue"><em class="inputTitle"></em></div>');
+        if (!item.title) input$.addClass("no-title");
+
+        input$[0].onValueUpdate = function (v) {
+        };
+        input$[0].onInput = function (v) {
+        };
+
+        input$[0].setValue = function (v) {
+          this.underlineValue(v);
+          return (this);
+        };
+
+        input$.addClass(item.input);
+
+
+        if (field != "") {
+          input$[0].fieldType = fieldType;
+          input$[0].fieldName = field;
+          input$.attr("field", field).attr("fieldType", fieldType);
+
+        }
+
+
+        if (fieldType == "string") {
+          input$[0].getDisplayValue = function (v) {
+            return (v);
+          };
+        }
+        else if (fieldType == "int") {
+          input$[0].getDisplayValue = function (v) {
+            return (parseInt(v));
+          };
+        }
+        else if (fieldType == "float") {
+          input$[0].getDisplayValue = function (v) {
+            return (parseFloat(v).toFixed("2"));
+          };
+        }
+
+
+
+
+        if (item.input == "text") {
+          input$.append('<input type="text"  />');
+          input$[0].textBox = input$.find("input");
+          input$[0].textBox.change(function () {
+            this.parentNode.onValueUpdate(this.value);
+          });
+
+
+
+
+          input$[0].underlineValue = function (v) {
+            this.textBox.val(this.getDisplayValue(v));
+          };
+
+          if (item.touchControl) {
+            var txb = input$[0].textBox[0];
+            txb.dragable = true;
+            txb.touchControlStart = function () {
+              this.valueStart = parseInt(this.value);
+            };
+            txb.touchControlSpeed = item.touchControlSpeed || 2;
+            txb.touchControlMove = function (dx, dy, x, y) {
+
+              if (Math.abs(dy) == 0) {
+
+                var value = this.valueStart + (x / this.touchControlSpeed);
+                this.parentNode.onValueUpdate(value);
+                this.value = this.parentNode.getDisplayValue(value);
+              }
+
+            };
+          }
+
+
+        }
+        else if (item.input == "dropdown") {
+          item.options = item.options || [];
+          input$.append('<div class="select-box select-box-2"><select></select><div class="sp-dd">▼</div></div>');
+
+          input$[0].dropdown = input$.find("select");
+          input$[0].dropdown.dropDownPlain(item.options).onUpdate = function (v) {
+            this[0].parentNode.parentNode.onValueUpdate(v);
+          };
+
+          input$[0].underlineValue = function (v) {
+            this.dropdown.val(v);
+          };
+
+
+        }
+        else if (item.input == "color") {
+          input$.append('<div class="colorPicker"></div>');
+          input$[0].colorPicker = input$.find(".colorPicker");
+          input$[0].colorPicker.createColorPickerEx().onUpdate = function (v) {
+            this[0].parentNode.onValueUpdate(v);
+          };
+
+          input$[0].underlineValue = function (v) {
+            this.colorPicker.smartEdit(v).onUpdate = function (v) {
+              this[0].parentNode.onValueUpdate(v);
+            };
+          };
+
+        }
+        else if (item.input == "checkbox") {
+
+          input$.find(".inputTitle").remove();
+          var uuid = ani.guid();
+          input$.append('<div class="fac fac-checkbox fac-default"><span></span><input id="' + uuid + field + '-fac-checkbox" type="checkbox" value="1" checked=""><label for="' + uuid + field + '-fac-checkbox" class="inputTitle">Simple</label></div>');
+          input$[0].checkbox = input$.find("input");
+
+          input$[0].checkbox[0].onchange = function () {
+            this.parentNode.parentNode.onValueUpdate(!this.checked);
+            this.parentNode.parentNode.onInput();
+
+          };
+          input$[0].underlineValue = function (v) {
+
+            this.checkbox[0].checked = !v;
+          };
+
+
+
+        }
+        else if (item.input == "slider") {
+          input$.append('<div class="range-slider"><input type="text" value="0" /><input class="ios-slider" type="range" value="0"/></div>');
+
+          item.min = item.min || 0; item.max = item.max || 100; item.value = item.value || 0;
+          var range = input$.find("input:last");
+          var textBox = input$.find("input:first");
+
+          range[0].textBox = textBox;
+          if (item.hideTextbox) range[0].textBox.hide();
+          textBox[0].$ = textBox;
+          input$[0].parseValue = function (v) {
+            return (parseInt(v));
+          };
+
+          input$[0].displayValue = function (v) {
+            return (parseInt(v));
+          };
+
+          textBox.updateValue = function () {
+            this[0].parentNode.parentNode.onValueUpdate(this.val());
+
+          };
+          if (item.valueControl) {
+            item.valueRange = item.valueRange || 5;
+            range[0].min = -item.valueRange; range[0].max = item.valueRange; range[0].value = 0;
+
+            range[0].oninput = function () {
+              this.textBox.val(this.parentNode.parentNode.displayValue(this.startValue + this.parentNode.parentNode.parseValue(this.value)));
+              this.textBox.updateValue();
+
+            };
+            range[0].ontouchstart = function () {
+              this.startValue = this.parentNode.parentNode.parseValue(this.textBox.val());
+            };
+
+            range[0].ontouchend = function () {
+              this.value = 0;
+            };
+
+            input$[0].underlineValue = function (v) {
+              this.textBox.val(v);
+            };
+
+          }
+          else {
+            range[0].min = item.min; range[0].max = item.max; range[0].value = 0;
+            range[0].oninput = function () {
+              textBox.val(this.value);
+              this.textBox.updateValue();
+            };
+            textBox[0].oninput = function () {
+              range.val(this.value);
+              this.$.updateValue();
+            };
+
+            input$[0].underlineValue = function (v) {
+              this.range.val(v);
+              this.range[0].textBox.val(v);
+            };
+
+          }
+
+
+          input$[0].range = range;
+
+
+
+        }
+        else if (item.input == "textarea") {
+          input$.append('<textarea></textarea>');
+          input$[0].textBox = input$.find("textarea");
+
+          item.rows = item.rows || 3;
+          input$[0].textBox.attr("rows", item.rows);
+          input$[0].textBox.change(function () {
+            this.parentNode.onValueUpdate(this.value);
+          });
+
+          input$[0].textBox[0].oninput = function () {
+            this.parentNode.onValueUpdate(this.value);
+          };
+
+          input$[0].underlineValue = function (v) {
+            this.textBox.val(this.getDisplayValue(v));
+          };
+
+
+        }
+        else if (item.input == "content") {
+          input$[0].underlineValue = function (v) {
+            this.$.html(v);
+          };
+        }
+
+
+
+        item$[0].inputTitle = input$.find(".inputTitle");
+
+        item$[0].inputTitle.html(item.title);
+
+        if (item.inputSettings) {
+          ani.extend(input$[0], item.inputSettings);
+        }
+        item$.append(input$);
+
+      }
+
+
+
+      else if (item.type == "button") {
+        item$.html(item.title);
+        item$.addClass('button');
+        item$.css("margin", "0px");
+        item$[0].onclick = item.onClick;
+      }
+      else if (item.title && !item.type) {
+        item$.html(item.title);
+        if (field != "") {
+          item$.addClass("custom-page-input");
+          item$[0].fieldType = fieldType;
+          item$[0].fieldName = field;
+          item$.attr("field", field).attr("fieldType", fieldType);
+          if (item.inputSettings) {
+            ani.extend(item$[0], item.inputSettings);
+          }
+        }
+
+      }
+
+
+
+
+    }
+    if (item.cssClass) item$.addClass(item.cssClass);
+    if (item.style) {
+      var style = item$.attr("style") || "";
+      item$.attr("style", style + item.style);
+
+    }
+
+    if (item.html) item$.html(item.html);
+    item$[0].$ = item$;
+    if (item.onInit) item.onInit(item$);
+    return (item$);
+
+  };
  
 
 
@@ -1982,27 +1981,52 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
   ani.editPages.events = new ani.eventSystem();
   ani.editPages.run = function (page$, object, stateAttributes) {
 
-    for (var f in page$[0].fields) {
-      var field = page$[0].fields[f];
-      field.currentState = stateAttributes;
-      field.currentObject = object;
-      var value;
-      if (field.getStateValue)
-        value = field.getStateValue(field)
-      else if (stateAttributes[f])
-        value = stateAttributes[f][0].apply(object, []);
+    if (stateAttributes) {
+      for (var f in page$[0].fields) {
+        var field = page$[0].fields[f];
+        field.currentState = stateAttributes;
+        field.currentObject = object;
+        var value;
+        if (field.getStateValue)
+          value = field.getStateValue(field)
+        else if (stateAttributes[f])
+          value = stateAttributes[f][0].apply(object, []);
 
-      field.setValue(value);
+        field.setValue(value);
 
-      field.onValueUpdate = function (value) {
-        if (this.setStateValue)
-          this.setStateValue(value, this);
-        else if (this.currentState[this.fieldName])
-          this.currentState[this.fieldName][1].apply(this.currentObject, [value]);
-        ani.editPages.events("OnUpdate", [this, value, this.currentObject, this.currentState]);
-      };
+        field.onValueUpdate = function (value) {
+          if (this.setStateValue)
+            this.setStateValue(value, this);
+          else if (this.currentState[this.fieldName])
+            this.currentState[this.fieldName][1].apply(this.currentObject, [value]);
+          ani.editPages.events("OnUpdate", [this, value, this.currentObject, this.currentState]);
+        };
 
+      }
     }
+    else {
+      for (var f in page$[0].fields) {
+        var field = page$[0].fields[f];
+        field.currentObject = object;
+        var value;
+        if (field.getStateValue)
+          value = field.getStateValue(field)
+        else 
+          value =object[f];
+
+        field.setValue(value);
+
+        field.onValueUpdate = function (value) {
+          if (this.setStateValue)
+            this.setStateValue(value, this);
+          else {
+            object[this.fieldName] = value;
+          }
+        };
+
+      }
+    }
+   
 
     return (page$);
   };

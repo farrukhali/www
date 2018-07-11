@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="styles/framework.css">
     <link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
@@ -17,20 +18,20 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
+	<p id="toast-fav" class="toast toast-top toast-large bg-red-dark">Added to favourite list!</p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-static header-logo-app hide-header-card">
             <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
             <a href="#" class="header-icon header-icon-2 "><i class="la la-heart-o"></i></a>
-            <a href="#" class="header-icon header-icon-3 "><i class="la la-share-alt"></i></a>
+            <a href="#" class="header-icon header-icon-3 " onclick="window.plugins.socialsharing.share(null, null, null, 'http://blmani.com')"><i class="la la-share-alt"></i></a>
         </div>
         <div class="page-content footer-clear">
-            
             <!--   Episode banner section     -->
             <div class="header-card card card-full card-image first_episode_banner" style="background-image: url(images/story-banner.png)">
                 <div class="header header-static header-logo-app">
                     <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-                    <a href="#" class="header-icon header-icon-2"><i class="la la-heart-o"></i></a>
-                    <a href="#" class="header-icon header-icon-3" onclick="window.plugins.socialsharing.share(null, null, null, 'http://blmani.com')"><i class="la la-share-alt"></i></a>
+                    <a href="#" class="header-icon header-icon-2"><i class="la la-heart-o" style="font-size: 30px"></i></a>
+                    <a href="#" class="header-icon header-icon-3" onclick="window.plugins.socialsharing.share(null, null, null, 'http://blmani.com')"><i class="la la-share-alt" style="font-size: 30px"></i></a>
                 </div>
                 <div class="episode-play-section">
                     <!--<a href="play-episode.html">
@@ -39,17 +40,21 @@
                     </a>-->
                 </div>
             </div>
-            
             <!--   Story section     -->
             <div class="content">
                 <div class="story-info top-30 bottom-30">
                     <div class="story-info-left">
                         <div class="story-cover">
                             <img data-src="images/story-banner.png" src="images/empty.png" class="preload-image responsive-image" alt="img">
-                        </div>    
+                        </div>
                     </div>
-                    <div class="story-info-right"><!--
-                        <div class="story-title">  </div>
+                    <div class="story-info-right">
+                        <!-- <div class="story-title">
+                            <div class="story-title">
+                                <h2>undefined</h2>
+                                <p>2794 Episodes Completed</p>
+                            </div>
+                        </div>
                         <div class="author-details">
                             <img data-src="images/pictures/0s.png" src="images/empty.png" class="preload-image responsive-image" alt="img">
                             <div class="author-details-text-wrapper">
@@ -57,32 +62,37 @@
                                 <div class="author-start-date">2 Weeks ago</div>
                             </div>
                         </div>
-                        <div class="story-views-sec">Views<br><span class="story-views-sec-tag">502K</span></div>
-						-->
+                        <div class="story-views-sec">Views
+                            <br><span class="story-views-sec-tag">502K</span>
+                        </div>
+                        <div class="right-fixed-action">
+                            <a href="javascript:;"><i class="zmdi zmdi-comment-more"></i></a>
+                            <a href="javascript:;"><i class="la la-star"></i></a>
+                        </div> -->
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="tabs">
-                <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
-                    <a href="#" id="story-info" class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">Information</a>
-                    <a href="#" id="story-episodes" data-tab-pill="tab-pill-2">Episodes</a>
-                </div>
-                <div class="tab-pill-content">
-                    <div class="tab-item active-tab" id="tab-pill-1">
-                        <h3 class="bold font-12 bottom-10 color-black">Genres</h3>
-                        <ul class="info-tags">
-                        </ul>
-                        <div class="clear"></div>
-                        <div class="decoration"></div>
-                        <h3 class="bold font-12 bottom-10 color-black">Description</h3>
-                        <p class="bottom-0 font-10 color-grey comic-desc"></p>
+                    <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
+                        <a href="#" id="story-info" class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">Information</a>
+                        <a href="#" id="story-episodes" data-tab-pill="tab-pill-2">Episodes</a>
                     </div>
-                    <div class="tab-item" id="tab-pill-2">
-                        <h2 class="bold font-15 color-black">Episodes</h2>
-                        <div class="latest-comics-all details-page-episodes"></div>
+                    <div class="tab-pill-content">
+                        <div class="tab-item active-tab" id="tab-pill-1">
+                            <h3 class="bold font-12 bottom-10 color-black">Genres</h3>
+                            <ul class="info-tags">
+                            </ul>
+                            <div class="clear"></div>
+                            <div class="decoration"></div>
+                            <h3 class="bold font-12 bottom-10 color-black">Description</h3>
+                            <p class="bottom-0 font-10 color-grey comic-desc"></p>
+                        </div>
+                        <div class="tab-item" id="tab-pill-2">
+                            <h2 class="bold font-15 color-black">Episodes</h2>
+                            <div class="latest-comics-all details-page-episodes"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="footer-fixed">
@@ -94,8 +104,8 @@
             </ul>
         </div>
     </div>
-	<a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
-	<div id="post-a-story-options" class="menu-flyin non-scroll-modal">
+    <a href="#" class="post-story-option-link hideit" data-menu="post-a-story-options">...</a>
+    <div id="post-a-story-options" class="menu-flyin non-scroll-modal">
         <div class="menu-flyin-content bottom-0">
             <h1 class="modal-heading center-text f-roboto bottom-0">Posting Method</h1>
         </div>
@@ -116,21 +126,16 @@
             </form>
         </div>
         <div class="modal-footer">
-		   <a href="#" class="modal-btn posting-method-selection-done">Done</a>
+            <a href="#" class="modal-btn posting-method-selection-done">Done</a>
         </div>
-	<script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/plugins.js"></script>
-	<script type="text/javascript" src="scripts/blmani.js"></script>
-    <script type="text/javascript" src="scripts/session.js"></script>
-	<script type="text/javascript" src="scripts/jslib.js"></script>
-	<script type="text/javascript" src="scripts/story.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
-	<script>
-
-
-
-
-</script>
-
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="scripts/jquery.js"></script>
+        <script type="text/javascript" src="scripts/plugins.js"></script>
+        <script type="text/javascript" src="scripts/blmani.js"></script>
+        <script type="text/javascript" src="scripts/session.js"></script>
+        <script type="text/javascript" src="scripts/jslib.js"></script>
+        <script type="text/javascript" src="scripts/story.js"></script>
+        <script type="text/javascript" src="scripts/custom.js"></script>
+        <script>
+        </script>
 </body>

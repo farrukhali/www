@@ -18,8 +18,10 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
-	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Your content is loading</p></div></div>
-	<p id="toast-x" class="toast toast-top toast-large bg-red-dark"></p>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p></p></div></div>
+	<p id="toast-x" class="toast toast-top toast-large bg-red-dark">You are not Added into viewers list!</p>
+	<p id="toast-fav" class="toast toast-top toast-large bg-black">Added to favourite List</p>
+	
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">Blmani</div>
@@ -158,12 +160,12 @@
 		<div class="footer-fixed bounds-footer action-footer">
             <div class="bounds-options">
                 <a href="#" id="spost_view" data-id="0" data-privacy="0" data-type="0" data-url="0"><i class="la la-eye"></i> View</a>
-                <a href="#" id="post_favourite" data-id="0" data-privacy="0" data-type="0" class="btn-action-unpublish"><i class="la la-heart"></i> Favorite</a>
+                <a href="javascript:;" id="post_favourite" data-id="0" data-privacy="0" data-type="0" class="btn-action-unpublish"><i class="la la-heart"></i> Favorite</a>
             </div>
         </div>
     </div>
 	 <div id="fb-root"></div>
-	 <a href="#" class="password-protected-link hideit" data-menu="passcode-modal">...</a>
+	<a href="#" class="password-protected-link hideit" data-menu="passcode-modal">...</a>
 	<div id="passcode-modal" class="menu-flyin menu-share1">
         <div class="menu-flyin-content">
             <h3>Enter Passcode</h3>
@@ -204,12 +206,11 @@
 		   <a href="#" class="modal-btn posting-method-selection-done">Done</a>
         </div>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
 	<script type="text/javascript" src="scripts/blmani.js"></script>
     <script type="text/javascript" src="scripts/session.js"></script>
-	<script type="text/javascript" src="scripts/posting.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
+	<script type="text/javascript" src="scripts/custom.js"></script>
 	<script type="text/javascript" src="scripts/search.js"></script>
     
 </body>

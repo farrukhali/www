@@ -18,7 +18,11 @@
         <div id="preload-spinner"></div>
     </div>
 	<div class="loading-gif hideit"><img src="images/loadersvg.svg"></div>
-		<p id="toast-1" class="toast toast-top toast-large bg-red-dark">Please Select Item!</p>
+    <p id="toast-1" class="toast toast-top toast-large bg-red-dark">Please Select Item!</p>
+	<p id="toast-del" class="toast toast-top toast-large bg-red-dark">Item Removed!</p>
+	
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Processing Request...</p></div></div>
+	<p id="toast-del" class="toast toast-top toast-large bg-red-dark">Item removed from list!</p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">My Library</div>
@@ -68,6 +72,13 @@
             </ul>
             <!-- MOST LIKED start -->
             <div class="content search-results-section">
+			    <div class="nrf hideit">
+				   <div class="empty-results">
+                        <img src="images/empty-search.svg" alt="">
+                        <h3>No Favorite Comics Found!</h3>
+                        
+                    </div>
+				</div>
                 <div class="search-results-list">
                     <ul class="searching-results my-library my-works-listing">
                         <!--<div class="nrf">No Records Found!</div>-->
@@ -87,6 +98,7 @@
         </div>
         <div class="footer-fixed bounds-footer action-footer">
             <div class="bounds-options">
+			    <a href="#" id="delete_work"><i class="la la-pencil"></i> Delete</a>
                 <a href="#" id="edit_work"><i class="la la-pencil"></i> Edit Work</a>
                 <a href="#" id="publish_work" class="btn-action-unpublish"><i class="la la-cloud-download"></i> Publish</a>
             </div>

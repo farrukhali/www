@@ -65,6 +65,12 @@ $(window).on('load',function(){
 	window.localStorage.setItem("story",1);
 	
  });
+ 
+document.addEventListener("backbutton", function () { 
+console.log("ff called");
+window.location = "mylib.html";
+
+}, false);
 
 </script>
 </body>

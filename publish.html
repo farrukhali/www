@@ -215,7 +215,7 @@
             <div class="clear"></div>
             <div style="padding-top: 20px; text-align: center;">
 			    <a href="#" class="btn button-round button-black close-menu">Close</a>
-                <a href="#" class="btn button-round button-red privacy-passcode-done">Done</a>
+                <a href="#" id="new_post_view" class="btn button-round button-red privacy-passcode-done">Done</a>
             </div>
         </div>
     </div>
@@ -270,6 +270,12 @@ $(window).on('load',function(){
 	
 });
 
+
+document.addEventListener("backbutton", function () { 
+console.log("ff called");
+window.location = "mylib.html";
+
+}, false);
 
 
 </script>

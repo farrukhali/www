@@ -430,7 +430,7 @@ sup{top: -15px;} sub{bottom: 0px;}
 .border-white{border:solid 1px #FFFFFF!important;}
 .border-light{border-color:rgba(255,255,255,0.05)!important;}
 
-.bg-black{background-color:#000000!important;}
+.bg-black{background-color:#000000!important; color: #ffffff !important}
 .bg-hover-black:hover{background-color:#000000!important; color:#FFFFFF!important;}
 .color-black{color:#1f2b3f!important;}
 .color-grey{color:#8E8E93!important;}
@@ -623,7 +623,7 @@ ol ol ol{list-style-type:disc;}
 .top-5{margin-top:5px!important;}
 .top-10{margin-top:10px!important;}
 .top-15{margin-top:15px!important;}
-.top-20{margin-top: 26px!important;}
+.top-20{margin-top:20px!important;}
 .top-21{margin-top:21px!important;}
 .top-25{margin-top:25px!important;}
 .top-30{margin-top:30px!important;}

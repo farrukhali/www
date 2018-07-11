@@ -8,7 +8,12 @@ $(document).ready(function(){
 						
 		
 		$('a').on('click', function(){var attrs = $(this).attr('href');	if(attrs === '#'){return false;}});
-		
+		$("#class-clear-cache").on('click',function(){
+			$("#toast-2").addClass("show-toast");
+			setTimeout(function(){
+			$("#toast-2").removeClass("show-toast");	
+			},2000);
+		});
 		/*$('.demo-light').on('click', function(){
 			$('.demo-dark').removeClass('menu-item-active');
 			$(this).addClass('menu-item-active');	
@@ -428,24 +433,7 @@ $(document).ready(function(){
 						   $(".loading-gif").addClass("hideit");
 						   $('.toast').addClass('show-toast');
 						   setTimeout(function(){window.location = "comic.html";},1500);
-			               //setTimeout(function(){$('.toast').removeClass('show-toast');},3000);
-						   //window.location = "comic.html";
-						   /* if(response.status == "Success"){
-								signupFormSubmitted = "true";
-								e("#" + t).hide();
-                                e("#formSuccessMessageWrap").fadeIn(500);
-								
-							} else {
-								//(response.status=="Error"){
-							   signupFormSubmitted = "false";
-                               console.log(response.msg);
-                               $("#formError3").html('<p class="center-text uppercase small-text color-white">'+response.msg+'</p>');
-							   $("#usernameField").focus();
-							   $("#usernameField").addClass("fieldHasError");
-							   $("#formError3").fadeIn(300);
-                               return false;							   
-							}
-						  */ 
+			               
 						},
 					    error: function (jqXHR, textStatus, errorThrown) {
                                console.log(textStatus, errorThrown);
@@ -458,12 +446,7 @@ $(document).ready(function(){
                                return false;
                         }
 					 });
-                //var r = e("#" + t).serialize();
-                //e.post(e("#" + t).attr("action"), r, function(n) {
-                    //console.log(n);
-					//e("#" + t).hide();
-                    //e("#formSuccessMessageWrap").fadeIn(500)
-                //})
+                
             }
 
             function n(n, r) {
@@ -510,18 +493,157 @@ $(document).ready(function(){
         })
 		
 		
+		
+		//changeSubmitButton
+		
+		
+		var changePassForm = "false";
+        jQuery(document).ready(function(e) {
+            function t(t, n) {
+				if($("#npassword1Field").val() !=$("#npassword2Field").val()){
+					    $("#npassword2Field").focus();
+                        $("#npassword3FieldError").fadeIn(300);
+                        return false
+				}
+                changePassForm = "true";
+				var session = Blmani.Session.getInstance().get();
+	            $(".loading-gif").removeClass("hideit");
+				var params = {};
+				params['uid'] =session.uid;
+				params["old_pass"] = $("#cpasswordField").val();
+				params["new_pass"] = $("#npassword1Field").val();
+				console.log(params);
+				$.ajax({
+					  url: "http://blmani.com/wp-json/aniparti/changepass",
+					  type: "post",
+				      data: params,
+					  dataType: 'json',
+					  success: function (response) {
+						   changePassForm = "true";
+						   console.log(response);
+						   $(".loading-gif").addClass("hideit");
+						   if(response=="success"){
+							  $('#toast-2').html("Password Successfully Changed!"); 
+							  $('#toast-2').addClass('show-toast');
+							  setTimeout(function(){$('#toast-2').removeClass('show-toast');},2000);
+						   } else {
+							  $('#toast-2').html(""+response); 
+							  $('#toast-2').addClass('show-toast');
+							  setTimeout(function(){$('#toast-2').removeClass('show-toast');},2000);  
+						   }
+						   
+						   
+						  
+			               
+						},
+					    error: function (jqXHR, textStatus, errorThrown) {
+                               console.log(textStatus, errorThrown);
+							   loginFormSubmitted = "false";
+							   $(".loading-gif").addClass("hideit");
+						       return false;
+                        }
+					 });
+
+			   
+			   
+            }
+
+            function n(n, r) {
+                e(".formValidationError").hide();
+                e(".fieldHasError").removeClass("fieldHasError");
+                e("#" + n + " .requiredField").each(function(i) {
+                    if (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy")) {
+                        e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+                        e("#" + e(this).attr("id") + "Error").fadeIn(300);
+                        return false
+                    }
+					
+					if (e(this).hasClass("requiredPasswordField")) {
+                       if (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy") || e(this).val().length < 3) {
+                        e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+                        e("#" + e(this).attr("id") + "Error").fadeIn(300);
+                        return false
+                      }
+                    }
+					
+                    if (e(this).hasClass("requiredEmailField")) {
+                        var s = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        var o = "#" + e(this).attr("id");
+                        if (!s.test(e(o).val())) {
+                            e(o).focus();
+                            e(o).addClass("fieldHasError");
+                            e(o + "Error2").fadeIn(300);
+                            return false
+                        }
+                    }
+                    if (changePassForm == "false" && i == e("#" + n + " .requiredField").length - 1) {
+                        t(n, r)
+                    }
+                })
+            }
+            e(".formValidationError").fadeOut(0);
+            e('input[type="text"], input[type="password"]').focus(function() {
+                if (e(this).val() == e(this).attr("data-dummy")) {
+                    e(this).val("")
+                }
+            });
+            e("input").blur(function() {
+                if (e(this).val() == "") {
+                    e(this).val(e(this).attr("data-dummy"))
+                }
+            });
+            e("#changeSubmitButton").click(function() {
+                n(e(this).attr("data-formId"));
+                return false
+            })
+        })
+		
+		
 		// forgetPassword form
 		
 		var forgetFormSubmitted = "false";
         jQuery(document).ready(function(e) {
             function t(t, n) {
                 forgetFormSubmitted = "true";
-                var r = e("#" + t).serialize();
+				//reset_upassword
+               // var r = e("#" + t).serialize();
                // e.post(e("#" + t).attr("action"), r, function(n) {
                  //   console.log(n);
 					//e("#" + t).hide();
                     //e("#formSuccessMessageWrap").fadeIn(500)
                // })
+			   
+			    $(".loading-gif").removeClass("hideit");
+				var params = {};
+				params["email"] = $("#forgetEmailField").val();
+				console.log(params);
+				$.ajax({
+					  url: "http://blmani.com/wp-json/aniparti/reset_upassword",
+					  type: "post",
+				      data: params,
+					  dataType: 'json',
+					  success: function (response) {
+						   forgetFormSubmitted = "true";
+						   console.log(response);
+						   $(".loading-gif").addClass("hideit");
+						   //var stateObj = { foo: "login" };
+                           //window.history.replaceState(stateObj, "login page", "login.html");
+						   $('#toast-2').addClass('show-toast');
+						   setTimeout(function(){window.location = "login.html";},2000);
+			               
+						},
+					    error: function (jqXHR, textStatus, errorThrown) {
+                               console.log(textStatus, errorThrown);
+							   loginFormSubmitted = "false";
+							   $(".loading-gif").addClass("hideit");
+						       return false;
+                        }
+					 });
+
 			   
 			   
             }

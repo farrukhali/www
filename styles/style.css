@@ -223,7 +223,7 @@
     background-position-y: center;
 }
 .page-list-items li a.flag.active {}
-.page-list-items li a.flag .la.la-check{
+.page-list-items li a.flag .la.la-check {
     display: none;
 }
 .page-list-items li a.flag.active .la.la-check {
@@ -581,6 +581,7 @@ body .active-touch .hideit {
 }
 .story-info .story-info-right {
     float: left;
+    padding-right: 40px;
 }
 .story-info .story-info-right .story-title {
     margin-bottom: 20px;
@@ -613,6 +614,18 @@ body .active-touch .hideit {
     font-family: Roboto;
     padding-left: 15px;
     text-align: center;
+}
+.story-info .story-info-right .right-fixed-action{
+    position: absolute;
+    right: 0;
+    top: 14px;
+}
+.story-info .story-info-right .right-fixed-action > a{
+    color: #1F2B3F;
+    line-height: 33px;
+}
+.story-info .story-info-right .right-fixed-action > a > i{
+    font-size: 16px;
 }
 .story-info .story-info-right .story-views-sec .story-views-sec-tag {
     font-weight: normal;
@@ -1254,6 +1267,8 @@ a.upload-file-block .size-guide {
     border-radius: 30px;
     overflow: hidden;
     margin: 0 auto;
+    height: 30px;
+    object-fit: cover;
 }
 .owl-carousel .owl-item .slide-author span {
     color: #fff;
@@ -1722,10 +1737,33 @@ ul.search-result-tags li {
     .latest-comics-all .comic-book-item img, .gallery-filter-results .comic-book-item img {
         margin-bottom: 5px;
     }
-    .latest-comics-all .comic-book-item, .gallery-filter-results .comic-book-item{
+    .latest-comics-all .comic-book-item, .gallery-filter-results .comic-book-item {
         margin-bottom: 5px;
     }
-    .footer-fixed.bounds-footer .bounds-options>a{
-        padding:0 5px; 
+    .footer-fixed.bounds-footer .bounds-options>a {
+        padding: 0 5px;
+    }
+    .latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views, .gallery-filter-results.details-page-episodes .comic-book-item .thumb-episode-views {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        color: #fff;
+        font-family: Roboto;
+        z-index: 2;
+        font-size: 11px;
+        line-height: normal;
+        font-size: 9px;
+    }
+    .latest-comics-all.details-page-episodes .comic-book-item .thumb-episode-views:before, .gallery-filter-results.details-page-episodes .comic-book-item .thumb-episode-views:before {
+        content: '';
+        background: #F71D4B;
+        width: 38px;
+        height: 38px;
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: -19px;
+        left: -8px;
+        border-radius: 50px;
     }
 }

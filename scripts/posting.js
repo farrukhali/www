@@ -67,7 +67,7 @@ $(".upload-file-block").on("click", function(e){
 		 
 		 var publishFormSubmitted = "false";
         jQuery(document).ready(function(e) {
-		
+		     
             function t(t, n) {
 				var imageURI = $('#preview-thumb').attr("src");
 				if (!imageURI || imageURI == "images/image-icon.png") {
@@ -218,6 +218,8 @@ $(".upload-file-block").on("click", function(e){
                 }
             });
             e("#recommendedSubmitButton").click(function() {
+				console.log("function called");
+				//$("a#show-success-popup").click();
                 n(e(this).attr("data-formId"));
                 return false
             })

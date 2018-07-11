@@ -26,6 +26,8 @@
 		<a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
 		<a data-menu="menu-1" href="#" class="header-icon header-icon-4"><i class="la la-bars2"></i></a>
 	</div>
+	<div class="loading-gif hideit"><img src="images/loadersvg.svg"></div>
+	<p id="toast-x" class="toast toast-top toast-large">TXT TXT TXT.</p>
 			
 	 <div id="menu-1" class="menu-sidebar menu-light menu-sidebar-right menu-sidebar-over">
             <div class="menu-scroll">
@@ -66,16 +68,16 @@
 	<div class="page-content header-clear">
 		<ul class="page-list-items my-profile-list-items">
 			<li>
-				Change Profile Picture <a href="#"><img class="profile-image preload-image rounded-image" data-src="images/pictures/clip.png" alt="img" src="images/pictures/clip.png"></a>
+				Change Profile Picture <a href="#" ><img class="profile-image preload-image rounded-image" id="user_profile_pic" alt="img" src="images/pictures/clip.png"></a>
 			</li>
-			<li>
-				Nick name <strong>(John.deo93)</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>
+			<li id="li_nick_name">
+				Nick name <strong >(John.deo93)</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>
 			</li>
 			<li>
 				Gender <strong>(Male)</strong> <a href="#" data-menu="edit-gender-modal">Edit</a>
 			</li>
 			<li>
-				Birthday - <strong>(12-09-1988)</strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
+				Birthday - <strong></strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
 			</li>
 		</ul>
 	</div>
@@ -97,7 +99,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-btn">Done</a>
+            <a href="#" class="modal-btn" >Done</a>
         </div>
     </div>
 	<div id="edit-bday-modal" class="menu-flyin non-scroll-modal">
@@ -122,12 +124,12 @@
         <div class="modal-content">
             <form action="">
                 <div class="input-simple-1 has-icon input-green bottom-30">
-					<input type="text" placeholder="Enter Nickname">
+					<input type="text" id="edit_nick_name" placeholder="Enter Nickname">
 				</div>
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-btn">Done</a>
+            <a href="#" class="modal-btn" id="edit_nick_name_done">Done</a>
         </div>
     </div>
 	
@@ -219,11 +221,12 @@
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
-<script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/session.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/blmani.js"></script>
 <script>
 $(window).on('load',function(){
     //checkConnection();
