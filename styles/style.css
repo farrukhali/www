@@ -1019,6 +1019,7 @@ ul.info-tags li a {}
     float: left;
     border: 1px solid #eee;
     border-radius: 50px;
+    background: #fafafa;
 }
 .content.search-results-section .search-results-list ul li .srl-right-wrapper .srl-right-author-details span {
     font-size: 9px;
