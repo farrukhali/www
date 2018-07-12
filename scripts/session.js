@@ -36,97 +36,6 @@ Blmani.Session = (function () {
 
 
 
-var pictureSource;   // picture source
-var destinationType; // sets the format of returned value
-
-// Wait for device API libraries to load
-//
-document.addEventListener("deviceready",onDeviceReady,false);
-
-// device APIs are available
-//
-function onDeviceReady() {
-    pictureSource = navigator.camera.PictureSourceType;
-    destinationType = navigator.camera.DestinationType;
-}
-
-
-function onPhotoURISuccess(imageURI) {
-    $("#user_profile_pic-thumb").attr("src",imageURI);
-	$(".loading-gif").removeClass("hideit");
-	var options = new FileUploadOptions();
-    options.fileKey = "image";
-    options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
-    options.mimeType = "image/png";
-    options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/upload_asset"), userImageSuc, userImageFail,options)
-	
-
-}
-
-
-var userImageSuc = function(success) {
-	console.log(JSON.stringify(success));
-    var url = success.response.replace('"','');
-	var url = url.replace('"','');
-	purl =url;//"";//"blmani.com"+url;
-	var session = Blmani.Session.getInstance().get();
-	params = {};
-	params['uid'] = session.uid;
-	params['url'] = purl;
-	console.log(params);
-	
-	$.ajax({
-					  url: "http://blmani.com/wp-json/aniparti/userimage",
-					  type: "post",
-				      data: params,
-					  dataType: 'json',
-					  success: function (response) {
-						   console.log(response);
-						   $(".loading-gif").addClass("hideit");
-						      session.user_pic = response; 
-							  Blmani.Session.getInstance().set(session);
-							  $('#toast-x').html("Profile Pic Successfully Updated!"); 
-							  $('#toast-x').addClass('show-toast');
-							  setTimeout(function(){$('#toast-x').removeClass('show-toast');},2000);
-						   
-			               
-						},
-					    error: function (jqXHR, textStatus, errorThrown) {
-                               console.log(textStatus, errorThrown);
-							   loginFormSubmitted = "false";
-							   $(".loading-gif").addClass("hideit");
-						       return false;
-                        }
-	 });
-	
-	
-	
-}
-
-var userImageFail =function(error) {
-    //alert("An error has occurred: Code = " + error.code);
-    console.log("upload error source " + error.source);
-    console.log("upload error target " + error.target);
-	$('#toast-x').html("Error Occurred!"); 
-	$(".loading-gif").addClass("hideit");
-    $("#toast-x").addClass("show-toast");
-    setTimeout(function(){$("#toast-x").removeClass("show-toast");},2000);
-}
-
-var onFail =function(){
-	console.log("failed");
-	
-}
-
-
-var getPhoto = function() {
-	console.log("get photo called");
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
-}
 
 
 
@@ -314,17 +223,21 @@ console.log(JSON.stringify(response));
 		} else {
 			$('.user-not-logined').addClass("hideit");
 			$('.profile-title').html(session.user_nicename);
-			var langid = Blmani.Language.getInstance().get();
+			var langid  = Blmani.Language.getInstance().get();
 			if(langid==1){
 			$('span.lang-flags').html('<img src="images/flag-en.png" alt="En-US">');
 			}
 			if(langid==2){
 			$('span.lang-flags').html('<img src="images/flag-ko.png" alt="En-US">');	
 			}
-			if(session.user_pic.indexOf("avatar") == -1){
-			$('.profile-image').attr("src",'"'+session.user_pic+'"');
-			$("#user_profile_pic").attr("src",'"'+session.user_pic+'"');
-			}
+			//if(session.user_pic.indexOf("avatar") == -1){
+			//if(session.user_pic !== ""){
+			$('.profile-image').attr("data-src",session.user_pic);
+			$("#user_profile_pic").attr("data-src",session.user_pic);
+			$('.profile-image').attr("src",session.user_pic);
+			$("#user_profile_pic").attr("src",session.user_pic);
+			$(".preload-image").lazyload({threshold : 500});
+			//}
 			$("li#li_nick_name").html('Nick name <strong >('+session.user_nicename+')</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>');
 			
 		}

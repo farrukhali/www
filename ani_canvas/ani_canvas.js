@@ -1497,59 +1497,65 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   ani.editPages = function (schema) {
 
-    
+
     var div$ = $('<div class="editPages" style="width:100%"></div>');
     schema.items.forEach(function (item) {
       ani.editPages.processItem(item, div$);
     });
 
-   div$.find('a[data-tab]').on("click", function () {
+    div$.find('a[data-tab]').on("click", function () {
       var tab_number = $(this).data('tab');
       $(this).parent().find('[data-tab]').removeClass('active-tab-button');
       $(this).parent().parent().find('.tab-titles a').removeClass('active-tab-button');
       $(this).addClass('active-tab-button');
       $(this).parent().parent().find('.tab-item').slideUp(200);
       $('#' + tab_number).slideDown(200);
-   });
+    });
 
-   div$.find('a[data-accordion]').on("click", function () {
+    div$.find('a[data-accordion]').on("click", function () {
 
-     var accordion_number = $(this).data('accordion');
-     $('.accordion-content').slideUp(200);
-     $('.accordion i').removeClass('rotate-180');
-     if ($('#' + accordion_number).is(":visible")) {
-       $('#' + accordion_number).slideUp(200);
-       $(this).find('i:last-child').removeClass('rotate-180');
-     } else {
-       $('#' + accordion_number).slideDown(200);
-       $(this).find('i:last-child').addClass('rotate-180');
-     }
-   });
+      var accordion_number = $(this).data('accordion');
+      $('.accordion-content').slideUp(200);
+      $('.accordion i').removeClass('rotate-180');
+      if ($('#' + accordion_number).is(":visible")) {
+        $('#' + accordion_number).slideUp(200);
+        $(this).find('i:last-child').removeClass('rotate-180');
+      } else {
+        $('#' + accordion_number).slideDown(200);
+        $(this).find('i:last-child').addClass('rotate-180');
+      }
+    });
 
-   div$.find('.toggle-trigger, .toggle-title').on('click', function () {
-     $(this).parent().toggleClass('toggle-active');
-     $(this).parent().find('.toggle-content').slideToggle(250);
-   });
-
-
-   div$.touchDragingArea({
-     drageElement: function (e,x,y, dx, dy) {
-       if (e.touchControlMove) e.touchControlMove(dx, dy,x,y);
-     },
-     drageStart: function (e) {
-       if (e.touchControlStart) e.touchControlStart();
-     }
-   });
+    div$.find('.toggle-trigger, .toggle-title').on('click', function () {
+      $(this).parent().toggleClass('toggle-active');
+      $(this).parent().find('.toggle-content').slideToggle(250);
+    });
 
 
-   div$[0].fields = {};
-   div$.find(".page-input,.custom-page-input").each(function () {
-     if (this.fieldName) {
-       div$[0].fields[this.fieldName] = this;
-     }
-   
-   });
+    div$.touchDragingArea({
+      drageElement: function (e, x, y, dx, dy) {
+        if (e.touchControlMove) e.touchControlMove(dx, dy, x, y);
+      },
+      drageStart: function (e) {
+        if (e.touchControlStart) e.touchControlStart();
+      }
+    });
 
+
+    div$[0].fields = {};
+    div$.find(".page-input,.custom-page-input").each(function () {
+      if (this.fieldName) {
+        div$[0].fields[this.fieldName] = this;
+      }
+
+    });
+
+    div$.onValueUpdate = function (field, value) { };
+    for (var k in schema) {
+      if (k != "items") {
+        div$[k] = schema[k];
+      }
+    }
 
     return (div$);
   };
@@ -1714,15 +1720,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
           if (item.touchControl) {
             var txb = input$[0].textBox[0];
             txb.dragable = true;
+
+            txb.min = item.min || -9999999; txb.max = item.max || 9999999;
             txb.touchControlStart = function () {
               this.valueStart = parseInt(this.value);
             };
             txb.touchControlSpeed = item.touchControlSpeed || 2;
+
             txb.touchControlMove = function (dx, dy, x, y) {
 
               if (Math.abs(dy) == 0) {
 
                 var value = this.valueStart + (x / this.touchControlSpeed);
+                if (value < this.min) value = this.min;
+                if (value > this.max) value = this.max;
                 this.parentNode.onValueUpdate(value);
                 this.value = this.parentNode.getDisplayValue(value);
               }
@@ -1924,6 +1935,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
     if (item.html) item$.html(item.html);
     item$[0].$ = item$;
     if (item.onInit) item.onInit(item$);
+
+    
     return (item$);
 
   };
@@ -1980,7 +1993,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   ani.editPages.events = new ani.eventSystem();
   ani.editPages.run = function (page$, object, stateAttributes) {
-
+   
     if (stateAttributes) {
       for (var f in page$[0].fields) {
         var field = page$[0].fields[f];
@@ -2000,6 +2013,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
           else if (this.currentState[this.fieldName])
             this.currentState[this.fieldName][1].apply(this.currentObject, [value]);
           ani.editPages.events("OnUpdate", [this, value, this.currentObject, this.currentState]);
+
+          page$.onValueUpdate(this, value);
+
         };
 
       }
@@ -2022,6 +2038,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
           else {
             object[this.fieldName] = value;
           }
+
+          page$.onValueUpdate(this, value);
         };
 
       }

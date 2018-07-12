@@ -488,7 +488,10 @@ var publishPost = function(url){
 			 $("#copy-to-clipboard").val(response.url);
 			 //$("#view-post-btn").attr("href","story.html#"+response.pid);
 			 $("#view-post-btn").on("click",function(){
-			 showComic(3,response.pid,"");
+			 //showComic(3,response.pid,"");
+			  window.location ="search.html";
+			  window.localStorage.setItem("latest-posted",response.pid);
+			 
              });
 			},
 		 error:function(response){
@@ -583,7 +586,10 @@ var recommendedPost =function(url){
 			 $(".loading-gif").addClass("hideit");
 			 $("#copy-to-clipboard").val(response.url);
 			 $("#view-post-btn").on("click",function(){
-			  showComic(2,response.pid,$("#urlflinkField").val());
+			  //showComic(2,response.pid,$("#urlflinkField").val());
+			  window.localStorage.setItem("latest-posted",response.pid);
+			  window.location ="search.html";
+			 
              });
 			},
 		 error:function(response){
@@ -642,7 +648,7 @@ var validatePassCode = function(){
 		   // myObjct["did"] = dtype;
 		   //	myObjct["pid"] = postid;
 		  //	myObjct["purl"] = durl;
-		  
+		  var params = {};
 		  var passcode = $(".privacy-passcode").val();
 		  params['uid'] = session.uid;
 		  params['postid'] = postObject.pid;//window.localStorage.getItem("pcpc");
@@ -660,7 +666,9 @@ var validatePassCode = function(){
 					  //window.location ="story.html#"+pid;
 					  showComic(postObject.did,postObject.pid,postObject.purl);
 				   } else {
-					  alert("invalid Passcode");
+					  $("#toast-invalid").addClass("show-toast");
+					  setTimeout(function(){$("#toast-invalid").removeClass("show-toast");},2000)
+					
 				   }
 				   
 				   
@@ -675,10 +683,15 @@ var validatePassCode = function(){
 
 var favouriteComic = function(value){
 	      var session = Blmani.Session.getInstance().get();
+		  if(!session){
+			  $('#toast-x').addClass('show-toast');
+              setTimeout(function(){$('#toast-x').removeClass('show-toast');},2000);
+			  return false;
+		  }
 	      var params={};
 		  params['uid'] = session.uid;
 		  params['pid'] = value;
-		  
+		  $(".loading-gif-centered").removeClass("hideit");
           $.ajax({
 			  url: "http://blmani.com/wp-json/aniparti/like",
 			  type: "post",
@@ -686,9 +699,44 @@ var favouriteComic = function(value){
 			  dataType: 'json',
 			  success: function (response) {
 				   console.log(response+"............s");
-				   
+				   $("#add_fav_small_icon").addClass("fav-star-clicked");
+				   $("#add_fav_large_icon").addClass("fav-star-clicked");
+				   $(".loading-gif-centered").addClass("hideit");
 				   $('#toast-fav').addClass('show-toast');
                    setTimeout(function(){$('#toast-fav').removeClass('show-toast');},2000);
+				   //$('.footer-fixed.regular-footer').removeClass('move-out');
+                   //$('.footer-fixed.action-footer').removeClass('come-in');
+                  
+                   	
+				   
+			}
+	  });
+}
+
+
+
+var likeComic = function(value){
+	      var session = Blmani.Session.getInstance().get();
+		  if(!session){
+			  $('#toast-x').addClass('show-toast');
+              setTimeout(function(){$('#toast-x').removeClass('show-toast');},2000);
+			  return false;
+		  }
+	      var params={};
+		  params['uid'] = session.uid;
+		  params['pid'] = value;
+		  $(".loading-gif-centered").removeClass("hideit");
+          $.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/alike",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response+"............s");
+				   $("#add_like_item_called").addClass("h-liked");
+				   $(".loading-gif-centered").addClass("hideit");
+				   $('#toast-like').addClass('show-toast');
+                   setTimeout(function(){$('#toast-like').removeClass('show-toast');},2000);
 				   //$('.footer-fixed.regular-footer').removeClass('move-out');
                    //$('.footer-fixed.action-footer').removeClass('come-in');
                   
@@ -810,7 +858,6 @@ $(document).ready(function(){
 	  $("#edit_work").on("click",function(){
 		  console.log("editwork called");
 		  var value = $("input#my_work_id").val();
-		  deleteWork(value);
 		  if(value==0){
 		   $('#toast-1').addClass('show-toast');
            setTimeout(function(){$('#toast-1').removeClass('toast-1');},3000);		   

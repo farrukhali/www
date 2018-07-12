@@ -166,12 +166,10 @@
 }
 .menu-profile-sec {}
 .menu-profile-sec .rounded-image {
-    width: 75px;
+    max-width: 75px;
     margin: 0 auto;
     box-shadow: 0px 10px 15px rgba(31, 42, 62, 0.15);
     margin-bottom: 12px;
-    height: 75px;
-    object-fit: cover;
 }
 .menu-profile-sec .profile-title {
     font-size: 15px;
@@ -575,7 +573,7 @@ body .active-touch .hideit {
 .story-info .story-info-left .story-cover img {
     max-width: 90px;
     float: left;
-    height: 122px;
+    /* height: 122px; */
     object-fit: cover;
     border-radius: 11px;
     overflow: hidden;
@@ -584,7 +582,7 @@ body .active-touch .hideit {
 .story-info .story-info-right {
     float: left;
     padding-right: 40px;
-    width: calc(100% - 110px);
+    width: calc(100% - 104px);
 }
 .story-info .story-info-right .story-title {
     margin-bottom: 20px;
@@ -593,10 +591,14 @@ body .active-touch .hideit {
     font-family: Roboto;
     font-size: 17px;
     font-weight: 600;
-    margin-top: 22px;
+    margin-top: 0px;
     line-height: 19px;
     margin-bottom: 2px;
     color: #1F2B3F;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .story-info .story-info-right .story-title p {
     margin: 0;
@@ -621,7 +623,7 @@ body .active-touch .hideit {
 .story-info .story-info-right .right-fixed-action{
     position: absolute;
     right: 0;
-    top: 14px;
+    top: 0px;
 }
 .story-info .story-info-right .right-fixed-action > a{
     color: #1F2B3F;
@@ -936,6 +938,20 @@ ul.info-tags li a {}
     object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 10px 20px rgba(19, 59, 76, 0.2);
+}
+.content.search-results-section .search-results-list ul li .srl-image-wrapper .locked-icon{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: red;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 20px;
 }
 .content.search-results-section .search-results-list ul li.searched-item.item-selected .srl-image-wrapper img {
     box-shadow: none;
@@ -1708,7 +1724,7 @@ a.upload-file-block .thumb-fullwidth {
     background: #00000014;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 9999999;
 }
 .loading-gif-centered>div {
     display: table;

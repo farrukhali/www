@@ -169,21 +169,12 @@ $(document).ready(function () {
 		  }
 		 
 		 $(".latest-comics-all").append('<div class="clear"></div>');
-		 $(".story-info-right").html('<div class="story-title"><h2>'+response.post_title+'</h2><p>'+counter+' Episodes Completed</p></div><div class="author-details"><img data-src="'+authpic+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><div class="author-details-text-wrapper"><div class="author-title">'+response.author_name+'</div><div class="author-start-date">'+response.user_last_login_timestamp+'</div> </div></div><div class="story-views-sec">Views<br><span class="story-views-sec-tag">'+pviews+'</span></div><div class="right-fixed-action"><a href="javascript:;"><i class="zmdi zmdi-comment-more"></i></a><a href="javascript:;" id="add_like_item_called" class="story-info-heart-o" data-id="'+response.ID+'"><i class="la la-heart-o"></i><i class="la la-heart"></i></a></div>');
+		 $(".story-info-right").html('<div class="story-title"><h2>'+response.post_title+'</h2><p>'+counter+' Episodes Completed</p></div><div class="author-details"><img data-src="'+authpic+'" src="images/empty.png" class="preload-image responsive-image" alt="img"><div class="author-details-text-wrapper"><div class="author-title">'+response.author_name+'</div><div class="author-start-date">'+response.user_last_login_timestamp+'</div> </div></div><div class="story-views-sec">Views<br><span class="story-views-sec-tag">'+pviews+'</span></div><div class="right-fixed-action"><a href="javascript:;"><i class="zmdi zmdi-comment-more"></i></a><a href="javascript:;" id="add_fav_list_called" data-id="'+response.ID+'"><i class="la la-star-o"></i></a></div>');
 		 $(".comic-desc").html(desc);
 		 $(".story-cover").html('<img data-src="'+thumb+'" src="images/empty.png" class="preload-image responsive-image" alt="img">');
-		 
-		 $("#add_fav_small_icon").on("click",function(){
+		 $("#add_fav_list_called").on("click",function(){
 			 var pid = $(this).attr("data-id");
 			 favouriteComic(pid);
-		 });
-		 $("#add_fav_large_icon").on("click",function(){
-			 var pid = $(this).attr("data-id");
-			 favouriteComic(pid);
-		 });
-		 $("#add_like_item_called").on("click",function(){
-			 var pid = $(this).attr("data-id");
-			 likeComic(pid);
 		 })
 		 $("#preloader").addClass('hide-preloader');
 		 $(".preload-image").lazyload({threshold : 500});

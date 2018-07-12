@@ -117,18 +117,7 @@ $(document).ready(function () {
 	     var langid  = Blmani.Language.getInstance().get();
 		 var fields = Blmani.Fields.getInstance().get();
 	
-			params = {};
-			if(!langid){
-			 params['lang'] =1;
-			} else {
-			params['lang'] =langid;	
-			}
-			if(!session){
-			 params['uid'] ="nli";
-			} else {
-			params['uid'] =session.uid;	
-			}
-			
+				
 		 if(vdivision==1){
 		   var vgenre = $("select#select_genre").val();
 		   var vatype = $("select#select_atype").val();
@@ -164,7 +153,24 @@ $(document).ready(function () {
 		 tos['search_tags'] = vtag;	 
 		 }
 		 
+		 if(!langid){
+		  tos['lang'] =1;
+		 } else {
+		   tos['lang'] =langid;	
+		 }
+			if(!session){
+			 tos['uid'] ="nli";
+			} else {
+			tos['uid'] =session.uid;	
+			}
+		   var postid = window.localStorage.getItem("latest-posted",0);
+		   if(postid >0){
+			  tos['pid'] =postid; 
+			  window.localStorage.removeItem("latest-posted");
+		   }
+		   
 		 console.log(tos);
+		
 		 
 		 $.ajax({
       url: "http://blmani.com/wp-json/aniparti/get_com",

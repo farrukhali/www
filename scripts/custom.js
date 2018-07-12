@@ -230,7 +230,9 @@ $(document).ready(function(){
 		$('.back-button').on('click', function(){
 			$('#page-transitions').addClass('back-button-clicked');
 			$('#page-transitions').removeClass('back-button-not-clicked');
-			window.history.go(-1);
+			
+			console.log("previous"+window.history.previous);
+			//window.history.go(-1);
 			
 			
 		});

@@ -18,11 +18,14 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
-	<p id="toast-fav" class="toast toast-top toast-large bg-red-dark">Added to favourite list!</p>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Proccessing...</p></div></div>
+	<p id="toast-fav" class="toast toast-top toast-large bg-black">Added to favourite List</p>
+	<p id="toast-fav" class="toast toast-top toast-large bg-black">Item Liked!</p>
+	<p id="toast-x" class="toast toast-top toast-large bg-black">Login to add Favourite/Like Listing!</p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-static header-logo-app hide-header-card">
             <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-            <a href="#" class="header-icon header-icon-2 fav-star "><i class="la la-star-o" style="font-size: 26px"></i><i class="la la-star" style="font-size: 26px"></i></a>
+            <a href="#" class="header-icon header-icon-2 fav-star " id="add_fav_small_icon"><i class="la la-star-o" style="font-size: 26px"></i><i class="la la-star" style="font-size: 26px"></i></a>
             <a href="#" class="header-icon header-icon-3 " onclick="window.plugins.socialsharing.share(null, null, null, 'http://blmani.com')"><i class="la la-share-alt" style="font-size: 26px"></i></a>
         </div>
         <div class="page-content footer-clear">
@@ -30,7 +33,7 @@
             <div class="header-card card card-full card-image first_episode_banner" style="background-image: url(images/story-banner.png)">
                 <div class="header header-static header-logo-app">
                     <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-                    <a href="#" class="header-icon header-icon-2 fav-star"><i class="la la-star-o" style="font-size: 26px"></i><i class="la la-star" style="font-size: 26px"></i></a>
+                    <a href="#" class="header-icon header-icon-2 fav-star" id="add_fav_large_icon"><i class="la la-star-o" style="font-size: 26px"></i><i class="la la-star" style="font-size: 26px"></i></a>
                     <a href="#" class="header-icon header-icon-3" onclick="window.plugins.socialsharing.share(null, null, null, 'http://blmani.com')"><i class="la la-share-alt" style="font-size: 26px"></i></a>
                 </div>
                 <div class="episode-play-section">
