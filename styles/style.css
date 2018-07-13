@@ -166,10 +166,12 @@
 }
 .menu-profile-sec {}
 .menu-profile-sec .rounded-image {
-    max-width: 75px;
+    width: 75px;
     margin: 0 auto;
     box-shadow: 0px 10px 15px rgba(31, 42, 62, 0.15);
     margin-bottom: 12px;
+    height: 75px;
+    object-fit: cover;
 }
 .menu-profile-sec .profile-title {
     font-size: 15px;
@@ -410,6 +412,8 @@ body .active-touch .hideit {
 .my-profile-list-items li a>img {
     width: 35px;
     margin-top: -5px;
+    height: 35px;
+    object-fit: cover;
 }
 .footer-fixed {
     z-index: 9999;
