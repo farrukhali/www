@@ -489,8 +489,9 @@ var publishPost = function(url){
 			 //$("#view-post-btn").attr("href","story.html#"+response.pid);
 			 $("#view-post-btn").on("click",function(){
 			 //showComic(3,response.pid,"");
-			  window.location ="search.html";
 			  window.localStorage.setItem("latest-posted",response.pid);
+			  window.location.replace("search.html");
+			  
 			 
              });
 			},
@@ -588,7 +589,8 @@ var recommendedPost =function(url){
 			 $("#view-post-btn").on("click",function(){
 			  //showComic(2,response.pid,$("#urlflinkField").val());
 			  window.localStorage.setItem("latest-posted",response.pid);
-			  window.location ="search.html";
+			  window.location.replace("search.html");
+			  //window.location ="search.html";
 			 
              });
 			},
@@ -691,6 +693,7 @@ var favouriteComic = function(value){
 	      var params={};
 		  params['uid'] = session.uid;
 		  params['pid'] = value;
+		  console.log(params);
 		  $(".loading-gif-centered").removeClass("hideit");
           $.ajax({
 			  url: "http://blmani.com/wp-json/aniparti/like",
@@ -709,10 +712,50 @@ var favouriteComic = function(value){
                   
                    	
 				   
+			},
+			error: function(error){
+				console.log(error);
 			}
 	  });
 }
 
+
+
+var unFavouriteComic = function(value){
+	      var session = Blmani.Session.getInstance().get();
+		  if(!session){
+			  $('#toast-x').addClass('show-toast');
+              setTimeout(function(){$('#toast-x').removeClass('show-toast');},2000);
+			  return false;
+		  }
+	      var params={};
+		  params['uid'] = session.uid;
+		  params['pid'] = value;
+		  console.log(params);
+		  $(".loading-gif-centered").removeClass("hideit");
+          $.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/unlike",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response+"............s");
+				   $("#add_fav_small_icon").removeClass("fav-star-clicked");
+				   $("#add_fav_large_icon").removeClass("fav-star-clicked");
+				   $(".loading-gif-centered").addClass("hideit");
+				   $('#toast-unfav').addClass('show-toast');
+                   setTimeout(function(){$('#toast-unfav').removeClass('show-toast');},2000);
+				   //$('.footer-fixed.regular-footer').removeClass('move-out');
+                   //$('.footer-fixed.action-footer').removeClass('come-in');
+                  
+                   	
+				   
+			},
+			error: function(error){
+				console.log(error);
+			}
+	  });
+}
 
 
 var likeComic = function(value){
@@ -737,6 +780,38 @@ var likeComic = function(value){
 				   $(".loading-gif-centered").addClass("hideit");
 				   $('#toast-like').addClass('show-toast');
                    setTimeout(function(){$('#toast-like').removeClass('show-toast');},2000);
+				   //$('.footer-fixed.regular-footer').removeClass('move-out');
+                   //$('.footer-fixed.action-footer').removeClass('come-in');
+                  
+                   	
+				   
+			}
+	  });
+}
+
+
+var unLikeComic = function(value){
+	      var session = Blmani.Session.getInstance().get();
+		  if(!session){
+			  $('#toast-x').addClass('show-toast');
+              setTimeout(function(){$('#toast-x').removeClass('show-toast');},2000);
+			  return false;
+		  }
+	      var params={};
+		  params['uid'] = session.uid;
+		  params['pid'] = value;
+		  $(".loading-gif-centered").removeClass("hideit");
+          $.ajax({
+			  url: "http://blmani.com/wp-json/aniparti/aunlike",
+			  type: "post",
+			  data: params,
+			  dataType: 'json',
+			  success: function (response) {
+				   console.log(response+"............s");
+				   $("#add_like_item_called").removeClass("h-liked");
+				   $(".loading-gif-centered").addClass("hideit");
+				   $('#toast-unlike').addClass('show-toast');
+                   setTimeout(function(){$('#toast-unlike').removeClass('show-toast');},2000);
 				   //$('.footer-fixed.regular-footer').removeClass('move-out');
                    //$('.footer-fixed.action-footer').removeClass('come-in');
                   

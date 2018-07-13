@@ -21,18 +21,18 @@
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">Post a Story</div>
-            <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-			<a href="#" class="header-icon header-icon-4 back-button" style="line-height: 60px;"><i class="la la-times" style="font-size: 20px;color: #e44330;"></i></a>
+            <a href="#" class="header-icon header-icon-1 loggedin-back-btn"><i class="la la-arrow-left"></i></a>
+			<a href="#" class="header-icon header-icon-4 loggedin-back-btn" style="line-height: 60px;"><i class="la la-times" style="font-size: 20px;color: #e44330;"></i></a>
         
         </div>
 		
 		<div class="loading-gif hideit"><img src="images/loadersvg.svg"></div>
-		<p id="toast-1" class="toast toast-top toast-large bg-red-dark">You have not added any user!</p>
-		<p id="toast-2" class="toast toast-top toast-large bg-red-dark">Passcode lenght of 4, without space required!</p>
-		<p id="toast-3" class="toast toast-top toast-large bg-red-dark">Attach thumbnail!</p>
-		<p id="toast-title" class="toast toast-top toast-large bg-red-dark">Story Title Required!</p>
-		<p id="toast-url" class="toast toast-top toast-large bg-red-dark">Url required!</p>
-		<p id="toast-invalidurl" class="toast toast-top toast-large bg-red-dark">Invalid Url!</p>
+		<p id="toast-1" class="toast toast-top toast-large bg-black">You have not added any user!</p>
+		<p id="toast-2" class="toast toast-top toast-large bg-black">Passcode lenght of 4, without space required!</p>
+		<p id="toast-3" class="toast toast-top toast-large bg-black">Attach thumbnail!</p>
+		<p id="toast-title" class="toast toast-top toast-large bg-black">Story Title Required!</p>
+		<p id="toast-url" class="toast toast-top toast-large bg-black">Url required!</p>
+		<p id="toast-invalidurl" class="toast toast-top toast-large bg-black">Invalid Url!</p>
 		<form action="" method="post" class="publishForm" id="publishForm">
         <div class="page-content header-clear footer-clear">
             <h2 class="red-block-heading">Set Publishing Information</h2>
@@ -272,9 +272,8 @@ $(window).on('load',function(){
 
 
 document.addEventListener("backbutton", function () { 
-console.log("ff called");
-window.location = "mylib.html";
-
+        console.log("mobile back btn called called");
+        window.location.replace("mylib.html");
 }, false);
 
 

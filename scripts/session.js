@@ -232,11 +232,13 @@ console.log(JSON.stringify(response));
 			}
 			//if(session.user_pic.indexOf("avatar") == -1){
 			//if(session.user_pic !== ""){
+			
 			$('.profile-image').attr("data-src",session.user_pic);
 			$("#user_profile_pic").attr("data-src",session.user_pic);
-			$('.profile-image').attr("src",session.user_pic);
-			$("#user_profile_pic").attr("src",session.user_pic);
+			//$('.profile-image').attr("src",session.user_pic);
+			//$("#user_profile_pic").attr("src",session.user_pic);
 			$(".preload-image").lazyload({threshold : 500});
+			
 			//}
 			$("li#li_nick_name").html('Nick name <strong >('+session.user_nicename+')</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>');
 			

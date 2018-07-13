@@ -1769,6 +1769,47 @@ ul.search-result-tags li {
 .item-selected .item-image-overlay {
     display: block !important;
 }
+.next-appisode-btn{
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    color: #fff;
+    z-index: 999;
+    background: #e44330;
+    padding: 5px 23px;
+    border-radius: 40px;
+    transition: all 0.3s;
+    transform: translateX(180px);
+}
+.next-appisode-btn.active{
+    transform: translateX(0);
+    -webkit-animation: btnWiggle 2.5s infinite;
+    -moz-animation: btnWiggle 2.5s infinite;
+    -o-animation: btnWiggle 2.5s infinite;
+    animation: btnWiggle 2.5s infinite;
+}
+/* animation */
+@-webkit-keyframes btnWiggle {
+    0% {-webkit-transform: rotate(0deg);}
+    2% {-webkit-transform: rotate(-3deg);}
+    5.5% {-webkit-transform: rotate(3deg);}
+    10% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(0deg);}
+}
+@-o-keyframes btnWiggle {
+    0% {-webkit-transform: rotate(0deg);}
+    2% {-webkit-transform: rotate(-3deg);}
+    5.5% {-webkit-transform: rotate(3deg);}
+    10% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(0deg);}
+}
+@keyframes btnWiggle {
+    0% {-webkit-transform: rotate(0deg);}
+    2% {-webkit-transform: rotate(-3deg);}
+    5.5% {-webkit-transform: rotate(3deg);}
+    10% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(0deg);}
+}
 @media screen and (max-width: 650px) {
     .latest-comics-all .comic-book-item img,
     .gallery-filter-results .comic-book-item img {

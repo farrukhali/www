@@ -782,7 +782,7 @@ var getComicsForHome = function(){
 	} else {
 	params['uid'] =session.uid;	
 	}
-	console.log(params);
+	console.log("home params"+params);
 	$.ajax({
       url: "http://blmani.com/wp-json/aniparti/forhome",
       type: "post",

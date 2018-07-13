@@ -6,25 +6,29 @@ $(window).on('load',function(){
 
 $(document).ready(function () {
 	setFields();
+	$(".reset-search").on("click",function(){
+	 console.log("reset function called");
+	 resetSearchFields();
+	});
 	/*$('.content.search-results-section .search-results-list> ul> li').click(function(){
     			$(this).toggleClass('show-overlay-btns')
     })*/
 	$("a#2").on("click",function(){
 		$(".first-creation").addClass("hideit");
 		$(".second-reproduction").removeClass("hideit");
-		delSelection(1);
-		delSelection(2);
-		delSelection(3);
+		//delSelection(1);
+		//delSelection(2);
+		//delSelection(3);
 	});
 	$("a#1").on("click",function(){
 		$(".second-reproduction").addClass("hideit");
 		$(".first-creation").removeClass("hideit");
-		delSelection(4);
-		delSelection(5);
-		delSelection(6);
+		//delSelection(4);
+		//delSelection(5);
+		//delSelection(6);
 	});
 	
-	if($("div#menu-1").length){
+	/*if($("div#menu-1").length){
 		var session = Blmani.Session.getInstance().get();
 		if(!session){
 			$('.user-logined').addClass("hideit");
@@ -32,7 +36,7 @@ $(document).ready(function () {
 		} else {
 			$('.user-not-logined').addClass("hideit");
 		}
-	}
+	}*/
 	/* $.ajax({
       url: "http://blmani.com/wp-json/aniparti/get_field",
       type: "post",
@@ -81,37 +85,45 @@ $(document).ready(function () {
 	  
 	  $("select#select_genre").on('change', function(){
 		  $("#sgenre").remove();
-		  $(".info-tags").append('<li id="sgenre"><span onClick="delSelection(1)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".fc-info-tags").append('<li id="sgenre"><span onClick="delSelection(1)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  $("select#select_atype").on('change', function(){
 		  $("#satype").remove();
-		  $(".info-tags").append('<li id="satype"><span onClick="delSelection(2)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".fc-info-tags").append('<li id="satype"><span onClick="delSelection(2)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  $("select#select_dtype").on('change', function(){
 		  $("#sdtype").remove();
-		  $(".info-tags").append('<li id="sdtype"><span onClick="delSelection(3)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".fc-info-tags").append('<li id="sdtype"><span onClick="delSelection(3)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  
 	  $("select#select_content").on('change', function(){
 		  $("#scontent").remove();
-		  $(".info-tags").append('<li id="scontent"><span onClick="delSelection(4)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".sr-info-tags").append('<li id="scontent"><span onClick="delSelection(4)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  $("select#select_title").on('change', function(){
 		  $("#stitle").remove();
-		  $(".info-tags").append('<li id="stitle"><span onClick="delSelection(5)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".sr-info-tags").append('<li id="stitle"><span onClick="delSelection(5)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  $("select#select_character").on('change', function(){
 		  $("#scharacter").remove();
-		  $(".info-tags").append('<li id="scharacter"><span onClick="delSelection(6)">'+$(this).children(':selected').text()+'</span></li>');
+		  $(".sr-info-tags").append('<li id="scharacter"><span onClick="delSelection(6)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
 	  
 	  $(".search-comics").on('click', function(){
-		 $(".searching-results").html('');
-		 $(".nrf").addClass('hideit'); 
-		 $(".srl-section-heading").addClass('hideit');
+        var vdivision = $(".active-tab-pill-button").attr("id");		
+		if(vdivision==1){
+		 $(".searching-results-fc").html('');
+		 $(".fcnrf").addClass('hideit'); 
+		 $(".fc-heading").addClass('hideit');
+		} else {
+		 $(".searching-results-sr").html('');
+		 $(".srnrf").addClass('hideit'); 
+		 $(".sr-heading").addClass('hideit');
+		}
+		 
 		 $(this).addClass('searching-anc');
 		 $(this).html('Searching...<img src="images/loadersvg.svg">');
-		 var vdivision = $(".active-tab-pill-button").attr("id");
+		 
 		 
 		 var session = Blmani.Session.getInstance().get();
 	     var langid  = Blmani.Language.getInstance().get();
@@ -119,6 +131,7 @@ $(document).ready(function () {
 	
 				
 		 if(vdivision==1){
+		   var vtag = $(".first-creation-vtag").val();
 		   var vgenre = $("select#select_genre").val();
 		   var vatype = $("select#select_atype").val();
 		   var vdtype = $("select#select_dtype").val();
@@ -126,8 +139,9 @@ $(document).ready(function () {
 		   var vcontent = $("select#select_content").val();
 		   var vtitle = $("select#select_title").val();
 		   var vcharacter = $("select#select_character").val();	 
+		   var vtag = $(".second-reproduction-vtag").val();
 		 }
-		 var vtag = $(".search-etc-tag-input").val();
+		 
 		 var vdivision = $(".active-tab-pill-button").attr("id");
 		 var tos = {};
 		 tos['division'] = vdivision;
@@ -179,12 +193,20 @@ $(document).ready(function () {
       dataType: 'json',
 		 success: function (response) {
 			 console.log(response);
-			 
 			 if(response=="nrf"){
-				$(".nrf").removeClass('hideit');
+				if(vdivision==1){
+				$(".fcnrf").removeClass('hideit');
+				} else {
+				$(".srnrf").removeClass('hideit');	
+				}
 			 } else {
-				$(".srl-section-heading").removeClass('hideit');
-				$(".nrf").addClass('hideit'); 
+				if(vdivision==1){
+				$(".fc-heading").removeClass('hideit');
+				$(".fcnrf").addClass('hideit'); 
+				} else{
+				$(".sr-heading").removeClass('hideit');
+				$(".srnrf").addClass('hideit');	
+				}
 				$.each(response, function (key, value) {
 				var thumb = value.thumburl;
 				 if(!thumb){thumb="images/placeholder.jpg";}
@@ -242,6 +264,10 @@ $(document).ready(function () {
 					   types['d_type'] = value.custom.d_type[0];
 					}
 		  var taghtml ="";
+		  var lockhtml ="";
+		  if(privacy==4){
+			  lockhtml ='<i class="la la-lock locked-icon"></i>';
+		  }
          	  
 		  //if(types.length>0){
 		  var taghtml ='<ul class="search-result-tags">';
@@ -263,9 +289,14 @@ $(document).ready(function () {
 				 pcontent = value.post_content;
 			 }
 			 
-		 // }
-				$(".searching-results").append('<li class="searched-item" data-url="'+pcontent+'" data-type="'+ptype+'" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt=""></div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+likes+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
-				
+			 
+		 // }   
+		        if(vdivision==1){
+				$(".searching-results-fc").append('<li class="searched-item" data-url="'+pcontent+'" data-type="'+ptype+'" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt="">'+lockhtml+'</div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+likes+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
+				} else {
+				$(".searching-results-sr").append('<li class="searched-item" data-url="'+pcontent+'" data-type="'+ptype+'" data-id="'+value.ID+'" data-privacy="'+privacy+'"><a href="javascript:;" style="display:table" ><div class="srl-image-wrapper"><img src="'+thumb+'" alt="">'+lockhtml+'</div><div class="srl-right-wrapper"><div class="srl-right-author-details"><img src="'+value.author_pic+'" alt="" class="srl-author-thumb"><span>'+value.author_name+'</span></div><h4 class="srl-item-title">'+value.post_title+'</h4><p>'+desc+'</p>'+taghtml+'<div class="srl-states-fixed"><div class="srl-stats-comments"><span class="zmdi zmdi-comment-more"></span><span class="count">0</span></div><div class="srl-stats-likes"><span class="la la-heart"></span><span class="count">'+likes+'</span></div></div></div></a><div class="item-image-overlay"><i class="la la-check-circle"></i></div></li>');	
+					
+				}
 				});
 				
 		 
@@ -330,6 +361,25 @@ $(document).ready(function () {
 	  
 	
 });
+
+var resetSearchFields = function(){
+	delSelection(1);
+	delSelection(2);
+	delSelection(3);
+	delSelection(4);
+	delSelection(5);
+	delSelection(6);
+	$(".first-creation-vtag").val("");
+    $(".second-reproduction-vtag").val("");
+	$(".searching-results-fc").html('');
+	$(".fcnrf").addClass('hideit'); 
+	$(".fc-heading").addClass('hideit');
+	$(".searching-results-sr").html('');
+	$(".srnrf").addClass('hideit'); 
+	$(".sr-heading").addClass('hideit');
+	
+		 
+}
 
 function delSelection(sel){
 	       if(sel ==1){

@@ -18,7 +18,7 @@
         <h1 class="center-text color-black ultrabold uppercase bottom-0 fa-2x"><img src="images/logo-dark-red.png" style="margin:0 auto" alt=""></h1>
         <div id="preload-spinner"></div>
     </div>
-	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p></p></div></div>
+	<div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Processing request</p></div></div>
 	<p id="toast-x" class="toast toast-top toast-large bg-red-dark">You are not Added into viewers list!</p>
 	<p id="toast-fav" class="toast toast-top toast-large bg-black">Added to favourite List</p>
 	<p id="toast-invalid" class="toast toast-top toast-large bg-red-dark">Invalid Passcode!</p>
@@ -27,7 +27,7 @@
         <div class="header header-light header-logo-center">
             <div class="header-title">Blmani</div>
             <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
-            <a href="#" class="header-icon header-icon-4 color-red regularbold">Reset</a>
+            <a href="#" class="header-icon header-icon-4 color-red regularbold reset-search" style="width:60px">RESET</a>
         </div>
         <!-- 
         <div id="menu-1" class="menu-sidebar menu-light menu-sidebar-right menu-sidebar-over">
@@ -97,7 +97,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="search-filters second-reproduction hideit">
+                   <!-- <div class="search-filters second-reproduction hideit">
                         <ul>
                             <li>
                                 <select name="select_content" id="select_content">
@@ -118,17 +118,17 @@
                                 <span class="zmdi zmdi-caret-down select-caret"></span>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     
                     <div class="clear"></div>
                     <div class="search-etc-tag">
                         <form action="">
-                            <input type="text" class="search-etc-tag-input" placeholder="Search tag">
+                            <input type="text" class="search-etc-tag-input first-creation-vtag" placeholder="Search tag">
                         </form>
                     </div>
                     <div class="decoration"></div>
                     <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
-                    <ul class="info-tags collapseable">
+                    <ul class="info-tags collapseable fc-info-tags">
                     </ul>
                     <div class="clear"></div>
                     <div style="text-align:center">
@@ -137,15 +137,15 @@
                 </div>
                 <div class="content search-results-section">
                     
-                    <h3 class="srl-section-heading hideit">Search Results</h3>
-                    <div class="nrf hideit"><div class="empty-results">
+                    <h3 class="srl-section-heading hideit fc-heading">Search Results</h3>
+                    <div class="fcnrf hideit"><div class="empty-results">
                             <img src="images/empty-search.svg" alt="">
                             <h3>We are Sorry!</h3>
                             <p>We are unable to find any matching results.</p>
                         </div></div>
                     
                     <div class="search-results-list">
-                        <ul class="searching-results">
+                        <ul class="searching-results-fc">
                             
                         </ul>
                     </div>
@@ -179,12 +179,12 @@
                     <div class="clear"></div>
                     <div class="search-etc-tag">
                         <form action="">
-                            <input type="text" class="search-etc-tag-input" placeholder="Search tag">
+                            <input type="text" class="search-etc-tag-input second-reproduction-vtag" placeholder="Search tag">
                         </form>
                     </div>
                     <div class="decoration"></div>
                     <h3 class="bold font-12 bottom-10 color-black">Selected</h3>
-                    <ul class="info-tags collapseable">
+                    <ul class="info-tags collapseable sr-info-tags">
                     </ul>
                     <div class="clear"></div>
                     <div style="text-align:center">
@@ -193,15 +193,15 @@
                 </div>
                 <div class="content search-results-section">
                     
-                    <h3 class="srl-section-heading hideit">Search Results</h3>
-                    <div class="nrf hideit"><div class="empty-results">
+                    <h3 class="srl-section-heading hideit sr-heading">Search Results</h3>
+                    <div class="srnrf hideit"><div class="empty-results">
                             <img src="images/empty-search.svg" alt="">
                             <h3>We are Sorry!</h3>
                             <p>We are unable to find any matching results.</p>
                         </div></div>
                     
                     <div class="search-results-list">
-                        <ul class="searching-results">
+                        <ul class="searching-results-sr">
                             
                         </ul>
                     </div>

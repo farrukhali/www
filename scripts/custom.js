@@ -231,11 +231,42 @@ $(document).ready(function(){
 			$('#page-transitions').addClass('back-button-clicked');
 			$('#page-transitions').removeClass('back-button-not-clicked');
 			
-			console.log("previous"+window.history.previous);
+			//console.log("previous"+window.history.previous);
+			window.history.go(-1);
+			
+			
+		});
+		
+			
+		$('.back-button-mylib').on('click', function(){
+			$('#page-transitions').addClass('back-button-clicked');
+			$('#page-transitions').removeClass('back-button-not-clicked');
+			window.location.replace("comic.html");
+			//window.history.go(-2);
+			
+			
+		});
+		
+		// login signup back btn logoff-back-btn
+		$('.logoff-back-btn').on('click', function(){
+			$('#page-transitions').addClass('back-button-clicked');
+			$('#page-transitions').removeClass('back-button-not-clicked');
+			window.location.replace("comic.html");
 			//window.history.go(-1);
 			
 			
 		});
+		
+		// recomended publish back btn loggedin-back-btn
+		
+		$('.loggedin-back-btn').on('click', function(){
+			$('#page-transitions').addClass('back-button-clicked');
+			$('#page-transitions').removeClass('back-button-not-clicked');
+			window.location.replace("mylib.html");
+			//window.history.go(-1);
+			
+			
+		}); 
 		
         //Back to top Badge
         $('.back-to-top-badge, .back-to-top').on( "click", function(e){
@@ -434,7 +465,7 @@ $(document).ready(function(){
 						   Blmani.Session.getInstance().set(response);
 						   $(".loading-gif").addClass("hideit");
 						   $('.toast').addClass('show-toast');
-						   setTimeout(function(){window.location = "comic.html";},1500);
+						   setTimeout(function(){window.location.replace("mylib.html");},1500);
 			               
 						},
 					    error: function (jqXHR, textStatus, errorThrown) {
@@ -733,7 +764,7 @@ $(document).ready(function(){
 								signupFormSubmitted = "true";
 								$(".loading-gif").addClass("hideit");
 						        $('.toast').addClass('show-toast');
-						        setTimeout(function(){window.location = "comic.html";},1500);
+						        setTimeout(function(){window.location.replace("mylib.html");},1500);
 								//e("#" + t).hide();
                                 //e("#formSuccessMessageWrap").fadeIn(500);
 							  							   

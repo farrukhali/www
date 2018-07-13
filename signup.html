@@ -22,7 +22,7 @@
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-static header-logo-app hide-header-card">
             <!--<a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>-->
-            <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
+            <a href="#" class="header-icon header-icon-1  logoff-back-btn"><i class="la la-arrow-left"></i></a>
         </div>
         <div class="page-content">
             <div class="header-card card card-white card-full">
@@ -88,5 +88,10 @@ $(window).on('load',function(){
 	$('#page-build').remove();
 	setTimeout(function(){$("#preloader").addClass('hide-preloader');},100);// will fade out the white DIV that covers the website.
 });
+document.addEventListener("backbutton", function () { 
+        console.log("mobile back btn called called");
+        window.location.replace("comic.html");
+
+}, false);
 </script>
 </body>

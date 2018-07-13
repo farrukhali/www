@@ -26,7 +26,7 @@
     <div id="page-transitions" class="page-build highlight-red">
         <div class="header header-light header-logo-center">
             <div class="header-title">My Library</div>
-            <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
+            <a href="#" class="header-icon header-icon-1 back-button-mylib"><i class="la la-arrow-left"></i></a>
             <a data-menu="menu-1" href="#" class="header-icon header-icon-4"><i class="la la-bars2"></i></a>
         </div>
         <div id="menu-1" class="menu-sidebar menu-light menu-sidebar-right menu-sidebar-over">
@@ -145,6 +145,13 @@
 	}
 	
 });
+
+document.addEventListener("backbutton", function () { 
+console.log("mobile back btn called called");
+window.location.replace("comic.html");
+//window.history.go(-2);
+
+}, false);
         
     </script>
 </body>
