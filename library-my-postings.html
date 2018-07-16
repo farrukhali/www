@@ -34,9 +34,9 @@
         <div id="preload-spinner"></div>
     </div>
     <div class="loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Processing Request...</p></div></div>
-	<p id="toast-1" class="toast toast-top toast-large bg-red-dark">Please Select Item!</p>
-	<p id="toast-2" class="toast toast-top toast-large bg-red-dark">Item unpublished!</p>
-	<p id="toast-invalid" class="toast toast-top toast-large bg-red-dark">Invalid Passcode!</p>
+	<p id="toast-1" class="toast toast-bottom toast-large bg-gray-dark">Please Select Item!</p>
+	<p id="toast-2" class="toast toast-bottom toast-large bg-gray-dark">Item unpublished!</p>
+	<p id="toast-invalid" class="toast toast-bottom toast-large bg-gray-dark">Invalid Passcode!</p>
     <div id="page-transitions" class="page-build highlight-red">
         <div class="xphone"></div>
         <div class="header header-light header-logo-center">
@@ -87,7 +87,7 @@
                 <li><a href="library-my-favorities.html">My Favorites</a></li>
             </ul>
             <!-- MOST LIKED start -->
-            <div class="content">
+            <div class="content search-results-section">
                 <div class="tab-pill-titles" data-active-tab-pill-background="bg-highlight">
                     <a href="#" id="1" class="active-tab-pill-button bg-highlight" data-tab-pill="tab-pill-1" style="width: 50%">1st Creation</a>
                     <a href="#" id="2" data-tab-pill="tab-pill-2">2nd Reproduction</a>
@@ -109,6 +109,48 @@
                 <div class="latest-comics-all mycomics-fcreation-private">
                    
                 </div>
+                
+                <!-- This is new layout START -->
+                <div class="search-results-list">
+                    <ul class="searching-results my-library my-works-listing">        
+                        <li>
+                            <a href="javascript:;" data-id="1ci7h2ac05b4770f0a8df0" class="my-work-item" style="display:table">
+                                <div class="srl-image-wrapper">
+                                    <img src="images/placeholder.jpg" alt=""></div>
+                                    <div class="srl-right-wrapper"><div class="srl-right-text-wrapper">
+                                        <h4 class="srl-item-title">﻿Softcodic</h4>
+                                        <p class="creation-date">Created Date: <span>12-07-2018</span></p>
+                                        <p class="creation-date">Modified Date: <span>12-07-2018</span></p>
+                                        <div class="item-status-tag saved-tag stats-icons"><i class="la la-eye"></i> 120</div>
+                                        <div class="item-status-tag saved-tag stats-icons"><i class="la la-heart" style="color:#E44130"></i> 120</div>
+                                    </div>
+                                    <div class="srl-right-text-overlay">
+                                        <i class="la la-check-circle"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-id="1ci7h2ac05b4770f0a8df0" class="my-work-item" style="display:table">
+                                <div class="srl-image-wrapper">
+                                    <img src="images/placeholder.jpg" alt=""></div>
+                                    <div class="srl-right-wrapper"><div class="srl-right-text-wrapper">
+                                        <h4 class="srl-item-title">﻿Softcodic</h4>
+                                        <p class="creation-date">Created Date: <span>12-07-2018</span></p>
+                                        <p class="creation-date">Modified Date: <span>12-07-2018</span></p>
+                                        <div class="item-status-tag saved-tag stats-icons"><i class="la la-eye"></i> 120</div>
+                                        <div class="item-status-tag saved-tag stats-icons"><i class="la la-heart" style="color:#E44130"></i> 120</div>
+                                    </div>
+                                    <div class="srl-right-text-overlay">
+                                        <i class="la la-check-circle"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- This is new layout END -->
+
                 <h2 class="bold font-15 color-black uppercase mycomics-fcreation-locked-heading hideit">Locked</h2>
                 <div class="latest-comics-all mycomics-fcreation-locked">
 				
