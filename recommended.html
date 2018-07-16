@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="viewport-fit=cover, initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height" />
     <title>Comics - Blmani </title>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
@@ -11,6 +12,21 @@
     <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.css">
     <link rel="stylesheet" type="text/css" href="styles/framework.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <style>
+        .xphone {
+            height: 0;
+            height: env(safe-area-inset-top);
+            background: #fff;
+            display: block;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+        .header-light{
+            top: env(safe-area-inset-top); /* iOS 11.2 */
+        }
+    </style>
 </head>
 
 <body>
@@ -19,6 +35,7 @@
         <div id="preload-spinner"></div>
     </div>
     <div id="page-transitions" class="page-build highlight-red">
+        <div class="xphone"></div>
         <div class="header header-light header-logo-center">
             <div class="header-title">Post a Story</div>
             <a href="#" class="header-icon header-icon-1 loggedin-back-btn"><i class="la la-arrow-left"></i></a>
@@ -27,6 +44,7 @@
         </div>
 		
 		<div class="loading-gif hideit"><img src="images/loadersvg.svg"></div>
+		<div class="loading-gif loading-gif-centered hideit"><div><img src="images/loadersvg.svg"><p>Publishing Post...</p></div></div>
 		<p id="toast-1" class="toast toast-top toast-large bg-black">You have not added any user!</p>
 		<p id="toast-2" class="toast toast-top toast-large bg-black">Passcode lenght of 4, without space required!</p>
 		<p id="toast-3" class="toast toast-top toast-large bg-black">Attach thumbnail!</p>
@@ -34,6 +52,7 @@
 		<p id="toast-url" class="toast toast-top toast-large bg-black">Url required!</p>
 		<p id="toast-invalidurl" class="toast toast-top toast-large bg-black">Invalid Url!</p>
 		<p id="toast-fc" class="toast toast-top toast-large bg-black">Select Genre, A-Type & D-Type!</p>
+		<p id="toast-sr" class="toast toast-top toast-large bg-black">Select Content, Title & Character!</p>
 		
 		<form action="" method="post" class="recommendedForm" id="recommendedForm">
         <div class="page-content header-clear footer-clear">
@@ -58,7 +77,7 @@
                 <h6 class="story-title-label">Story Title</h6>
                 
                     <div class="input-simple-1 blmani-design input-green bottom-20">
-                        <input type="text" placeholder="Enter story title" name="title" value="" class="titleField requiredField" id="titleField"  style="text-align: center;font-size: 20px;">
+                        <input type="text" placeholder="Enter story title" name="title" data-type="input" value="" class="titleField requiredField" id="titleField"  style="text-align: center;font-size: 20px;">
                     </div>
                
                 <a href="#" class="upload-file-block">
@@ -77,7 +96,7 @@
 					</div>
                     <div class="input-simple-1 blmani-design input-green bottom-20">
                         <em>URL for Link</em>
-                        <input type="text" placeholder="Copy & paste URL "  name="urlflink"  class="urlflinkField requiredField requireUrlField" id="urlflinkField">
+                        <input type="text" placeholder="Copy & paste URL " data-type="input"  name="urlflink"  class="urlflinkField requiredField requireUrlField" id="urlflinkField">
                     </div>
                     <div class="input-simple-1 blmani-design input-green bottom-20">
                         <em>Description</em>
@@ -95,19 +114,19 @@
                             <div class="search-filters">
                                 <ul>
                                     <li>
-                                        <select name="select_genre" id="select_genre" class="requiredDDFCField">
+                                        <select name="select_genre" id="select_genre" data-type="fcselect" class="requiredField">
                                             <option value="" selected="" disabled="" >Genre</option>
                                         </select>
                                         <span class="zmdi zmdi-caret-down select-caret"></span>
                                     </li>
                                     <li>
-                                        <select name="select_atype" id="select_atype" class="requiredDDFCField">
+                                        <select name="select_atype" id="select_atype" data-type="fcselect" class="requiredField">
                                             <option value="" selected="" disabled="">A-Type</option>
                                         </select>
                                         <span class="zmdi zmdi-caret-down select-caret"></span>
                                     </li>
                                     <li>
-                                        <select name="select_dtype" id="select_dtype" class="requiredDDFCField">
+                                        <select name="select_dtype" id="select_dtype" data-type="fcselect" class="requiredField">
                                             <option value="" selected="" disabled="">D-Type</option>
                                         </select>
                                         <span class="zmdi zmdi-caret-down select-caret"></span>
@@ -128,20 +147,20 @@
                             <div class="search-filters">
                                 <ul>
 									<li>
-										<select name="select_content" id="select_content" >
+										<select name="select_content" id="select_content" data-type="srselect" class="requiredField">
 											<option value="" selected="" disabled="">Content</option>
 										</select>
 										<span class="zmdi zmdi-caret-down select-caret"></span>
 									</li>
 									<li>
-										<select name="select_title" id="select_title">
-											<option value="" selected="" disabled="">Title</option>
+										<select name="select_title" id="select_title" data-type="srselect" class="requiredField">
+											<option value="" selected="" disabled="" data-type="srselect">Title</option>
 										</select>
 										<span class="zmdi zmdi-caret-down select-caret"></span>
 									</li>
 									<li>
-										<select name="select_character" id="select_character">
-											<option value="" selected="" disabled="">Character</option>
+										<select name="select_character" id="select_character" data-type="srselect" class="requiredField">
+											<option value="" selected="" disabled="" data-type="srselect">Character</option>
 										</select>
 										<span class="zmdi zmdi-caret-down select-caret"></span>
 									</li>
@@ -239,8 +258,8 @@
             <div class="decoration"></div>
 			
             <div class="social-share-btns">
-              <a href="#" class="button button-round facebook-bg" onclick="window.plugins.socialsharing.shareViaFacebook(null, null, null, 'http://blmani.com')"><i class="la la-facebook"></i> Share</a>
-              <a href="#" class="button button-round twitter-bg" onclick="window.plugins.socialsharing.shareViaTwitter(null, null, null, 'http://blmani.com')"><i class="la la-twitter"></i> Share</a>
+              <a href="#" class="button button-round facebook-bg" id="facebook_share_btn" ><i class="la la-facebook"></i> Share</a>
+              <a href="#" class="button button-round twitter-bg"  id ="twitter_share_btn" ><i class="la la-twitter"></i> Share</a>
             </div>
 			
             <div class="copy-url-sec">
@@ -255,7 +274,7 @@
             </div>
             <p style="font-size: 9px;">Check Publishing Results</p>
                 <div class="social-share-btns">
-                    <a href="search.html" class="button button-round button-black">Close</a>
+                    <a href="#" id="close-post-btn" class="button button-round button-black">Close</a>
                     <a href="#" id="view-post-btn" class="button button-round button-red">View Post</a>
                 </div>
         </div> 

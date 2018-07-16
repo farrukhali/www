@@ -4,12 +4,28 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="viewport-fit=cover, initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height" />
     <title>Comics - Blmani </title>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
     <link rel="stylesheet" type="text/css" href="styles/framework.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <style>
+        .xphone {
+            height: 0;
+            height: env(safe-area-inset-top);
+            background: #fff;
+            display: block;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+        .header-light{
+            top: env(safe-area-inset-top); /* iOS 11.2 */
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +34,7 @@
         <div id="preload-spinner"></div>
     </div>
     <div id="page-transitions" class="page-build highlight-red">
+        <div class="xphone"></div>
         <div class="header header-light header-logo-center">
             <div class="header-title" style="font-size:20px">Popular Comics</div>
             <a href="#" class="header-icon header-icon-1 back-button"><i class="la la-arrow-left"></i></a>
@@ -34,6 +51,7 @@
                     <p>Sign in to start posting your stories</p>
                 </div>
                 <div class="menu-items menu-icons user-not-logined">
+				    <a href="comic.html"><i class="la la-home"></i>Home</a>
                     <a href="login.html"><i class="la la-user"></i>Sign in</a>
                     <a href="signup.html"><i class="la la-user-plus"></i>Sign up</a>
                     <a href="languages.html"><i class="la la-language"></i>Language<span class="lang-flags"><img src="images/flag-en.png" alt="En-US"></span></a>
@@ -45,6 +63,7 @@
                     <!--<p class="user-city center-text">Pyongyang City</p>-->
                 </div>
                 <div class="menu-items menu-icons user-logined">
+				    <a href="comic.html"><i class="la la-home"></i>Home</a>
                     <a href="inbox.html"><i class="far fa-bell"></i>Inbox<!--<span>2 new</span>--></a>
                     <a href="mylib.html"><i class="far fa-folder-open"></i>My Library</a>
                     <a href="profile.html"><i class="far fa-user"></i>Profile</a>

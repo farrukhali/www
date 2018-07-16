@@ -241,7 +241,9 @@ $(document).ready(function(){
 		$('.back-button-mylib').on('click', function(){
 			$('#page-transitions').addClass('back-button-clicked');
 			$('#page-transitions').removeClass('back-button-not-clicked');
-			window.location.replace("comic.html");
+			//window.location.replace("comic.html");
+			 console.log("my lib back btn called");
+			 window.location = "comic.html"
 			//window.history.go(-2);
 			
 			
@@ -465,7 +467,7 @@ $(document).ready(function(){
 						   Blmani.Session.getInstance().set(response);
 						   $(".loading-gif").addClass("hideit");
 						   $('.toast').addClass('show-toast');
-						   setTimeout(function(){window.location.replace("mylib.html");},1500);
+						   setTimeout(function(){window.location.replace("comic.html");},1500);
 			               
 						},
 					    error: function (jqXHR, textStatus, errorThrown) {
@@ -764,7 +766,7 @@ $(document).ready(function(){
 								signupFormSubmitted = "true";
 								$(".loading-gif").addClass("hideit");
 						        $('.toast').addClass('show-toast');
-						        setTimeout(function(){window.location.replace("mylib.html");},1500);
+						        setTimeout(function(){window.location.replace("comic.html");},1500);
 								//e("#" + t).hide();
                                 //e("#formSuccessMessageWrap").fadeIn(500);
 							  							   

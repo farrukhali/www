@@ -356,12 +356,12 @@ var  uploadThumb = function(fileid) {
 	var imageURI = $('#'+fileid).attr("src");
 	console.log("imageURI"+imageURI);
     var options = new FileUploadOptions();
-    options.fileKey = "file";
+    options.fileKey = "image";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
     options.mimeType = "image/png";
     options.chunkedMode = false;
 	
-	 console.log("abc15");
+	 console.log("abc14");
 	var param = {}
 	var tos = {};
 	var ekeys = [];
@@ -389,147 +389,6 @@ var  uploadThumb = function(fileid) {
     
 	
 	$("ul.additional-info-tags").children().each(function(i){
-		ekeys[i] = encodeURI($(this).text());
-	});
-	var pbound = $(".active-bounds").attr("id");
-	if(pbound==4){
-	   pboundkey = $(".privacy-passcode").val();
-	   param['privacy'] = pbound;
-	   param['privacykey'] = pboundkey;
-	} else if(pbound==2){
-	   $("ul.added-friends").children().each(function(i){
-		pusers[i] = $(this).attr("id");
-	   });
-	   param['privacy'] = pbound;
-	   param['pickusers'] = pusers;
-	} else {
-	  param['privacy'] = pbound;
-	}
-	
-    
-	//param['title'] = $("#titleField").val();
-	//param['desc'] = $("textarea#descField").val();
-	//param['rurl'] = $("#urlflinkField").val();
-	param['si'] = tos;
-	//param['extrakeys'] = ekeys;
-	var session = Blmani.Session.getInstance().get();
-    param['id'] = session.uid;
-    console.log("paramsyaali"+param);
-	params = {} ;
-    params["params"] = btoa(JSON.stringify(param));
-    params["title"] = $("#titleField").val();
-    params["desc"] = $("textarea#descField").val();
-    //params["extrakeys"] = ekeys;
-    params['rurl'] = $("#urlflinkField").val();
-    $("ul.additional-info-tags").children().each(function(i){
-        	params["extrakeys"+i] = $(this).text();
-    });
-
-	console.log("ya ali madad"+JSON.stringify(params));
-	//console.log(btoa(JSON.stringify(params)));
-	options.params = params;
-    console.log(JSON.stringify(options));
-	Blmani.Tos.getInstance().set(tos);
-    var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/post_comic_new"), recSuccessFunc, recFailFunc,options)
-}
-
-
-var recSuccessFunc = function(success) {
-	        console.log(JSON.stringify(success));
-	        $(".loading-gif-centered").addClass("hideit");
-             $("a#show-success-popup").click();
-  			 console.log(JSON.stringify(success.response));
-  			 var res = JSON.parse(success.response);
-  			 console.log("res12"+res);
-             var shmsg = $("#titleField").val()+" "+$("textarea#descField").val();
-             console.log("pid"+res.pid);
-  			 console.log("shmsg1"+shmsg);
-  			 console.log("shurl1"+res.url);
-  			 console.log("thurl1"+res.thumburl);
-  			 $("#close-post-btn").on("click",function(){
-  			  var tos = Blmani.Tos.getInstance().get();
-  			  console.log("tos"+tos);
-  			  tos.pid = res.pid;
-  			  console.log("tos"+tos);
-  			  Blmani.Tos.getInstance().set(tos);
-  			  window.location.replace("search.html");
-
-             });
-
-  			 $("#copy-to-clipboard").val(res.url);
-  			 $("#view-post-btn").on("click",function(){
-  			   showComic(2,res.pid,$("#urlflinkField").val());
-  			 });
-  			 $("#facebook_share_btn").on("click",function(){
-  			   sharePostViaFacebook(2,shmsg,res.thumburl,res.url);
-
-  			 });
-  			 $("#twitter_share_btn").on("click",function(){
-  			   sharePostViaTwitter(2,shmsg,res.thumburl,res.url);
-
-  			 });
-
-  			 $("#copy-to-clipboard-btn").on("click",function(){
-  			   copyToClipBoard();
-
-  			 });
-}
-
-var recFailFunc =function(error) {
-    //alert("An error has occurred: Code = " + error.code);
-    console.log("upload error source " + error.source);
-    console.log("upload error target " + error.target);
-    $(".loading-gif-centered").addClass("hideit");
-	alert("error Occurred");
-	//return error;
-	//url = "";
-	//recommendedPost(url);
-}
-
-
-var  uploadPublishThumb = function(fileid) {
-	var imageURI = $('#'+fileid).attr("src");
-	console.log("imageURI"+imageURI);
-    var options = new FileUploadOptions();
-    options.fileKey = "file";
-    options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
-    options.mimeType = "image/png";
-    options.chunkedMode = false;
-	
-	
-	console.log("abc14");
-	var param = {}
-	var tos = {};
-	var ekeys = {};
-	var pusers =[];
-	var vdivision = $(".active-tab-pill-button").attr("id");
-	tos['division'] = vdivision;
-	
-	if(vdivision==1){
-		   //var vtag = $('.fc-search-input').val();
-		   //console.log(vtag);
-		   var vgenre = $("select#select_genre").val();
-		   var vatype = $("select#select_atype").val();
-		   var vdtype = $("select#select_dtype").val();
-		   if(vgenre !=null){ tos['genre'] = vgenre;}
-           if(vatype !=null){tos['a_type'] = vatype;}
-		   if(vdtype !=null){tos['d_type'] = vdtype;}
-		   //if(vtag.trim() !=""){tos['search_tags'] = vtag;}
-	} else {
-		   //var vtag = $(".sc-search-input").val();
-		   var vcontent = $("select#select_content").val();
-		   var vtitle = $("select#select_title").val();
-		   var vcharacter = $("select#select_character").val();	
-           if(vcontent !=null){tos['content'] = vcontent;}
-		   if(vtitle !=null){tos['title'] = vtitle }
-		   if(vcharacter !=null){tos['character'] = vcharacter;	}
-		   //if(vtag.trim() !=""){tos['search_tags'] = vtag;}
-           		   
-   }
-    
-	
-	$("ul.additional-info-tags").children().each(function(i){
 		ekeys[i] = $(this).text();
 	});
 	var pbound = $(".active-bounds").attr("id");
@@ -548,102 +407,47 @@ var  uploadPublishThumb = function(fileid) {
 	}
 	
     
-	//param['title'] = $("#titleField").val();
-	//param['desc'] = $("textarea#descField").val();
+	param['title'] = $("#titleField").val();
+	param['desc'] = $("textarea#descField").val();
+	param['rurl'] = $("#urlflinkField").val();
 	param['si'] = tos;
-	//param['extrakeys'] = ekeys;
-    param['siid'] = $("input#saveitemid").val();
-	var session = Blmani.Session.getInstance().get();
-    param['id'] = session.uid;
-	params = {} ;
-    params["params"] = btoa(JSON.stringify(param));
-    params["title"] = $("#titleField").val();
-    params["desc"] = $("textarea#descField").val();
-    //params["extrakeys"] = JSON.stringify(ekeys);
-    $("ul.additional-info-tags").children().each(function(i){
-    	params["extrakeys"+i] = $(this).text();
-    });
+	param['extrakeys'] = ekeys;
 	
-	console.log("12141214"+JSON.stringify(params));
-	console.log(JSON.stringify(ekeys))
-	options.params = params;
-    console.log(JSON.stringify(options));
-	Blmani.Tos.getInstance().set(tos);
+   
+	
+	//$(".loading-gif").addClass("hideit");
+	//return false;
+	var session = Blmani.Session.getInstance().get();
+	param['id'] = session.uid;
+	console.log(JSON.stringify(param));
+	console.log(btoa(JSON.stringify(param)));
+	options.params = btoa(JSON.stringify(param));
 
     var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/post_comic_new"), pubSuccessFunc, pubFailFunc,options)
-	}
+    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/post_comic_new"), recSuccessFunc, recFailFunc,options)
+}
 
 
-
-
-
-var pubSuccessFunc = function(success) {
+var recSuccessFunc = function(success) {
 	console.log(JSON.stringify(success));
-    
-	
-	$(".loading-gif-centered").addClass("hideit");
-             $("a#show-success-popup").click();
-  			 console.log(JSON.stringify(success.response));
-  			 var res = JSON.parse(success.response);
-  			 console.log("res12"+res);
-             var shmsg = $("#titleField").val()+" "+$("textarea#descField").val();
-             console.log("pid"+res.pid);
-  			 console.log("shmsg1"+shmsg);
-  			 console.log("shurl1"+res.url);
-  			 console.log("thurl1"+res.thumburl);
-  			 $("#close-post-btn").on("click",function(){
-  			  var tos = Blmani.Tos.getInstance().get();
-  			  console.log("tos"+tos);
-  			  tos.pid = res.pid;
-  			  console.log("tos"+tos);
-  			  Blmani.Tos.getInstance().set(tos);
-  			  window.location.replace("search.html");
-
-             });
-
-  			 $("#copy-to-clipboard").val(res.url);
-  			 $("#view-post-btn").on("click",function(){
-  			   showComic(4,res.pid,'');
-  			 });
-  			 $("#facebook_share_btn").on("click",function(){
-  			   sharePostViaFacebook(2,shmsg,res.thumburl,res.url);
-
-  			 });
-  			 $("#twitter_share_btn").on("click",function(){
-  			   sharePostViaTwitter(2,shmsg,res.thumburl,res.url);
-
-  			 });
-
-  			 $("#copy-to-clipboard-btn").on("click",function(){
-  			   copyToClipBoard();
-
-  			 });
-	
-	
-	
-	//var url = success.response.replace('"','');
+    //var url = success.response.replace('"','');
 	//var url = url.replace('"','');
 	//purl =url;//"";//"blmani.com"+url;
 	//console.log(purl);
-	//publishPost(purl);
+	//recommendedPost(purl);
 }
 
-var pubFailFunc =function(error) {
+var recFailFunc =function(error) {
     //alert("An error has occurred: Code = " + error.code);
     console.log("upload error source " + error.source);
     console.log("upload error target " + error.target);
-	$(".loading-gif-centered").addClass("hideit");
-	alert("error Occurred");
 	//return error;
 	//url = "";
-	//publishPost(url);
+	//recommendedPost(url);
 }
 
-
-
 	
-/*	
+	
 var recommendedPost =function(url){
     console.log("abc14");
 	var param = {}
@@ -697,7 +501,7 @@ var recommendedPost =function(url){
 	param['rurl'] = $("#urlflinkField").val();
 	param['si'] = tos;
 	param['extrakeys'] = ekeys;
-	Blmani.Tos.getInstance().set(tos);
+	
    
 	
 	//$(".loading-gif").addClass("hideit");
@@ -710,10 +514,10 @@ var recommendedPost =function(url){
       url: "http://blmani.com/wp-json/aniparti/post_comic",
       type: "post",
       data: param,
-	  //contentType: 'application/json',
-	  // beforeSend: function (xhr) {
-	  //		xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
-	  //	},
+	  /*contentType: 'application/json',
+	   beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer '+session.token+'');
+		},*/
 
       dataType: 'json',
 		 success: function (response) {
@@ -763,7 +567,7 @@ var recommendedPost =function(url){
 	
 }
 
-
+/*
 var recSuccessFunc = function(success) {
 	console.log(JSON.stringify(success));
     var url = success.response.replace('"','');
@@ -782,6 +586,41 @@ var recFailFunc =function(error) {
 	recommendedPost(url);
 }*/
 	
+var  uploadPublishThumb = function(fileid) {
+	var imageURI = $('#'+fileid).attr("src");
+	console.log("imageURI"+imageURI);
+    var options = new FileUploadOptions();
+    options.fileKey = "image";
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+    options.mimeType = "image/png";
+    options.chunkedMode = false;
+
+    var ft = new FileTransfer();
+    ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/upload_image"), pubSuccessFunc, pubFailFunc,options)
+	}
+
+
+
+
+
+var pubSuccessFunc = function(success) {
+	console.log(JSON.stringify(success));
+    var url = success.response.replace('"','');
+	var url = url.replace('"','');
+	purl =url;//"";//"blmani.com"+url;
+	console.log(purl);
+	publishPost(purl);
+}
+
+var pubFailFunc =function(error) {
+    //alert("An error has occurred: Code = " + error.code);
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
+	//return error;
+	url = "";
+	publishPost(url);
+}
+
 
 var publishPost = function(url){
     console.log("abc12");
@@ -905,18 +744,15 @@ var publishPost = function(url){
 
 
 var sharePostViaFacebook = function(ptype,msg,thumurl,ref){
-	window.plugins.socialsharing.shareViaFacebook(msg,'', 'http://blmani.com');
+	window.plugins.socialsharing.shareViaFacebook(msg,thumurl, ref);
 }
 
 var sharePostViaTwitter = function(ptype,msg,thumurl,ref){
-	window.plugins.socialsharing.shareViaTwitter(msg, '', 'http://blmani.com');
+	window.plugins.socialsharing.shareViaTwitter(msg, thumurl, ref);
 }
 
 var copyToClipBoard = function(){
 	console.log("copy to clip board");
-	var text_to_be_copied = $("#copy-to-clipboard").val();
-	cordova.plugins.clipboard.copy(text_to_be_copied);
-
 }
 
 

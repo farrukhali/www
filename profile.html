@@ -3,12 +3,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<meta name="viewport" content="viewport-fit=cover, initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height" />
 <title>Comics - Blmani </title>
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
 <link rel="stylesheet" type="text/css" href="fonts/css/line-awesome.css">
 <link rel="stylesheet" type="text/css" href="styles/framework.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+<style>
+        .xphone {
+            height: 0;
+            height: env(safe-area-inset-top);
+            background: #fff;
+            display: block;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+        .header-light{
+            top: env(safe-area-inset-top); /* iOS 11.2 */
+        }
+    </style>
 </head>
 
 <body>
@@ -51,7 +67,7 @@
                     <!--<p class="user-city center-text">Pyongyang City</p>-->
                 </div>
                 <div class="menu-items menu-icons user-logined">
-                	<a href="#"><i class="la la-home"></i>Home</a>
+                	<a href="comic.html"><i class="la la-home"></i>Home</a>
                     <a href="inbox.html"><i class="far fa-bell"></i>Inbox<!--<span>2 new</span>--></a>
                     <a href="mylib.html"><i class="far fa-folder-open"></i>My Library</a>
                     <a href="profile.html"><i class="far fa-user"></i>Profile</a>
@@ -74,17 +90,17 @@
 			<li id="li_nick_name">
 				Nick name <strong >(John.deo93)</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>
 			</li>
-			<li>
+			<li id="li_gender">
 				Gender <strong>(Male)</strong> <a href="#" data-menu="edit-gender-modal">Edit</a>
 			</li>
-			<li>
-				Birthday - <strong></strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
+			<li id="li_dob">
+				Birthday  <strong></strong> <a href="#" data-menu="edit-bday-modal">Edit</a>
 			</li>
-			<li>
+			<li id="li_user_id">
 				User ID <strong>(123456)</strong>
 			</li>
 			<li>
-				Password <strong>*********</strong> <a href="#">Change Password</a>
+				Password <strong>*********</strong> <a href="change-password.html">Change Password</a>
 			</li>
 		</ul>
 	</div>
@@ -96,17 +112,17 @@
         <div class="modal-content">
             <form action="">
                 <div class="fac fac-radio-full fac-default"><span></span>
-                    <input id="box1-fac-radio-full" type="radio" name="rad1" value="1">
+                    <input id="box1-fac-radio-full" type="radio" name="rad1" checked  value="1">
                     <label for="box1-fac-radio-full">Male</label>
                 </div>
                 <div class="fac fac-radio-full fac-blue"><span></span>
-                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="1">
+                    <input id="box2-fac-radio-full" type="radio" name="rad1" value="2">
                     <label for="box2-fac-radio-full">Female</label>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-btn" >Done</a>
+            <a href="#" class="modal-btn" id="update_gender_done" >Done</a>
         </div>
     </div>
 	<div id="edit-bday-modal" class="menu-flyin non-scroll-modal">
@@ -116,12 +132,12 @@
         <div class="modal-content">
             <form action="">
                 <div class="input-simple-1 has-icon input-green bottom-30">
-					<input type="text" placeholder="Enter Birthday">
+					<input type="text" id="dob" placeholder="yy/mm/dd">
 				</div>
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-btn">Done</a>
+            <a href="#" class="modal-btn" id="update_dob">Done</a>
         </div>
     </div>
     <div id="edit-nickname-modal" class="menu-flyin non-scroll-modal">

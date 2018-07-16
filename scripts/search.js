@@ -6,79 +6,60 @@ $(window).on('load',function(){
 
 $(document).ready(function () {
 	setFields();
+	var tos = Blmani.Tos.getInstance().get();
+	if(!tos){
+	
+	} else {
+		console.log("logic to show search results");
+		console.log(tos);
+		if(tos.division==1){
+			  console.log("first-creation");
+			  if(tos.genre){
+			   addSelection(1,tos.genre)
+			  }
+			 if(tos.a_type){
+			  addSelection(2,tos.a_type)
+			 }
+			if(tos.d_type){
+			  addSelection(3,tos.d_type)
+			}
+		} else {
+			console.log("second-creation");
+			$("a#1").removeClass("active-tab-pill-button bg-highlight");
+			$("a#2").addClass("active-tab-pill-button bg-highlight");
+			$(".first-creation").addClass("hideit");
+		    $(".second-reproduction").removeClass("hideit");
+			if(tos.content){
+			 addSelection(4,tos.content)
+			}
+			if(tos.title){
+			 addSelection(5,tos.title)
+			}
+			if(tos.character){
+			 addSelection(6,tos.character)
+			}
+			
+		}
+		if(tos.pid){
+		  searchComics(tos.pid);
+		} else {
+		  searchComics(0);	
+		}
+	}
 	$(".reset-search").on("click",function(){
 	 console.log("reset function called");
 	 resetSearchFields();
 	});
-	/*$('.content.search-results-section .search-results-list> ul> li').click(function(){
-    			$(this).toggleClass('show-overlay-btns')
-    })*/
+	
 	$("a#2").on("click",function(){
 		$(".first-creation").addClass("hideit");
 		$(".second-reproduction").removeClass("hideit");
-		//delSelection(1);
-		//delSelection(2);
-		//delSelection(3);
 	});
 	$("a#1").on("click",function(){
 		$(".second-reproduction").addClass("hideit");
 		$(".first-creation").removeClass("hideit");
-		//delSelection(4);
-		//delSelection(5);
-		//delSelection(6);
 	});
 	
-	/*if($("div#menu-1").length){
-		var session = Blmani.Session.getInstance().get();
-		if(!session){
-			$('.user-logined').addClass("hideit");
-			console.log("session expired");
-		} else {
-			$('.user-not-logined').addClass("hideit");
-		}
-	}*/
-	/* $.ajax({
-      url: "http://blmani.com/wp-json/aniparti/get_field",
-      type: "post",
-      //data: {id:16842},
-      dataType: 'json',
-      success: function (response) {
-		  $.each(response, function (key, value) {
-          if(key=="genre"){
-			  $.each(value,function(id,genre){
-			  $("select#select_genre").append('<option value="'+genre.ID+'" >'+genre.name+'</option>');
-			 });
-		  }
-		  if(key=="a_type"){
-			  $.each(value,function(id,atype){
-			  $("select#select_atype").append('<option value="'+atype.ID+'" >'+atype.name+'</option>');
-			 });
-		  }
-		  if(key=="d_type"){
-			  $.each(value,function(id,dtype){
-			  $("select#select_dtype").append('<option value="'+dtype.ID+'" >'+dtype.name+'</option>');
-			 });
-		  }
-		  if(key=="content"){
-			  $.each(value,function(id,content){
-			  $("select#select_content").append('<option value="'+content.ID+'" >'+content.name+'</option>');
-			 });
-		  }
-		  if(key=="title"){
-			  $.each(value,function(id,title){
-			  $("select#select_title").append('<option value="'+title.ID+'" >'+title.name+'</option>');
-			 });
-		  }
-		  if(key=="character"){
-			  $.each(value,function(id,character){
-			  $("select#select_character").append('<option value="'+character.ID+'" >'+character.name+'</option>');
-			 });
-		  }
-		  });
-		 // Blmani.Comic.getInstance().set(response);
-		  console.log(response);
-	    }
-	 });*/
 	 
 	  
 	  $("#preloader").addClass('hide-preloader');
@@ -108,8 +89,101 @@ $(document).ready(function () {
 		  $("#scharacter").remove();
 		  $(".sr-info-tags").append('<li id="scharacter"><span onClick="delSelection(6)">'+$(this).children(':selected').text()+'</span></li>');
 	  });
-	  
 	  $(".search-comics").on('click', function(){
+		  searchComics(0);
+	  });
+	  
+
+	 
+	 
+	  
+	
+});
+
+var resetSearchFields = function(){
+	delSelection(1);
+	delSelection(2);
+	delSelection(3);
+	delSelection(4);
+	delSelection(5);
+	delSelection(6);
+	$(".first-creation-vtag").val("");
+    $(".second-reproduction-vtag").val("");
+	$(".searching-results-fc").html('');
+	$(".fcnrf").addClass('hideit'); 
+	$(".fc-heading").addClass('hideit');
+	$(".searching-results-sr").html('');
+	$(".srnrf").addClass('hideit'); 
+	$(".sr-heading").addClass('hideit');
+	$('.footer-fixed.action-footer').removeClass('come-in').addClass("move-out");
+	$('.footer-fixed.regular-footer').removeClass('move-out');
+	
+		 
+}
+
+function addSelection(sel,value){
+	       if(sel ==1){
+		     selv = "genre";
+		   }
+		   if(sel ==2){
+		     selv = "atype";
+		   }
+		   if(sel ==3){
+		     selv = "dtype";
+		   }
+		   if(sel ==4){
+		     selv = "content";
+		   }
+		   if(sel ==5){
+		     selv = "title";
+		   }
+		   if(sel ==6){
+		     selv = "character";
+		   }
+		  
+		   
+	     $("select#select_"+selv).val(value);
+		 if(sel==4 || sel==5 || sel==6){
+		 $(".sr-info-tags").append('<li id="s'+selv+'"><span onClick="delSelection('+value+')">'+$("select#select_"+selv).children(':selected').text()+'</span></li>');
+		 } else {
+		 $(".fc-info-tags").append('<li id="s'+selv+'"><span onClick="delSelection('+value+')">'+$("select#select_"+selv).children(':selected').text()+'</span></li>');
+		 }
+		
+		 
+	
+}
+
+function delSelection(sel){
+	       if(sel ==1){
+		     selv = "genre";
+		   }
+		   if(sel ==2){
+		     selv = "atype";
+		   }
+		   if(sel ==3){
+		     selv = "dtype";
+		   }
+		   if(sel ==4){
+		     selv = "content";
+		   }
+		   if(sel ==5){
+		     selv = "title";
+		   }
+		   if(sel ==6){
+		     selv = "character";
+		   }
+		  
+		   
+	     $("li#s"+selv).remove();
+		 $("select#select_"+selv).val("");
+		 
+	
+}
+
+
+
+
+var searchComics  = function(postid){
         var vdivision = $(".active-tab-pill-button").attr("id");		
 		if(vdivision==1){
 		 $(".searching-results-fc").html('');
@@ -121,8 +195,8 @@ $(document).ready(function () {
 		 $(".sr-heading").addClass('hideit');
 		}
 		 
-		 $(this).addClass('searching-anc');
-		 $(this).html('Searching...<img src="images/loadersvg.svg">');
+		 $(".search-comics").addClass('searching-anc');
+		 $(".search-comics").html('Searching...<img src="images/loadersvg.svg">');
 		 
 		 
 		 var session = Blmani.Session.getInstance().get();
@@ -177,13 +251,11 @@ $(document).ready(function () {
 			} else {
 			tos['uid'] =session.uid;	
 			}
-		   var postid = window.localStorage.getItem("latest-posted",0);
 		   if(postid >0){
 			  tos['pid'] =postid; 
-			  window.localStorage.removeItem("latest-posted");
 		   }
-		   
-		 console.log(tos);
+		 console.log("setting tos"+tos);  
+		 Blmani.Tos.getInstance().set(tos);
 		
 		 
 		 $.ajax({
@@ -355,56 +427,5 @@ $(document).ready(function () {
 				 $("#preloader").addClass('hide-preloader');
 	  }
 		 });
-	  });
-	 
-	 
-	  
-	
-});
-
-var resetSearchFields = function(){
-	delSelection(1);
-	delSelection(2);
-	delSelection(3);
-	delSelection(4);
-	delSelection(5);
-	delSelection(6);
-	$(".first-creation-vtag").val("");
-    $(".second-reproduction-vtag").val("");
-	$(".searching-results-fc").html('');
-	$(".fcnrf").addClass('hideit'); 
-	$(".fc-heading").addClass('hideit');
-	$(".searching-results-sr").html('');
-	$(".srnrf").addClass('hideit'); 
-	$(".sr-heading").addClass('hideit');
-	
-		 
-}
-
-function delSelection(sel){
-	       if(sel ==1){
-		     selv = "genre";
-		   }
-		   if(sel ==2){
-		     selv = "atype";
-		   }
-		   if(sel ==3){
-		     selv = "dtype";
-		   }
-		   if(sel ==4){
-		     selv = "content";
-		   }
-		   if(sel ==5){
-		     selv = "title";
-		   }
-		   if(sel ==6){
-		     selv = "character";
-		   }
-		  
-		   
-	     $("li#s"+selv).remove();
-		 $("select#select_"+selv).val("");
-		 
-	
-}
+	  }
 

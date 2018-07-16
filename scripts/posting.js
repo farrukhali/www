@@ -53,12 +53,18 @@ var onFail =function(){
 
 var getPhoto = function() {
 	console.log("get photo called");
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+    quality: 30,
+    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+    allowEdit: true,
+    targetWidth: 500,
+    targetHeight: 500
+
+ });
 }
 
 $(".upload-file-block").on("click", function(e){
-    console.log("toucked  called");
+    console.log("toucked  called quality30");
 	getPhoto();
 } );
 
@@ -79,8 +85,9 @@ $(".upload-file-block").on("click", function(e){
 				}
 				console.log("submit");
                 publishFormSubmitted = "true";
-				$(".loading-gif").removeClass("hideit");
+				$(".loading-gif-centered").removeClass("hideit");
 				uploadPublishThumb('preview-thumb');
+				//publishPost('');
 				
             }
 
@@ -88,13 +95,41 @@ $(".upload-file-block").on("click", function(e){
                 e(".formValidationError").hide();
                 e(".fieldHasError").removeClass("fieldHasError");
                 e("#" + n + " .requiredField").each(function(i) {
-                    if (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy")) {
+                    
+					var vdivision = $(".active-tab-pill-button").attr("id");
+					if (e(this).attr("data-type")=="fcselect" &&  vdivision==1 && (e(this).val() == "" || e(this).val() == null)) {
                         e(this).val(e(this).attr("data-dummy"));
                         e(this).focus();
                         e(this).addClass("fieldHasError");
                         //e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-fc').addClass('show-toast');
+			            setTimeout(function(){$('#toast-fc').removeClass('show-toast');},3000);
+						
+                        return false
+                    }
+					
+					
+					
+					if (e(this).attr("data-type")=="srselect" && vdivision==2 && (e(this).val() == "" || e(this).val() == null)) {
+                        e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+						console.log("srselect called");
+                        //e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-sr').addClass('show-toast');
+			            setTimeout(function(){$('#toast-sr').removeClass('show-toast');},3000);
+						
+                        return false
+                    }
+                    if (e(this).attr("data-type") =="input" && (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy"))) {
+                        console.log("data tyoe "+e(this).attr("data-type"));
+						e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+                        //e("#" + e(this).attr("id") + "Error").fadeIn(300);
 						$('#toast-title').addClass('show-toast');
-			            setTimeout(function(){$('#toast-title').removeClass('show-toast');},3000);
+			            setTimeout(function(){$('#toast-title').removeClass('show-toast');},2000);
+						
 						
                         return false
                     }
@@ -161,8 +196,9 @@ $(".upload-file-block").on("click", function(e){
 				}
 				console.log("submit");
                 recommendedFormSubmitted = "true";
-				$(".loading-gif").removeClass("hideit");
+				$(".loading-gif-centered").removeClass("hideit");
 				uploadThumb('preview-thumb');
+				//recommendedPost("");
 				
             }
 
@@ -170,8 +206,34 @@ $(".upload-file-block").on("click", function(e){
                 e(".formValidationError").hide();
                 e(".fieldHasError").removeClass("fieldHasError");
                 e("#" + n + " .requiredField").each(function(i) {
-                    if (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy")) {
+					var vdivision = $(".active-tab-pill-button").attr("id");
+					if (e(this).attr("data-type")=="fcselect" &&  vdivision==1 && (e(this).val() == "" || e(this).val() == null)) {
                         e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+                        //e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-fc').addClass('show-toast');
+			            setTimeout(function(){$('#toast-fc').removeClass('show-toast');},3000);
+						
+                        return false
+                    }
+					
+					
+					
+					if (e(this).attr("data-type")=="srselect" && vdivision==2 && (e(this).val() == "" || e(this).val() == null)) {
+                        e(this).val(e(this).attr("data-dummy"));
+                        e(this).focus();
+                        e(this).addClass("fieldHasError");
+						console.log("srselect called");
+                        //e("#" + e(this).attr("id") + "Error").fadeIn(300);
+						$('#toast-sr').addClass('show-toast');
+			            setTimeout(function(){$('#toast-sr').removeClass('show-toast');},3000);
+						
+                        return false
+                    }
+                    if (e(this).attr("data-type") =="input" && (e(this).val() == "" || e(this).val() == e(this).attr("data-dummy"))) {
+                        console.log("data tyoe "+e(this).attr("data-type"));
+						e(this).val(e(this).attr("data-dummy"));
                         e(this).focus();
                         e(this).addClass("fieldHasError");
                         //e("#" + e(this).attr("id") + "Error").fadeIn(300);

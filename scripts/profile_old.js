@@ -35,15 +35,13 @@ function onPhotoURISuccess(imageURI) {
 	$(".loading-gif").removeClass("hideit");
 	console.log(imageURI.substr(imageURI.lastIndexOf('/')+1));
 	var session = Blmani.Session.getInstance().get();
-	var param = {};
-	param["uid"] = session.uid;
 	var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
     options.mimeType = "image/png";
     options.chunkedMode = false;
-    options.params = param;
-    console.log("options14"+JSON.stringify(options));
+	options.uid = session.uid;
+    console.log("options"+options);
     var ft = new FileTransfer();
     ft.upload(imageURI, encodeURI("http://blmani.com/wp-json/aniparti/user_image_new"), userImageSuc, userImageFail,options);
 	
@@ -51,10 +49,10 @@ function onPhotoURISuccess(imageURI) {
 }
 var userImageSuc = function(success) {
 	$(".loading-gif").addClass("hideit");
-	console.log("response"+JSON.stringify(success));
+	console.log(JSON.stringify(success));
     var url = success.response.replace('"','');
 	url = url.replace('"','');
-    console.log("url returned"+url);
+
 	session.user_pic = url; 
 	Blmani.Session.getInstance().set(session);
 	$('.profile-image').attr("data-src",url);
@@ -128,10 +126,6 @@ var onFail =function(){
 
 var getPhoto = function() {
 	console.log("get photo called");
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-    quality: 30,
-    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-    allowEdit: true,
-    targetWidth: 500,
-    targetHeight: 500});
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
 }

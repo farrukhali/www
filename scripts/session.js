@@ -46,6 +46,53 @@ $("#user_profile_pic").on("click",function(){
    	getPhoto();
 });
 
+
+    /*var otherparams = {}
+	var params = {};
+	var obj = {};
+	obj["xyz"] ="xyz";
+	params["uid"] = session.uid;
+	params["a"] = "a";
+	params["b"] = "b";
+	params["c"] = "c";
+	params["d"] = obj;
+	otherparams["params"] = params;
+	console.log(btoa(JSON.stringify(otherparams)));*/
+
+
+
+
+$("#update_dob").on("click",function(){
+var session = Blmani.Session.getInstance().get();
+var dob = $("input#dob").val();
+console.log("gender"+dob);
+
+session.dob= dob;
+Blmani.Session.getInstance().set(session);
+$('#toast-x').html("DOB Successfully Updated!"); 
+$('#toast-x').addClass('show-toast');
+setTimeout(function(){$('#toast-x').removeClass('show-toast'); window.location ="profile.html";},2000);
+
+});
+
+
+$("#update_gender_done").on("click",function(){
+var session = Blmani.Session.getInstance().get();
+var gender = $("input[name='rad1']:checked").val();
+console.log("gender"+gender);
+if(gender==1){
+  session.gender = "Male";
+} else {
+  session.gender = "Female";	
+}
+
+Blmani.Session.getInstance().set(session);
+$('#toast-x').html("Gender Successfully Updated!"); 
+$('#toast-x').addClass('show-toast');
+setTimeout(function(){$('#toast-x').removeClass('show-toast'); window.location ="profile.html";},2000);
+
+});
+
 $("#edit_nick_name_done").on("click",function(){
 var session = Blmani.Session.getInstance().get();
 params ={};
@@ -217,19 +264,27 @@ console.log(JSON.stringify(response));
         var session = Blmani.Session.getInstance().get();
 		console.log(session);
 		if($("div#menu-1").length){
+		   var langid  = Blmani.Language.getInstance().get();
+			
 		if(!session){
 			$('.user-logined').addClass("hideit");
-			console.log("session expired");
-		} else {
-			$('.user-not-logined').addClass("hideit");
-			$('.profile-title').html(session.user_nicename);
-			var langid  = Blmani.Language.getInstance().get();
 			if(langid==1){
 			$('span.lang-flags').html('<img src="images/flag-en.png" alt="En-US">');
 			}
 			if(langid==2){
 			$('span.lang-flags').html('<img src="images/flag-ko.png" alt="En-US">');	
 			}
+			console.log("session expired");
+		} else {
+			$('.user-not-logined').addClass("hideit");
+			$('.profile-title').html(session.user_nicename);
+			if(langid==1){
+			$('span.lang-flags').html('<img src="images/flag-en.png" alt="En-US">');
+			}
+			if(langid==2){
+			$('span.lang-flags').html('<img src="images/flag-ko.png" alt="En-US">');	
+			}
+			
 			//if(session.user_pic.indexOf("avatar") == -1){
 			//if(session.user_pic !== ""){
 			
@@ -241,7 +296,17 @@ console.log(JSON.stringify(response));
 			
 			//}
 			$("li#li_nick_name").html('Nick name <strong >('+session.user_nicename+')</strong><a href="#" data-menu="edit-nickname-modal" class="color-red">Edit</a>');
-			
+			$("li#li_user_id").html('User ID <strong>('+session.user_email+')</strong>');
+			if(session.gender){
+			$("li#li_gender").html('Gender <strong>('+session.gender+')</strong> <a href="#" data-menu="edit-gender-modal">Edit</a>');
+			} else {
+				console.log("gender false");
+			}
+			if(session.dob){
+			$("li#li_dob").html('Birthday  <strong>'+session.dob+'</strong> <a href="#" data-menu="edit-bday-modal">Edit</a>');
+			} else {
+				console.log("dob false");
+			}
 		}
 
 	}

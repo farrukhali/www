@@ -537,6 +537,7 @@ body .active-touch .hideit {
     bottom: 5px;
     transform: translate(-50%, 0%);
     color: #1f2b3f;
+    line-height: 30px;
 }
 .footer-fixed ul li a span.la {
     font-size: 25px;
@@ -1574,7 +1575,7 @@ a.upload-file-block .size-guide {
 }
 .footer-fixed.bounds-footer {
     background: #fff;
-    padding: 10px;
+    padding: 14px 0;
     box-shadow: 0px -10px 20px rgba(19, 59, 76, 0.08);
 }
 .footer-fixed.bounds-footer .bounds-options {}
